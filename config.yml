@@ -1,12 +1,14 @@
 modules:
-    trein: True
-    rooster: True
-    weer: True
-    tijd: True
-    spotify: False
-    leven: True
-    verlichting: True
+	weather: True
+	time: True
+	roster: True
+	train: True
+	music: True
+	fealings: True
+	riddle: True
 
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 
-naam: LISA
+name: LISA
+
+makers: Mark en Ivar

@@ -29,7 +29,7 @@ class State(object):
 		self.FSM = FSM
 		self.startTime = 0
 		self.timer = 0
-		self.persona = r"\b" + config.config['naam'] + "\\b"
+		self.persona = r"\b" + config.config['name'] + "\\b"
 
 	def Enter(self):
 		self.startTime = int(clock())

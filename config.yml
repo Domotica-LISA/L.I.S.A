@@ -1,11 +1,10 @@
 modules:
-    weather: True
+    weather: False
     time: True
-    roster: True
-    train: True
-    music: True
-    fealings: True
-    riddle: True
+    train: False
+    music: False
+    fealings: False
+    riddle: False
 
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 

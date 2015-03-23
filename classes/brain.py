@@ -15,6 +15,7 @@ class Brain(object):
 			try:
 				loader = finder.find_module(name)
 				mod = loader.load_module(name)
+				#print mod
 			except:
 				print("We made a booboo")
 			else:

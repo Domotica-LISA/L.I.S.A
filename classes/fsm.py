@@ -30,6 +30,6 @@ class FSM(object):
 		self.curState.Execute()
 
 	def ShutDown(self):
-		return self.curState
-		#if self.curState == "ShutDown":
-			#return True
+		#return self.curState
+		if self.curState == classes.states.ShutDown:#"ShutDown":
+			return True

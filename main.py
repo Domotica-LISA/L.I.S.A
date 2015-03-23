@@ -3,17 +3,15 @@ import wit
 import classes.character
 
 if __name__ == '__main__':
-	wit.init('cards.pcm.default')
-	lisa_fsm = classes.character.Lisa()
-	while True:
-		startTime = clock()
-		timeInterval = 1
-		while startTime + timeInterval > clock():
-			pass
-		lisa_fsm.Execute()
-		if lisa_fsm.ShutDown():
-			print "ugh"
-			#pass
-			#break
-	wit.close()
-	print "Bye Bye!"
+	try:
+		wit.init('cards.pcm.default')
+		lisa_fsm = classes.character.Lisa()
+		while True:
+			startTime = clock()
+			timeInterval = 1
+			while startTime + timeInterval > clock():
+				pass
+			lisa_fsm.Execute()
+	except KeyboardInterrupt:
+		wit.close()
+		print "Bye Bye!"

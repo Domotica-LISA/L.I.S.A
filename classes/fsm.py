@@ -28,8 +28,3 @@ class FSM(object):
 			self.curState.Enter()
 			self.trans = None
 		self.curState.Execute()
-
-	def ShutDown(self):
-		#return self.curState.Enter()
-		if self.curState.Execute() == "Shutting down":
-			return True

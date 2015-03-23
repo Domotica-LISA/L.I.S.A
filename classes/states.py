@@ -97,9 +97,9 @@ class Move(State):
 
 	def Execute(self):
 		print "Moving to sound origin"
-		#if self.startTime + self.timer <= clock():
-			#self.FSM.ToTransition("toTrack")
-		super(Move, self).Handle_Camera()
+		if self.startTime + self.timer <= clock():
+			self.FSM.ToTransition("toTrack")
+		#super(Move, self).Handle_Camera()
 
 	def Exit(self):
 		print "Stop Moving"

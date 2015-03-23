@@ -119,3 +119,4 @@ class Track(State):
 
 	def Exit(self):
 		print "Stop Tracking"
+		break

@@ -29,6 +29,6 @@ class FSM(object):
 			self.trans = None
 		self.curState.Execute()
 
-	def Exit(self):
+	def ShutDown(self):
 		if self.curState == "ShutDown":
 			return False

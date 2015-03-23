@@ -11,7 +11,7 @@ if __name__ == '__main__':
 		while startTime + timeInterval > clock():
 			pass
 		lisa_fsm.Execute()
-		if not lisa_fsm.Exit():
+		if not lisa_fsm.ShutDown():
 			break
 	wit.close()
 	print "Bye Bye!"

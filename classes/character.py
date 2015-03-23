@@ -30,5 +30,5 @@ class Lisa(Char):
 	def Execute(self):
 		self.FSM.Execute()
 
-	def Exit(self):
-		return self.FSM.Exit()
+	def ShutDown(self):
+		return self.FSM.ShutDown()

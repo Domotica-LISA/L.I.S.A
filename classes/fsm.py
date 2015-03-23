@@ -31,4 +31,4 @@ class FSM(object):
 
 	def ShutDown(self):
 		if self.curState == "ShutDown":
-			return False
+			return True

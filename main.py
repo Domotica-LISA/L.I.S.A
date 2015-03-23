@@ -12,6 +12,7 @@ if __name__ == '__main__':
 			pass
 		lisa_fsm.Execute()
 		if not lisa_fsm.ShutDown():
+			print "ugh"
 			pass
 			#break
 	wit.close()

@@ -115,8 +115,11 @@ class Track(State):
 	def Execute(self):
 		print "Tracking"
 		if self.startTime + self.timer <= clock():
-			self.FSM.ToTransition("toWait")
+			self.FSM.ToTransition("toShutDown")
 
 	def Exit(self):
 		print "Stop Tracking"
-		break
+
+class ShutDown(State):
+	def __init__(self, FSM):
+		super(ShutDown, self).__init__(FSM)

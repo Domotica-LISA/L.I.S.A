@@ -11,8 +11,8 @@ if __name__ == '__main__':
 		while startTime + timeInterval > clock():
 			pass
 		lisa_fsm.Execute()
-		print lisa_fsm.ShutDown()
-			#print "ugh"
+		if lisa_fsm.ShutDown()
+			print "ugh"
 			#pass
 			#break
 	wit.close()

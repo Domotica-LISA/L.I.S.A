@@ -107,7 +107,7 @@ class Track(State):
 
 	def Execute(self):
 		print "Tracking"
-		self.brain.query(super(Track, self).Handle_Response()["_text"])
+		self.brain.query(super(Track, self).Handle_Response())
 
 	def Exit(self):
 		print "Stop Tracking"

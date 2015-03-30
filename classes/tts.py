@@ -19,4 +19,4 @@ class GoogleTTS(Mp3TTSEngine):
 		print(tts)
 		tts.save("output.mp3")
 		self.play_mp3("output.mp3")
-		os.remove("output.mp3")
+		#os.remove("output.mp3")

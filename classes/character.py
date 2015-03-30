@@ -9,7 +9,7 @@ Char = type("Char", (object, ), {})
 class Lisa(Char):
 	def __init__(self):
 		self.FSM = fsm.FSM(self)
-		self.brain = brain.Brain(GoogleTTS())
+		self.brain = brain.Brain(tts.GoogleTTS())
 		##print(self.brain.modules)
 
 		## STATES

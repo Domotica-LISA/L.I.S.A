@@ -29,7 +29,7 @@ class Brain(object):
 				try:
 					module.handle(texts, self.speaker)
 				except:
-					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
-							"Probeer het later nog eens.")
+					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
+							#"Probeer het later nog eens.")
 				finally:
 					return

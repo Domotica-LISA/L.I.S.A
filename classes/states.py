@@ -43,7 +43,7 @@ class State(object):
 		pass
 
 	def Handle_Response(self):
-		return wit.voice_query_auto(config.config['wit_ai_token'])
+		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
 """
 	def Handle_Camera(self):
 		count = pixy_get_blocks(1, blocks)
@@ -107,7 +107,7 @@ class Track(State):
 
 	def Execute(self):
 		print "Tracking"
-		self.brain.query(super(Track, self).Handle_Response())
+		self.brain.query(super(Track, self).Handle_Response()["_text"])
 
 	def Exit(self):
 		print "Stop Tracking"

@@ -23,15 +23,14 @@ class Brain(object):
 					modules.append(mod)
 		return modules
 
-	def query(self, texts):
+	def query(self, text):
 		for module in self.modules:
-			for text in texts:
-				if module.isValid(text):
-					try:
-						module.handle(text, self.speaker)
-					except:
-						#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
-								#"Probeer het later nog eens.")
-						print "doei"
-					finally:
-						return
+			if module.isValid(text):
+				try:
+					module.handle(text, self.speaker)
+				except:
+					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
+							#"Probeer het later nog eens.")
+					print "doei"
+				finally:
+					return

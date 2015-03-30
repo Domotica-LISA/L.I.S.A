@@ -2,7 +2,7 @@ import os
 import gtts
 from pygame import mixer
 
-class Mp3TTSEngine():
+class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
 		mixer.init(16000)
 		mixer.music.load(filename)

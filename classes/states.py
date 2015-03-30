@@ -67,7 +67,7 @@ class Startup(State):
 
 class Scanning(State):
 	def __init__(self, FSM, Brain):
-		super(Startup, self).__init__(FSM, Brain)
+		super(Scanning, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Scanning"
@@ -82,7 +82,7 @@ class Scanning(State):
 
 class Move(State):
 	def __init__(self, FSM, Brain):
-		super(Startup, self).__init__(FSM, Brain)
+		super(Move, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Moving"
@@ -99,7 +99,7 @@ class Move(State):
 
 class Track(State):
 	def __init__(self, FSM, Brain):
-		super(Startup, self).__init__(FSM, Brain)
+		super(Track, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Tracking"
@@ -114,7 +114,7 @@ class Track(State):
 
 class Shutdown(State):
 	def __init__(self, FSM, Brain):
-		super(Startup, self).__init__(FSM, Brain)
+		super(Shutdown, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Entering shutdown"

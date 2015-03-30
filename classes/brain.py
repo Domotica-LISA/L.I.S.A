@@ -25,12 +25,13 @@ class Brain(object):
 
 	def query(self, texts):
 		for module in self.modules:
-			if module.isValid(texts):
-				try:
-					module.handle(texts, self.speaker)
-				except:
-					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
-							#"Probeer het later nog eens.")
-					print "doei"
-				finally:
-					return
+			for text in texts:
+				if module.isValid(text):
+					try:
+						module.handle(text, self.speaker)
+					except:
+						#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
+								#"Probeer het later nog eens.")
+						print "doei"
+					finally:
+						return

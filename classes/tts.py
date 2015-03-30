@@ -15,7 +15,7 @@ class GoogleTTS(Mp3TTSEngine):
 
 	def say(self, phrase):
 		tts = gtts.gTTS(text=phrase, lang=self.language)
-		print(phrase)
+		print(tts)
 		tts.save("output.mp3")
 		self.play_mp3("output.mp3")
 		os.remove("output.mp3")

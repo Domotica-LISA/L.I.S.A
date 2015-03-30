@@ -1,16 +1,14 @@
 import os
-import tempfile
-import subprocess
-import platform
 import gtts
+from pygame import mixer
 
 class Mp3TTSEngine():
 	def play_mp3(self, filename):
-		cmd = ['omxplayer', str(filename)]
-		with tempfile.TemporaryFile() as f:
-			subprocess.call(cmd, stdout=f, strerr=f)
-			f.seek(0)
-			output = f.read()
+		mixer.init(16000)
+		mixer.music.load(filename)
+		mixer.music.play()
+		while mixer.music.get_busy() == True:
+			continue
 
 class GoogleTTS(Mp3TTSEngine):
 	def __init__(self, language='nl'):

@@ -18,4 +18,5 @@ def handle(text, speaker):
 
 
 def isValid(text):
+	print text
 	return bool(re.search(r'\b(hoe laat|tijd)\b', text, re.IGNORECASE))

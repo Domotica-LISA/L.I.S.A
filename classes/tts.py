@@ -1,4 +1,6 @@
 import os
+import tempfile
+import subprocess
 import gtts
 
 class Mp3TTSEngine():

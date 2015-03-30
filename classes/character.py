@@ -13,11 +13,11 @@ class Lisa(Char):
 		##print(self.brain.modules)
 
 		## STATES
-		self.FSM.AddState("Startup", states.Wait(self.FSM, self.brain))
+		self.FSM.AddState("Startup", states.Startup(self.FSM, self.brain))
 		self.FSM.AddState("Scanning", states.Scanning(self.FSM, self.brain))
 		self.FSM.AddState("Move", states.Move(self.FSM, self.brain))
 		self.FSM.AddState("Track", states.Track(self.FSM, self.brain))
-		self.FSM.AddState("Shutdown", states.Track(self.FSM, self.brain))
+		self.FSM.AddState("Shutdown", states.Shutdown(self.FSM, self.brain))
 
 		## TRANSITIONS
 		self.FSM.AddTransition("toStartup", transitions.Transition("Startup"))

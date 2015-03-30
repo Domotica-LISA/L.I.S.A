@@ -10,7 +10,7 @@ class Lisa(Char):
 	def __init__(self):
 		self.FSM = fsm.FSM(self)
 		self.brain = brain.Brain(tts.GoogleTTS())
-		##print(self.brain.modules)
+		##print(self.brain)
 
 		## STATES
 		self.FSM.AddState("Startup", states.Startup(self.FSM, self.brain))

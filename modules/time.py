@@ -4,7 +4,7 @@ import time
 
 WORDS = ["TIJD", "HOE LAAT"]
 
-def handle(text, mic):
+def handle(text, speaker):
 	now = datetime.datetime.now()
 
 	minuten = now.strftime("%M")
@@ -13,7 +13,7 @@ def handle(text, mic):
 
 	response = minuten + " minuten over " + uur
 
-	#mic.say("Het is nu %s." % response)
+	speaker.say("Het is nu %s." % response)
 	time.sleep(2)
 
 

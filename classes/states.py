@@ -25,11 +25,12 @@ ser = serial.Serial('/dev/tty', 9600)
 blocks = Blocks()
 """
 class State(object):
-	def __init__(self, FSM):
+	def __init__(self, FSM, Brain):
 		self.FSM = FSM
 		self.startTime = 0
 		self.timer = 0
 		self.persona = r"\b" + config.config['name'] + "\\b"
+		self.brain = Brain
 
 	def Enter(self):
 		self.startTime = int(clock())
@@ -49,28 +50,24 @@ class State(object):
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
 """
-class Wait(State):
-	def __init__(self, FSM):
-		super(Wait, self).__init__(FSM)
+class Startup(State):
+	def __init__(self, FSM, Brain):
+		super(Startup, self).__init__(FSM, Brain)
 
 	def Enter(self):
-		print "Waiting for Keyword"
-		super(Wait, self).Enter()
+		print "Entering startup"
+		super(Startup, self).Enter()
 
 	def Execute(self):
-		print "Waiting"
-
-		if re.search(self.persona, super(Wait, self).Handle_Response(), re.IGNORECASE):
-				self.FSM.ToTransition("toMove")
-		if self.startTime + 30 <= clock():
-			self.FSM.ToTransition("toScanning")
+		print "Starting up"
+		self.FSM.ToTransition("toScanning")
 
 	def Exit(self):
-		print "Exit Waiting"
+		print "Startup complete"
 
 class Scanning(State):
-	def __init__(self, FSM):
-		super(Scanning, self).__init__(FSM)
+	def __init__(self, FSM, Brain):
+		super(Startup, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Scanning"
@@ -78,18 +75,14 @@ class Scanning(State):
 
 	def Execute(self):
 		print "Scanning"
-
-		if re.search(self.persona, super(Scanning, self).Handle_Response(), re.IGNORECASE):
-				self.FSM.ToTransition("toMove")
-		if self.startTime + 10 <= clock():
-			self.FSM.ToTransition("toWait")
+		self.FSM.ToTransition("toMove")
 
 	def Exit(self):
 		print "Exit Scanning"
 
 class Move(State):
-	def __init__(self, FSM):
-		super(Move, self).__init__(FSM)
+	def __init__(self, FSM, Brain):
+		super(Startup, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Moving"
@@ -105,8 +98,8 @@ class Move(State):
 		print "Stop Moving"
 
 class Track(State):
-	def __init__(self, FSM):
-		super(Track, self).__init__(FSM)
+	def __init__(self, FSM, Brain):
+		super(Startup, self).__init__(FSM, Brain)
 
 	def Enter(self):
 		print "Start Tracking"
@@ -114,8 +107,23 @@ class Track(State):
 
 	def Execute(self):
 		print "Tracking"
-		if self.startTime + self.timer <= clock():
-			self.FSM.ToTransition("toWait")
+		self.brain.query(super(Track, self).Handle_Response())
 
 	def Exit(self):
 		print "Stop Tracking"
+
+class Shutdown(State):
+	def __init__(self, FSM, Brain):
+		super(Startup, self).__init__(FSM, Brain)
+
+	def Enter(self):
+		print "Entering shutdown"
+		super(Shutdown, self).Enter()
+
+	def Execute(self):
+		print "Shutting down"
+		if self.startTime + self.timer <= clock():
+			self.FSM.ToTransition("toStartup")
+
+	def Exit(self):
+		print "Exit shutdown"

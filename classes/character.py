@@ -2,21 +2,22 @@ import fsm
 import states
 import transitions
 import brain
+import tts
 
 Char = type("Char", (object, ), {})
 
 class Lisa(Char):
 	def __init__(self):
 		self.FSM = fsm.FSM(self)
-		self.brain = brain.Brain()
+		self.brain = brain.Brain(GoogleTTS())
 		##print(self.brain.modules)
 
 		## STATES
-		self.FSM.AddState("Startup", states.Wait(self.FSM))
-		self.FSM.AddState("Scanning", states.Scanning(self.FSM))
-		self.FSM.AddState("Move", states.Move(self.FSM))
-		self.FSM.AddState("Track", states.Track(self.FSM))
-		self.FSM.AddState("Shutdown", states.Track(self.FSM))
+		self.FSM.AddState("Startup", states.Wait(self.FSM, self.brain))
+		self.FSM.AddState("Scanning", states.Scanning(self.FSM, self.brain))
+		self.FSM.AddState("Move", states.Move(self.FSM, self.brain))
+		self.FSM.AddState("Track", states.Track(self.FSM, self.brain))
+		self.FSM.AddState("Shutdown", states.Track(self.FSM, self.brain))
 
 		## TRANSITIONS
 		self.FSM.AddTransition("toStartup", transitions.Transition("Startup"))

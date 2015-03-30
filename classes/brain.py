@@ -3,9 +3,9 @@ import path_declarations
 import config
 
 class Brain(object):
-	def __init__(self):
+	def __init__(self, speaker):
 		self.modules = self.get_modules()
-		
+		self.speaker = speaker
 
 	@classmethod
 	def get_modules(cls):
@@ -28,9 +28,9 @@ class Brain(object):
 			for text in texts:
 				if module.isValid(text):
 					try:
-						module.handle(text, self.mic, self.profile)
+						module.handle(text, self.speaker)
 					except:
-						self.mic.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
+						self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							"Probeer het later nog eens.")
 					finally:
 						return

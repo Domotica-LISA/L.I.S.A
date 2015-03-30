@@ -31,5 +31,6 @@ class Brain(object):
 				except:
 					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							#"Probeer het later nog eens.")
+					print "doei"
 				finally:
 					return

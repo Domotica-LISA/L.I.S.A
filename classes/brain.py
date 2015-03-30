@@ -29,7 +29,14 @@ class Brain(object):
 				try:
 					module.handle(texts, self.speaker)
 				except:
+<<<<<<< HEAD
 					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							#"Probeer het later nog eens.")
 				finally:
 					return
+=======
+					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
+						"Probeer het later nog eens.")
+				finally:
+					return
+>>>>>>> origin/master

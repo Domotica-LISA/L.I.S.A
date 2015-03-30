@@ -1,7 +1,7 @@
 import os
 import tempfile
 import subprocess
-import mad
+import platform
 import gtts
 
 class Mp3TTSEngine():
@@ -9,6 +9,8 @@ class Mp3TTSEngine():
 		cmd = ['omxplayer', str(filename)]
 		with tempfile.TemporaryFile() as f:
 			subprocess.cal(cmd, stdout=f, strerr=f)
+			f.seek(0)
+			output = f.read()
 
 class GoogleTTS(Mp3TTSEngine):
 	def __init__(self, language='nl'):

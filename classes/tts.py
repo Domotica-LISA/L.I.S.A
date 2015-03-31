@@ -35,6 +35,7 @@ class Mp3TTSEngine(object):
 					#val could be >max_length
 					combined_text.extend(split_text_rec(val, regexps, max_length))
 			return combined_text
+		print input_text
 		return split_text_rec(input_text.replace('\n', ''),['([\,|\.|;]+)', '( )'])
 
 	def save(self, savefile, text):

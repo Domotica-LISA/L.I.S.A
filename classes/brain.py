@@ -28,9 +28,9 @@ class Brain(object):
 			if module.isValid(text):
 				try:
 					module.handle(text, tts.GoogleTTS())
-				#except:
+				except:
 					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							#"Probeer het later nog eens.")
-					#print "doei"
+					print "doei"
 				finally:
 					return

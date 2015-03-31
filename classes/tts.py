@@ -71,6 +71,6 @@ class GoogleTTS(Mp3TTSEngine):
 
 	def say(self, phrase):
 		print(phrase)
-		self.save("output.mp3", phrase)
+		#self.save("output.mp3", phrase)
 		self.play_mp3("output.mp3")
 		#os.remove("output.mp3")

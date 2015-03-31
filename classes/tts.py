@@ -23,9 +23,9 @@ class Mp3TTSEngine(object):
 					r = requests.get(self.GOOGLE_TTS_URL, params=payload)
 					for chunk in r.iter_content(chunk_size=1024):
 						f.write(chunk)
-					f.close()
 				except Exception as e:
 					raise
+		f.close()
 
 class GoogleTTS(Mp3TTSEngine):
 	def say(self, phrase):

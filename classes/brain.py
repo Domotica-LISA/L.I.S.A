@@ -1,6 +1,7 @@
 import pkgutil
 import path_declarations
 import config
+import tts
 
 class Brain(object):
 	def __init__(self):

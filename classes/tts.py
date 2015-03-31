@@ -54,7 +54,7 @@ class Mp3TTSEngine(object):
 										"Chrome/18.0.1025.163 Safari/535.19"
 			}
 			req = urllib2.Request(mp3url, '', headers)
-			print req
+			print req.headers
 			sys.stdout.write('.')
 			sys.stdout.flush()
 			if len(val) > 0:

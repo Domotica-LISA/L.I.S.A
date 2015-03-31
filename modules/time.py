@@ -13,8 +13,10 @@ def handle(text, speaker):
 
 	response = minuten + " minuten over " + uur
 
-	speaker.say("Het is nu %s." % response)
-	time.sleep(2)
+	print speaker
+
+	#speaker.say("Het is nu %s." % response)
+	#time.sleep(2)
 
 def isValid(text):
 	return bool(re.search(r'\b(hoe laat|tijd)\b', text, re.IGNORECASE))

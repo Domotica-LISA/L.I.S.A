@@ -15,7 +15,7 @@ class Mp3TTSEngine(object):
 		while mixer.music.get_busy() == True:
 			continue
 
-	def split_text(input_text, max_length=100):
+	def split_text(self, input_text, max_length=100):
 		def split_text_rec(input_text, regexps, max_length=max_length):
 			if(len(input_text) <= max_length): return [input_text]
 			#mistakenly passed a string instead of a list

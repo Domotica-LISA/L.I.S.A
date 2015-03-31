@@ -2,6 +2,7 @@ import os
 import gtts
 from pygame import mixer
 import time
+import requests
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
@@ -13,14 +14,9 @@ class Mp3TTSEngine(object):
 	def save(self, savefile, text):
 		with open(savefile, 'wb') as f:
 			for idx, part in enumerate(text):
-				payload = { 'ie' : 'UTF-8',
-				'tl' : 'nl',
-				'q' : part,
-				'total' : len(text),
-				'idx' : idx,
-				'textlen' : len(part) }
+				payload = { 'ie' : 'UTF-8','tl' : 'nl','q' : part,'total' : len(text),'idx' : idx,'textlen' : len(part) }
 				try:
-					r = requests.get(self.GOOGLE_TTS_URL, params=payload)
+					r = requests.get('http://translate.google.com/translate_tts', params=payload)
 					for chunk in r.iter_content(chunk_size=1024):
 						f.write(chunk)
 				except Exception as e:

@@ -64,7 +64,7 @@ class Mp3TTSEngine(object):
 					savefile.write(response.read())
 					time.sleep(.5)
 				except urllib2.URLError as e:
-					#print ('%s' % e)
+					print ("doei")
 		savefile.close()
 		print('Saved MP3 to %s' % savefile.name)
 

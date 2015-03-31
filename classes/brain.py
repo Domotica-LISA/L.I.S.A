@@ -6,6 +6,7 @@ import tts
 class Brain(object):
 	def __init__(self):
 		self.modules = self.get_modules()
+		self.speaker = tts.GoogleTTS()
 
 	@classmethod
 	def get_modules(cls):
@@ -27,7 +28,7 @@ class Brain(object):
 		for module in self.modules:
 			if module.isValid(text):
 				try:
-					module.handle(text, tts.GoogleTTS())
+					module.handle(text, self.speaker)
 				except:
 					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							"Probeer het later nog eens.")

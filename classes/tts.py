@@ -35,7 +35,6 @@ class Mp3TTSEngine(object):
 					#val could be >max_length
 					combined_text.extend(split_text_rec(val, regexps, max_length))
 			return combined_text
-		print input_text
 		return split_text_rec(input_text.replace('\n', ''),['([\,|\.|;]+)', '( )'])
 
 	def save(self, savefile, text):
@@ -54,8 +53,8 @@ class Mp3TTSEngine(object):
 										"AppleWebKit/535.19 (KHTML, like Gecko) "
 										"Chrome/18.0.1025.163 Safari/535.19"
 			}
-			print mp3url
 			req = urllib2.Request(mp3url, '', headers)
+			print req
 			sys.stdout.write('.')
 			sys.stdout.flush()
 			if len(val) > 0:

@@ -13,7 +13,7 @@ def handle(text, speaker):
 
 	response = minuten + " minuten over " + uur
 
-	speaker.say("Het is nu %s." % response)
+	speaker.say("Het is nu %s" % response)
 	time.sleep(2)
 
 def isValid(text):

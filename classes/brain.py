@@ -3,9 +3,8 @@ import path_declarations
 import config
 
 class Brain(object):
-	def __init__(self, speaker):
+	def __init__(self):
 		self.modules = self.get_modules()
-		self.speaker = speaker
 
 	@classmethod
 	def get_modules(cls):
@@ -27,7 +26,7 @@ class Brain(object):
 		for module in self.modules:
 			if module.isValid(text):
 				try:
-					module.handle(text, self.speaker)
+					module.handle(text, tts.GoogleTTS())
 				except:
 					#self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							#"Probeer het later nog eens.")

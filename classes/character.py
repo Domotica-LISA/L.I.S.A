@@ -2,14 +2,13 @@ import fsm
 import states
 import transitions
 import brain
-import tts
 
 Char = type("Char", (object, ), {})
 
 class Lisa(Char):
 	def __init__(self):
 		self.FSM = fsm.FSM(self)
-		self.brain = brain.Brain(tts.GoogleTTS())
+		self.brain = brain.Brain()
 		##print(self.brain)
 
 		## STATES

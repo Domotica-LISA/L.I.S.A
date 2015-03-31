@@ -38,7 +38,7 @@ class Mp3TTSEngine(object):
 		return split_text_rec(input_text.replace('\n', ''),['([\,|\.|;]+)', '( )'])
 
 	def save(self, savefile, text):
-		open(savefile, 'wb')
+		args = [output=open(savefile, 'wb')]
 		combined_text = self.split_text(text)
 		#print combined_text
 		#download chunks and write them to the output file
@@ -59,12 +59,11 @@ class Mp3TTSEngine(object):
 			if len(val) > 0:
 				try:
 					response = urllib2.urlopen(req)
-					print response.read()
-					savefile.write(response.read())
+					args.output.write(response.read())
 					time.sleep(.5)
 				except urllib2.URLError as e:
 					print ('%s' % e)
-		savefile.close()
+		args.output.close()
 		print('Saved MP3 to %s' % savefile.name)
 
 class GoogleTTS(Mp3TTSEngine):

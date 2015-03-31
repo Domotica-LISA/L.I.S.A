@@ -24,9 +24,9 @@ class Mp3TTSEngine(object):
 		f.close()
 
 class GoogleTTS(Mp3TTSEngine):
-	def __init__():
+	def __init__(self):
 		pass
-		
+
 	def say(self, phrase):
 		tts = gtts.gTTS(text=phrase, lang='nl')
 		#print(phrase)

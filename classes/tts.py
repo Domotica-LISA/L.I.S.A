@@ -53,12 +53,13 @@ class Mp3TTSEngine(object):
 										"AppleWebKit/535.19 (KHTML, like Gecko) "
 										"Chrome/18.0.1025.163 Safari/535.19"
 			}
-			req = urllib2.Request(mp3url)
+			req = urllib2.Request(mp3url, '', headers)
 			sys.stdout.write('.')
 			sys.stdout.flush()
 			if len(val) > 0:
 				try:
 					response = urllib2.urlopen(req)
+					print response.read()
 					savefile.write(response.read())
 					time.sleep(.5)
 				except urllib2.URLError as e:

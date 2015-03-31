@@ -38,6 +38,11 @@ class Mp3TTSEngine(object):
 	return split_text_rec(input_text.replace('\n', ''),['([\,|\.|;]+)', '( )'])
 
 	def save(self, savefile, text):
+		open(savefile, 'wb')
+		combined_text = split_text(text)
+		#download chunks and write them to the output file
+		for idx, val in enumerate(combined_text):
+			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s" % (
 				urllib.quote(val),
 				len(combined_text),
 				idx)

@@ -41,7 +41,7 @@ class Mp3TTSEngine(object):
 	def save(self, savefile, text):
 		open(savefile, 'wb')
 		combined_text = self.split_text(text)
-		print combined_text
+		#print combined_text
 		#download chunks and write them to the output file
 		for idx, val in enumerate(combined_text):
 			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s" % (

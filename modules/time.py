@@ -2,7 +2,7 @@ import re
 import datetime
 import time
 
-WORDS = ["TIJD", "HOE LAAT"]
+WORDS = ["TIJD", "HOE LAAT", "HOELAAT"]
 
 def handle(text, speaker):
 	now = datetime.datetime.now()
@@ -17,4 +17,4 @@ def handle(text, speaker):
 	time.sleep(2)
 
 def isValid(text):
-	return bool(re.search(r'\b(hoe laat|tijd)\b', text, re.IGNORECASE))
+	return bool(re.search(r'\b(hoe laat|tijd|hoelaat)\b', text, re.IGNORECASE))

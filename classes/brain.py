@@ -22,7 +22,7 @@ class Brain(object):
 			else:
 				if hasattr(mod, "WORDS") and config.config['modules'][name] == True:
 					modules.append(mod)
-				elif mod.name == "default":
+				elif mod == "default":
 					modules.append(mod)
 		return modules
 

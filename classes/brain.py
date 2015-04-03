@@ -26,6 +26,7 @@ class Brain(object):
 					modules.append(mod)
 				elif mod.__name__ == "default":
 					modules.append(mod)
+		print modules
 		return modules
 
 	def query(self, text):

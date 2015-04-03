@@ -108,7 +108,7 @@ class Track(State):
 	def Execute(self):
 		print "Tracking"
 		text = super(Track, self).Handle_Response()["_text"]
-		if re.search(r'\bshutdown\b', text, re.IGNORECASE):
+		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:
 			self.brain.query(text)
@@ -126,7 +126,8 @@ class Shutdown(State):
 
 	def Execute(self):
 		print "Shutting down"
-		if self.startTime + self.timer <= clock():
+		text = super(Shutdown, self).Handle_Response()["_text"]
+		if re.search(r'\b(startup|start up)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toStartup")
 
 	def Exit(self):

@@ -22,7 +22,7 @@ class Brain(object):
 			else:
 				if hasattr(mod, "WORDS") and config.config['modules'][name] == True:
 					modules.append(mod)
-				elif mod == "default":
+				elif mod.__name__ == "default":
 					modules.append(mod)
 		modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY') else 0, reverse=True)
 		print modules

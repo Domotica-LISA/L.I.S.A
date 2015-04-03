@@ -16,11 +16,13 @@ class Brain(object):
 			try:
 				loader = finder.find_module(name)
 				mod = loader.load_module(name)
-				#print mod
+				print mod
 			except:
 				print("We made a booboo")
 			else:
 				if hasattr(mod, "WORDS") and config.config['modules'][name] == True:
+					modules.append(mod)
+				elif mod.name == "default":
 					modules.append(mod)
 		return modules
 

@@ -20,9 +20,9 @@ class Brain(object):
 			except:
 				print("We made a booboo")
 			else:
-				if hasattr(mod, "WORDS") and config.config['modules'][name] == True:
+				if hasattr(mod, "WORDS") and config.config['modules'][name] == None:
 					modules.append(mod)
-				elif hasattr(mod, "WORDS") and config.config['modules'][name] == None:
+				elif hasattr(mod, "WORDS") and config.config['modules'][name] == True:
 					modules.append(mod)
 				elif mod.__name__ == "default":
 					modules.append(mod)

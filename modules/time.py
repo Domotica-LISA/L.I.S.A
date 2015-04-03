@@ -41,7 +41,7 @@ def convert_time():
 		response = str(now.minute) + set_prefix(now.minute) + "over " + str(uur)
 	return response
 
-def handle(text, speaker):
+def handle(text, speaker, profile):
 	speaker.say("Het is nu %s" % convert_time())
 	time.sleep(2)
 

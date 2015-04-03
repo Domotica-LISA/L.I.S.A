@@ -35,7 +35,7 @@ class Brain(object):
 		for module in self.modules:
 			if module.isValid(text):
 				try:
-					module.handle(text, self.speaker)
+					module.handle(text, self.speaker, config.config)
 				except:
 					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							"Probeer het later nog eens.")

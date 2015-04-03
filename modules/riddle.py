@@ -1,10 +1,9 @@
 import re
-import random
 import time
 
 WORDS = ["RAADSEL"]
 
-def handle(text, speaker):
+def handle(text, speaker, profile):
 	speaker.say("Hidiho")
 	time.sleep(2)
 

@@ -1,6 +1,8 @@
 import time
 from sys import maxint
 
+WORDS = []
+
 PRIORITY = -(maxint + 1)
 
 def handle(text, speaker, profile):

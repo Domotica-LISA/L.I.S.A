@@ -107,7 +107,7 @@ class Track(State):
 
 	def Execute(self):
 		print "Tracking"
-		if super(Track, self).Handle_Response()["_text"] == "shutdown":
+		if re.search(r'\bshutdown\b', super(Track, self).Handle_Response()["_text"], re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:
 			self.brain.query(super(Track, self).Handle_Response()["_text"])

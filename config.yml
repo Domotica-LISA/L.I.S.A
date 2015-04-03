@@ -5,7 +5,7 @@ modules:
     roster: False
     music: False
     fealings: False
-    riddle: False
+    riddle: True
 
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 

@@ -20,7 +20,7 @@ class Brain(object):
 			except:
 				print("We made a booboo")
 			else:
-				if hasattr(mod, "WORDS") and not config.config['modules'][name] == True:
+				if hasattr(mod, "WORDS") and not in config.config['modules']:
 					modules.append(mod)
 				elif hasattr(mod, "WORDS") and config.config['modules'][name] == True:
 					modules.append(mod)

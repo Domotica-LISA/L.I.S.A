@@ -2,19 +2,48 @@ import re
 import datetime
 import time
 
-WORDS = ["TIJD", "HOE LAAT", "HOELAAT"]
+WORDS = ["TIJD", "HOE LAAT", "HOELAAT" "IS", "HET", "WAT", "IS", "DE"]
+
+def set_prefix(minuten):
+	if minuten == 1:
+		prefix = " minuut "
+	else:
+		prefix = " minuten "
+	return prefix
+
+def convert_time():
+	now = datetime.datetime.now()
+	if now.hour > 12:
+		uur = now.hour - 12
+	else:
+		uur = now.hour
+		if uur + 1 == 13:
+			uur = 0
+
+	if now.minute == 0:
+		response = str(uur) + " uur"
+	elif now.minute == 15:
+		response = "kwart over " + str(uur)
+	elif now.minute == 30:
+		response = "half " + str(uur + 1)
+	elif now.minute == 45:
+		response = "kwart voor " + str(uur + 1)
+	elif now.minute > 15 and now.minute < 30:
+		minuten = 30 - now.minute
+		response = str(minuten) + set_prefix(minuten) +  "voor half " + str(uur + 1)
+	elif now.minute > 30 and now.minute < 45:
+		minuten = now.minute - 30
+		response = str(minuten) + set_prefix(minuten) + "over half " + str(uur + 1)
+	elif now.minute > 45 and now.minute < 60:
+		minuten = 60 - now.minute
+		response = str(minuten) + set_prefix(minuten) + "voor " + str(uur + 1)
+	else:
+		response = str(now.minute) + set_prefix(now.minute) + "over " + str(uur)
+	return response
 
 def handle(text, speaker):
-	now = datetime.datetime.now()
-
-	minuten = now.strftime("%M")
-	uur = now.strftime("%I")
-	uur = uur.replace("0", "")
-
-	response = minuten + " minuten over " + uur
-
-	speaker.say("Het is nu %s" % response)
+	speaker.say("Het is nu %s" % convert_time())
 	time.sleep(2)
 
 def isValid(text):
-	return bool(re.search(r'\b(hoe laat|tijd|hoelaat)\b', text, re.IGNORECASE))
+	return bool(re.search(r'\b(hoe laat is het|wat is de tijd|hoelaat is het)\b', text, re.IGNORECASE))

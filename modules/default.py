@@ -1,7 +1,4 @@
 import time
-from sys import maxint
-
-PRIORITY = -(maxint + 1)
 
 def handle(text, speaker):
 	speaker.say("Sorry kan je dat herhalen")

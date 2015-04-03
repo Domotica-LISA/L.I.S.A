@@ -16,7 +16,7 @@ class Brain(object):
 			try:
 				loader = finder.find_module(name)
 				mod = loader.load_module(name)
-				print mod
+				#print mod
 			except:
 				print("We made a booboo")
 			else:
@@ -24,8 +24,6 @@ class Brain(object):
 					modules.append(mod)
 				elif mod.__name__ == "default":
 					modules.append(mod)
-		modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY') else 0, reverse=True)
-		print modules
 		return modules
 
 	def query(self, text):

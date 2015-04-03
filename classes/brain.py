@@ -24,6 +24,7 @@ class Brain(object):
 					modules.append(mod)
 				elif mod == "default":
 					modules.append(mod)
+		modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY') else 0, reverse=True)
 		return modules
 
 	def query(self, text):

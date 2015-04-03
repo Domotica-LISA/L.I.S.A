@@ -1,5 +1,6 @@
 import re
-from math import random
+import random
+import time
 
 WORDS = ["RAADSEL"]
 

@@ -20,9 +20,9 @@ class Brain(object):
 			except:
 				print("We made a booboo")
 			else:
-				if hasattr(mod, "WORDS") and name not in config.config['modules']:
+				if hasattr(mod, "WORDS") and config.config['modules'][name] == True:
 					modules.append(mod)
-				elif hasattr(mod, "WORDS") and config.config['modules'][name] == True:
+				elif hasattr(mod, "WORDS") and name not in config.config['modules']:
 					modules.append(mod)
 			modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY')
                      else 0, reverse=True)

@@ -1,5 +1,5 @@
 modules:
-    weather: False
+    weather: True
     time: True
     train: False
     roster: False

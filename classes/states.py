@@ -5,10 +5,10 @@ import config
 import re
 import time
 import json
-"""
+
 from pixy import *
 from ctypes import *
-import serial
+#import serial
 
 pixy_init()
 
@@ -21,9 +21,9 @@ class Blocks(Structure):
 		("height", c_uint),
 		("angle", c_uint) ]
 
-ser = serial.Serial('/dev/tty', 9600)
+#ser = serial.Serial('/dev/tty', 9600)
 blocks = Blocks()
-"""
+
 class State(object):
 	def __init__(self, FSM, Brain):
 		self.FSM = FSM
@@ -44,12 +44,12 @@ class State(object):
 
 	def Handle_Response(self):
 		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
-"""
+
 	def Handle_Camera(self):
 		count = pixy_get_blocks(1, blocks)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
-"""
+
 class Startup(State):
 	def __init__(self, FSM, Brain):
 		super(Startup, self).__init__(FSM, Brain)
@@ -90,9 +90,9 @@ class Move(State):
 
 	def Execute(self):
 		print "Moving to sound origin"
-		if self.startTime + self.timer <= clock():
-			self.FSM.ToTransition("toTrack")
-		#super(Move, self).Handle_Camera()
+		#if self.startTime + self.timer <= clock():
+		#	self.FSM.ToTransition("toTrack")
+		super(Move, self).Handle_Camera()
 
 	def Exit(self):
 		print "Stop Moving"

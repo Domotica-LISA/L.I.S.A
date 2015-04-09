@@ -6,8 +6,8 @@ import re
 import time
 import json
 
-from pixy import *
-from ctypes import *
+import pixy
+import ctypes
 #import serial
 
 pixy_init()
@@ -18,11 +18,10 @@ class Blocks(Structure):
 		("x", c_uint),
 		("y", c_uint),
 		("width", c_uint),
-		("height", c_uint),
-		("angle", c_uint) ]
+		("height", c_uint)]
 
 #ser = serial.Serial('/dev/tty', 9600)
-blocks = Blocks()
+blocks = Block()
 
 class State(object):
 	def __init__(self, FSM, Brain):

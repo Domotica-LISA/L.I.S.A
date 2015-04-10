@@ -7,7 +7,7 @@ import time
 import json
 
 from pixy import *
-import ctypes
+from ctypes import *
 #import serial
 
 pixy_init()

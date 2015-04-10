@@ -2,6 +2,8 @@ import httplib2
 import re
 from xml.dom import minidom
 
+WORDS = ['TREIN']
+
 def handle(text, speaker, profile):
 	http = httplib2.Http(disable_ssl_certificate_validation=True)
 	http.follow_redirects = False
@@ -12,11 +14,8 @@ def handle(text, speaker, profile):
 	xmldoc = minidom.parseString(content);
 
 	for node in xmldoc.getElementsByTagName('VertrekkendeTrein'):
-	    RitNummer = node.getElementsByTagName("RitNummer")[0].firstChild.data
 	    VertrekTijd = node.getElementsByTagName("VertrekTijd")[0].firstChild.data
 	    EindBestemming = node.getElementsByTagName("EindBestemming")[0].firstChild.data
-	    TreinSoort = node.getElementsByTagName("TreinSoort")[0].firstChild.data
-	    Vervoerder = node.getElementsByTagName("Vervoerder")[0].firstChild.data
 	    VertrekSpoor = node.getElementsByTagName("VertrekSpoor")[0].firstChild.data
 	    
 	    speaker.say("De trein naar " + EindBestemming + " op spoor " + VertrekSpoor + " vertrekt om " + VertrekTijd[11] + VertrekTijd[12] + VertrekTijd[13] + VertrekTijd[14] + VertrekTijd[15])

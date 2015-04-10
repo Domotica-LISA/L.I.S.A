@@ -7,6 +7,7 @@ def handle(text, speaker, profile):
 	for module in profile['modules']:
 		if module == True:
 			print module
+		print module
 	time.sleep(2)
 
 def isValid(text):

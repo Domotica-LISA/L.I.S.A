@@ -4,7 +4,7 @@ import time
 WORDS = ["BETEKENT"]
 
 def handle(text, speaker, profile):
-	speaker.say(profile['name'] + ' staat voor Lokaal Interactive Servce Android')
+	speaker.say(profile['name'] + ' staat voor ' + profile['meaning'])
 	time.sleep(2)
 
 def isValid(text):

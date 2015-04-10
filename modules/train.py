@@ -7,7 +7,7 @@ WORDS = ['TREIN']
 def handle(text, speaker, profile):
 	http = httplib2.Http(disable_ssl_certificate_validation=True)
 	http.follow_redirects = False
-	http.add_credentials('skievar@gmail.com', '9zMZBc_mLFpII0OMTQct-OMPtf93EEvammhfuDUzQMfLG-NSE1QFDw')
+	http.add_credentials('skievar@gmail.com', profile['ns_api_key'])
 
 	resp, content = http.request("https://webservices.ns.nl/ns-api-avt?station=" + profile['location'])
 

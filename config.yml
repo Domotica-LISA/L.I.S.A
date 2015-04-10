@@ -1,6 +1,7 @@
 modules:
     weather: True
     time: True
+
     train: False
     roster: False
     music: False
@@ -10,5 +11,7 @@ modules:
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 
 name: LISA
+
+meaning: Lokaal Interactive Service Android
 
 makers: Mark en Ivar

@@ -4,12 +4,9 @@ import time
 WORDS = ['WAT KAN JE ALLEMAAL']
 
 def handle(text, speaker, profile):
-	for module in profile['modules']:
-		for value in module:
-			if value == True:
-				print module
-			print value
-		print module
+	for moduleName in profile['modules']:
+		if profile['modules'][moduleName] == True:
+			print moduleName
 	time.sleep(2)
 
 def isValid(text):

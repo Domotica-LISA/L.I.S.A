@@ -1,8 +1,7 @@
+import re
 import time
-from sys import maxint
 
 WORDS = ['WAT KAN JE ALLEMAAL']
-
 
 def handle(text, speaker, profile):
 	for module in profile['modules']:

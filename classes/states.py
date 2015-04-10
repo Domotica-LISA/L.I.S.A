@@ -48,6 +48,7 @@ class State(object):
 		count = pixy_get_blocks(1, blocks)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
+			return True
 
 class Startup(State):
 	def __init__(self, FSM, Brain):
@@ -91,7 +92,8 @@ class Move(State):
 		print "Moving to sound origin"
 		#if self.startTime + self.timer <= clock():
 		#	self.FSM.ToTransition("toTrack")
-		super(Move, self).Handle_Camera()
+		if super(Move, self).Handle_Camera():
+			self.FSM.ToTransition("toTrack")
 
 	def Exit(self):
 		print "Stop Moving"
@@ -106,6 +108,7 @@ class Track(State):
 
 	def Execute(self):
 		print "Tracking"
+		super(Track, self).Handle_Camera()
 		text = super(Track, self).Handle_Response()["_text"]
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")

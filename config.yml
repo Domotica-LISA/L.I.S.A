@@ -1,7 +1,7 @@
 modules:
     weather: True
     time: True
-    train: False
+    train: True
     roster: False
     music: False
     fealings: False

@@ -5,8 +5,10 @@ WORDS = ['WAT KAN JE ALLEMAAL']
 
 def handle(text, speaker, profile):
 	for module in profile['modules']:
-		if module == True:
-			print module
+		for value in module:
+			if value == True:
+				print module
+			print value
 		print module
 	time.sleep(2)
 

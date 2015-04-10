@@ -10,7 +10,7 @@ def handle(text, speaker, profile):
     for entry in entries:
         date_desc = entry['title'].split()[1].strip().lower()
         if date_desc == 'verwachting':
-            speaker.say(entry['summary'].replace('<br />','')[:-33])
+            speaker.say("Het weer voor vandaag is %s" % entry['summary'].replace('<br />','')[:-33])
             time.sleep(2)
 
 def isValid(text):

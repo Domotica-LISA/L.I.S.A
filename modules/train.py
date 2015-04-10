@@ -9,7 +9,7 @@ def handle(text, speaker, profile):
 	http.follow_redirects = False
 	http.add_credentials('skievar@gmail.com', '9zMZBc_mLFpII0OMTQct-OMPtf93EEvammhfuDUzQMfLG-NSE1QFDw')
 
-	resp, content = http.request("https://webservices.ns.nl/ns-api-avt?station=Enschede")
+	resp, content = http.request("https://webservices.ns.nl/ns-api-avt?station=" + profile['location'])
 
 	xmldoc = minidom.parseString(content);
 

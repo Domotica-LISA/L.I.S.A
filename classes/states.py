@@ -6,7 +6,7 @@ import re
 import time
 import json
 
-import pixy
+from pixy import *
 import ctypes
 #import serial
 

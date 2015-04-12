@@ -67,6 +67,7 @@ class Startup(State):
 
 	def enter(self):
 		print "Entering startup"
+		self.brain.speaker.say("Biep... Biep... Booting up mijn primaire functies")
 
 	def execute(self):
 		print "Starting up"
@@ -75,6 +76,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
+		self.brain.speaker.say("Bootup voltooid")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -101,6 +103,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
+		self.brain.speaker.say("Riep iemand mij")
 
 	def execute(self):
 		print "Moving to sound origin"
@@ -111,6 +114,7 @@ class Move(State):
 
 	def exit(self):
 		print "Stop Moving"
+		self.brain.speaker.say("Ik heb je gevonden")
 
 class Track(State):
 	def __init__(self, fSM, brain):
@@ -118,6 +122,7 @@ class Track(State):
 
 	def enter(self):
 		print "Start Tracking"
+		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"
@@ -134,6 +139,7 @@ class Shutdown(State):
 
 	def enter(self):
 		print "Entering shutdown"
+		self.brain.speaker.say("Nee niet doen. Ik kan je nog zooooooooooo veeeeel wijz..........")
 		# set servo's to transport position
 
 	def execute(self):

@@ -45,6 +45,14 @@ class State(object):
 	def handle_response(self):
 		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
 
+	def handle_async_response(self, response):
+		text = json.loads(response)
+		if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
+			self.fSM.to_transition("toShutdown")
+		else:
+			self.brain.query(text['_text'])
+		#return json.loads(response)
+
 	def get_color_code(self):
 		count = pixy_get_blocks(1, blocks)
 		if count > 0:
@@ -108,13 +116,6 @@ class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
 
-	def handle_async_response(self, response):
-		text = json.loads(response)
-		if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
-			self.fSM.to_transition("toShutdown")
-		else:
-			self.brain.query(text['_text'])
-
 	def enter(self):
 		print "Start Tracking"
 
@@ -122,7 +123,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).get_color_code()
 		
-		wit.voice_query_auto_async(config.config['wit_ai_token'], handle_async_response)
+		wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response)
 
 	def exit(self):
 		print "Stop Tracking"

@@ -5,7 +5,7 @@ import config
 import re
 import time
 import json
-#import RPi.GPIO as gpio
+import RPi.GPIO as gpio
 import threading
 
 from pixy import *
@@ -43,8 +43,7 @@ class State(object):
 	def Exit(self):
 		pass
 
-	def Handle_Response(self):
-		response = threading.Thread(target=wit.voice_query_auto, args=(config.config['wit_ai_token'],)).start()
+	def Handle_Response(self, response):
 		return json.loads(response)
 
 	def Handle_Camera(self):
@@ -113,7 +112,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
 		
-		text = super(Track, self).Handle_Response()["_text"]
+		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).Handle_Response)["_text"]
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:

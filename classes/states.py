@@ -111,9 +111,9 @@ class Track(State):
 	def handle_async_response(self, response):
 		text = json.loads(response)
 		if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
-				self.fSM.to_transition("toShutdown")
-			else:
-				self.brain.query(text['_text'])
+			self.fSM.to_transition("toShutdown")
+		else:
+			self.brain.query(text['_text'])
 
 	def enter(self):
 		print "Start Tracking"

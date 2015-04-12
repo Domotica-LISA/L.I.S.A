@@ -64,14 +64,14 @@ class Mp3TTSEngine(object):
 				except urllib2.URLError as e:
 					print ('%s' % e)
 		output.close()
-		print('Saved MP3 to %s' % output.name)
+		#print('Saved MP3 to %s' % output.name)
 
 class GoogleTTS(Mp3TTSEngine):
 	def __init__(self):
 		pass
 
 	def say(self, phrase):
-		print(phrase)
+		#print(phrase)
 		self.save("output.mp3", phrase)
 		self.play_mp3("output.mp3")
 		os.remove("output.mp3")

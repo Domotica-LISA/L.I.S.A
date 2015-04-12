@@ -7,6 +7,7 @@ import time
 import json
 #import RPi.GPIO as gpio
 import threading
+import queue
 
 from pixy import *
 from ctypes import *
@@ -24,6 +25,7 @@ class Blocks(Structure):
 
 #ser = serial.Serial('/dev/tty', 9600)
 blocks = Block()
+q = queue.Queue()
 
 class State(object):
 	def __init__(self, FSM, Brain):
@@ -43,10 +45,8 @@ class State(object):
 	def Exit(self):
 		pass
 
-	def Handle_Response(self):
-		response = ""
-		response += threading.Thread(target=wit.voice_query_auto, args=(config.config['wit_ai_token'],))
-		return json.loads(response)
+	def Handle_Response(self, q):
+		q.put(wit.voice_query_auto(config.config['wit_ai_token']))
 
 	def Handle_Camera(self):
 		count = pixy_get_blocks(1, blocks)
@@ -114,7 +114,8 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
 		
-		text = super(Track, self).Handle_Response()["_text"]
+		threading.Thread(target=super(Track, self).Handle_Response, args=(q)).start()
+		text = json(q.get())
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:

@@ -45,7 +45,7 @@ class State(object):
 
 	def Handle_Response(self):
 		response = threading.Thread(target=wit.voice_query_auto, args=(config.config['wit_ai_token'],))
-		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
+		return json.loads(response)
 
 	def Handle_Camera(self):
 		count = pixy_get_blocks(1, blocks)

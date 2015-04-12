@@ -5,10 +5,12 @@ import config
 import re
 import time
 import json
+import RPi.GPIO as gpio
+import threading
 
 from pixy import *
 from ctypes import *
-#import serial
+import serial
 
 pixy_init()
 
@@ -90,10 +92,10 @@ class Move(State):
 
 	def Execute(self):
 		print "Moving to sound origin"
-		#if self.startTime + self.timer <= clock():
-		#	self.FSM.ToTransition("toTrack")
-		if super(Move, self).Handle_Camera():
+		if self.startTime + self.timer <= clock():
 			self.FSM.ToTransition("toTrack")
+		#if super(Move, self).Handle_Camera():
+			#self.FSM.ToTransition("toTrack")
 
 	def Exit(self):
 		print "Stop Moving"
@@ -109,7 +111,7 @@ class Track(State):
 	def Execute(self):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
-		text = super(Track, self).Handle_Response()["_text"]
+		text = threading.Thread(target=super(Track, self).Handle_Response()["_text"]).start()
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:

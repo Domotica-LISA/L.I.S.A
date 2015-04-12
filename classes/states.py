@@ -46,6 +46,7 @@ class State(object):
 		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
 
 	def handle_async_response(self, response):
+		print response
 		return json.loads(response)
 
 	def get_color_code(self):

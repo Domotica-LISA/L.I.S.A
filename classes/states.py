@@ -28,7 +28,7 @@ class State(object):
 	def __init__(self, fSM, brain):
 		self.fSM = fSM
 		self.persona = r"\b" + config.config['name'] + "\\b"
-		self.brain = rain
+		self.brain = brain
 		self.servoPos = ['0','0','0','0']
 		self.arduinoActive = False
 		self.ccDetected = False

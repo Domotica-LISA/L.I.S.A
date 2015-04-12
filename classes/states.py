@@ -44,7 +44,8 @@ class State(object):
 		pass
 
 	def Handle_Response(self):
-		response = threading.Thread(target=wit.voice_query_auto, args=(config.config['wit_ai_token'],))
+		response = ""
+		response += threading.Thread(target=wit.voice_query_auto, args=(config.config['wit_ai_token'],))
 		return json.loads(response)
 
 	def Handle_Camera(self):

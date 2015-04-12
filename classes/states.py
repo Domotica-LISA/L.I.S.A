@@ -100,7 +100,7 @@ class Move(State):
 	def execute(self):
 		print "Moving to sound origin"
 		self.fSM.to_transition("toTrack")
-		super(Move, self).Handle_Camera()
+		super(Move, self).get_color_code()
 		#if self.ccDetected:
 			#self.fSM.to_transition("toTrack")
 
@@ -116,7 +116,7 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		super(Track, self).Handle_Camera()
+		super(Track, self).get_color_code()
 		
 		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response)
 		if text is not None:

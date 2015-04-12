@@ -7,7 +7,7 @@ import time
 import json
 #import RPi.GPIO as gpio
 import threading
-import queue
+import Queue
 
 from pixy import *
 from ctypes import *
@@ -25,7 +25,7 @@ class Blocks(Structure):
 
 #ser = serial.Serial('/dev/tty', 9600)
 blocks = Block()
-q = queue.Queue()
+q = Queue.Queue()
 
 class State(object):
 	def __init__(self, FSM, Brain):

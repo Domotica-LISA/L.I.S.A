@@ -47,7 +47,7 @@ class State(object):
 
 	def handle_async_response(self, response):
 		text = json.loads(response)
-		if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
+		if re.search(r'\b(power down|powerdown)\b', text['_text'], re.IGNORECASE):
 			self.fSM.to_transition("toShutdown")
 		else:
 			self.brain.query(text['_text'])
@@ -67,7 +67,7 @@ class Startup(State):
 
 	def enter(self):
 		print "Entering startup"
-		self.brain.speaker.say("Biep... Biep... Booting up mijn primaire functies")
+		self.brain.speaker.say("Biep... Biep... Opstarten van mijn primaire functies.")
 
 	def execute(self):
 		print "Starting up"
@@ -76,7 +76,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
-		self.brain.speaker.say("Bootup voltooid")
+		self.brain.speaker.say("Opstarten voltooid.")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -103,7 +103,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("Riep iemand mij")
+		self.brain.speaker.say("Riep iemand mij?")
 
 	def execute(self):
 		print "Moving to sound origin"
@@ -114,7 +114,7 @@ class Move(State):
 
 	def exit(self):
 		print "Stop Moving"
-		self.brain.speaker.say("Ik heb je gevonden")
+		#self.brain.speaker.say("Ik heb je gevonden")
 
 class Track(State):
 	def __init__(self, fSM, brain):
@@ -139,13 +139,13 @@ class Shutdown(State):
 
 	def enter(self):
 		print "Entering shutdown"
-		self.brain.speaker.say("Nee niet doen. Ik kan je nog zooooooooooo veeeeel wijz..........")
+		self.brain.speaker.say("Bezig met afsluiten.")
 		# set servo's to transport position
 
 	def execute(self):
 		print "Shutting down"
 		text = super(Shutdown, self).handle_response()["_text"]
-		if re.search(r'\b(startup|start up)\b', text, re.IGNORECASE):
+		if re.search(r'\b(opstarten|start up)\b', text, re.IGNORECASE):
 			self.fSM.to_transition("toStartup")
 
 	def exit(self):

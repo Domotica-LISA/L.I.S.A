@@ -112,7 +112,7 @@ class Track(State):
 		super(Track, self).Handle_Camera()
 		
 		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).Handle_Response)
-		if text not is None:
+		if text is not None:
 			if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 				self.FSM.ToTransition("toShutdown")
 			else:

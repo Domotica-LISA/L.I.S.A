@@ -10,7 +10,7 @@ class Brain(object):
 
 	@classmethod
 	def get_modules(cls):
-		locations = [path_declarations.MODULE_PATH]
+		locations = [path_declarations.modulePath]
 		modules = []
 		for finder, name, ispkg in pkgutil.walk_packages(locations):
 			try:

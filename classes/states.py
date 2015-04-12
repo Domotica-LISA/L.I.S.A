@@ -114,7 +114,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
 		
-		threading.Thread(target=super(Track, self).Handle_Response, args=(q)).start()
+		threading.Thread(target=super(Track, self).Handle_Response, args=(,q)).start()
 		text = json(q.get())
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")

@@ -9,5 +9,5 @@ def handle(text, speaker, profile):
 	speaker.say("Sorry kan je dat herhalen")
 	time.sleep(2)
 
-def isValid(text):
+def is_valid(text):
 	return True

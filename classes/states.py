@@ -25,115 +25,122 @@ class Blocks(Structure):
 blocks = Block()
 
 class State(object):
-	def __init__(self, FSM, Brain):
-		self.FSM = FSM
-		self.startTime = 0
-		self.timer = 0
+	def __init__(self, fSM, brain):
+		self.fSM = fSM
 		self.persona = r"\b" + config.config['name'] + "\\b"
-		self.brain = Brain
+		self.brain = rain
+		self.servoPos = ['0','0','0','0']
+		self.arduinoActive = False
+		self.ccDetected = False
 
-	def Enter(self):
-		self.startTime = int(clock())
-		self.timer = randint(0, 5)
-
-	def Execute(self):
+	def enter(self):
 		pass
 
-	def Exit(self):
+	def execute(self):
 		pass
 
-	def Handle_Response(self, response):
+	def exit(self):
+		pass
+
+	def handle_response(self):
+		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
+
+	def handle_async_response(self, response):
 		return json.loads(response)
 
-	def Handle_Camera(self):
+	def get_color_code(self):
 		count = pixy_get_blocks(1, blocks)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
-			return True
+			self.ccDetected = True
+		else:
+			self.ccDetected = False
 
 class Startup(State):
-	def __init__(self, FSM, Brain):
-		super(Startup, self).__init__(FSM, Brain)
+	def __init__(self, fSM, brain):
+		super(Startup, self).__init__(fSM, brain)
 
-	def Enter(self):
+	def enter(self):
 		print "Entering startup"
-		super(Startup, self).Enter()
 
-	def Execute(self):
+	def execute(self):
 		print "Starting up"
-		self.FSM.ToTransition("toScanning")
+		# set servo's to idle position
+		self.fSM.to_transition("toScanning")
 
-	def Exit(self):
+	def exit(self):
 		print "Startup complete"
 
 class Scanning(State):
-	def __init__(self, FSM, Brain):
-		super(Scanning, self).__init__(FSM, Brain)
+	def __init__(self, fSM, brain):
+		super(Scanning, self).__init__(fSM, brain)
 
-	def Enter(self):
+	def enter(self):
 		print "Start Scanning"
-		super(Scanning, self).Enter()
+		self.arduinoActive = True
 
-	def Execute(self):
+	def execute(self):
 		print "Scanning"
-		self.FSM.ToTransition("toMove")
+		if re.search(self.persona, super(Scanning, self).handle_response()['_text'], re.IGNORECASE):
+			# send message to arduino to listen to serial data only
+			# get baseservo pos from arduino
+			self.fSM.to_transition("toMove")
 
-	def Exit(self):
+	def exit(self):
 		print "Exit Scanning"
+		self.arduinoActive = False
 
 class Move(State):
-	def __init__(self, FSM, Brain):
-		super(Move, self).__init__(FSM, Brain)
+	def __init__(self, fSM, brain):
+		super(Move, self).__init__(fSM, brain)
 
-	def Enter(self):
+	def enter(self):
 		print "Start Moving"
-		super(Move, self).Enter()
 
-	def Execute(self):
+	def execute(self):
 		print "Moving to sound origin"
-		if self.startTime + self.timer <= clock():
-			self.FSM.ToTransition("toTrack")
-		#if super(Move, self).Handle_Camera():
-			#self.FSM.ToTransition("toTrack")
+		self.fSM.to_transition("toTrack")
+		super(Move, self).Handle_Camera()
+		#if self.ccDetected:
+			#self.fSM.to_transition("toTrack")
 
-	def Exit(self):
+	def exit(self):
 		print "Stop Moving"
 
 class Track(State):
-	def __init__(self, FSM, Brain):
-		super(Track, self).__init__(FSM, Brain)
+	def __init__(self, fSM, brain):
+		super(Track, self).__init__(fSM, brain)
 
-	def Enter(self):
+	def enter(self):
 		print "Start Tracking"
-		super(Track, self).Enter()
 
-	def Execute(self):
+	def execute(self):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
 		
-		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).Handle_Response)
+		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response)
 		if text is not None:
-			if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
-				self.FSM.ToTransition("toShutdown")
+			if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
+				self.fSM.to_transition("toShutdown")
 			else:
-				self.brain.query(text)
+				self.brain.query(text['_text'])
 
-	def Exit(self):
+	def exit(self):
 		print "Stop Tracking"
 
 class Shutdown(State):
-	def __init__(self, FSM, Brain):
-		super(Shutdown, self).__init__(FSM, Brain)
+	def __init__(self, fSM, brain):
+		super(Shutdown, self).__init__(fSM, brain)
 
-	def Enter(self):
+	def enter(self):
 		print "Entering shutdown"
-		super(Shutdown, self).Enter()
+		# set servo's to transport position
 
-	def Execute(self):
+	def execute(self):
 		print "Shutting down"
-		text = super(Shutdown, self).Handle_Response()["_text"]
+		text = super(Shutdown, self).handle_response()["_text"]
 		if re.search(r'\b(startup|start up)\b', text, re.IGNORECASE):
-			self.FSM.ToTransition("toStartup")
+			self.fSM.to_transition("toStartup")
 
-	def Exit(self):
+	def exit(self):
 		print "Exit shutdown"

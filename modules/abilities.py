@@ -17,5 +17,5 @@ def handle(text, speaker, profile):
 	speaker.say("%s En voor een workshop in 3d printen, kan ik je ook wijzer maken waar ze die geven." % response)
 	time.sleep(2)
 
-def isValid(text):
+def is_valid(text):
 	return bool(re.search(r'\bwat kan je\b', text, re.IGNORECASE))

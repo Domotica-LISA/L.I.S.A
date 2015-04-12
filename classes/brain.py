@@ -31,7 +31,7 @@ class Brain(object):
 
 	def query(self, text):
 		for module in self.modules:
-			if module.isValid(text):
+			if module.is_valid(text):
 				try:
 					module.handle(text, self.speaker, config.config)
 				except:

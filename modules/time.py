@@ -45,5 +45,5 @@ def handle(text, speaker, profile):
 	speaker.say("Het is nu %s" % convert_time())
 	time.sleep(2)
 
-def isValid(text):
+def is_valid(text):
 	return bool(re.search(r'\b(hoe laat is het|wat is de tijd|hoelaat is het)\b', text, re.IGNORECASE))

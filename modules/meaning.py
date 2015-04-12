@@ -7,5 +7,5 @@ def handle(text, speaker, profile):
 	speaker.say(profile['name'] + ' staat voor ' + profile['meaning'])
 	time.sleep(2)
 
-def isValid(text):
+def is_valid(text):
 	return bool(re.search(r'\bwat betekent lisa\b', text, re.IGNORECASE))

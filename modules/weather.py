@@ -13,5 +13,5 @@ def handle(text, speaker, profile):
             speaker.say("Het weer voor vandaag is %s" % entry['summary'].replace('<br />','')[:-33])
             time.sleep(2)
 
-def isValid(text):
+def is_valid(text):
     return bool(re.search(r'\b(hoe is het weer vandaag|wat voor weer wordt het vandaag)\b', text, re.IGNORECASE))

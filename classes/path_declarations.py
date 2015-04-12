@@ -1,16 +1,16 @@
 import os
 
-APP_PATH = os.path.normpath(os.path.join(
+appPath = os.path.normpath(os.path.join(
 	os.path.dirname(os.path.abspath(__file__)), 
 	os.pardir))
 
-DATA_PATH = os.path.join(APP_PATH, "data")
-MODULE_PATH = os.path.join(APP_PATH, "modules")
+dataPath = os.path.join(appPath, "data")
+modulePath = os.path.join(appPath, "modules")
 
-CONFIG_PATH = APP_PATH
+configPath = appPath
 
 def config(*fname):
-	return os.path.join(APP_PATH, *fname)
+	return os.path.join(appPath, *fname)
 
 def data(*fname):
-	return os.path.join(DATA_PATH, *fname)
+	return os.path.join(dataPath, *fname)

@@ -11,7 +11,7 @@ if __name__ == '__main__':
 			timeInterval = 1
 			while startTime + timeInterval > clock():
 				pass
-			lisa_fsm.Execute()
+			lisa_fsm.execute()
 	except KeyboardInterrupt:
 		wit.close()
 		print "Bye Bye!"

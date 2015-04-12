@@ -67,7 +67,11 @@ class Startup(State):
 
 	def enter(self):
 		print "Entering startup"
-		self.brain.speaker.say("Biep... Biep... Opstarten van mijn primaire functies.")
+		self.brain.speaker.say("Biep... ")
+		time.sleep(1)
+		self.brain.speaker.say("Biep... ")
+		time.sleep(0.5)
+		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 
 	def execute(self):
 		print "Starting up"

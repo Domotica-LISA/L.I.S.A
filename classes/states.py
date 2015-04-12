@@ -5,8 +5,7 @@ import config
 import re
 import time
 import json
-import RPi.GPIO as gpio
-import threading
+#import RPi.GPIO as gpio
 
 from pixy import *
 from ctypes import *

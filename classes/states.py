@@ -119,6 +119,7 @@ class Track(State):
 		super(Track, self).get_color_code()
 		
 		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response)
+		print text
 		if text is not None:
 			if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):
 				self.fSM.to_transition("toShutdown")

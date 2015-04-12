@@ -47,7 +47,7 @@ class State(object):
 
 	def handle_async_response(self, response):
 		print response
-		return json.loads(response)
+		return response
 
 	def get_color_code(self):
 		count = pixy_get_blocks(1, blocks)
@@ -119,7 +119,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).get_color_code()
 		
-		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response)
+		text = json.loads(wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).handle_async_response))
 		print text
 		if text is not None:
 			if re.search(r'\b(shutdown|shut down)\b', text['_text'], re.IGNORECASE):

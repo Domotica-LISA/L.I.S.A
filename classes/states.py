@@ -43,8 +43,8 @@ class State(object):
 	def Exit(self):
 		pass
 
-	def Handle_Response(self, response):
-		return json.loads(response)
+	def Handle_Response(self):
+		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
 
 	def Handle_Camera(self):
 		count = pixy_get_blocks(1, blocks)
@@ -111,7 +111,11 @@ class Track(State):
 	def Execute(self):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
+<<<<<<< HEAD
 		text = wit.voice_query_auto_async(config.config['wit_ai_token'], super(Track, self).Handle_Response)["_text"]
+=======
+		text = threading.Thread(target=super(Track, self).Handle_Response()["_text"]).start()
+>>>>>>> parent of 9092f8a... async
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")
 		else:

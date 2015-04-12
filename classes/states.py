@@ -45,7 +45,7 @@ class State(object):
 	def Exit(self):
 		pass
 
-	def Handle_Response(self, q):
+	def Handle_Response(self, name, q):
 		q.put(wit.voice_query_auto(config.config['wit_ai_token']))
 
 	def Handle_Camera(self):
@@ -114,7 +114,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).Handle_Camera()
 		
-		threading.Thread(target=super(Track, self).Handle_Response, args=(,q)).start()
+		threading.Thread(target=super(Track, self).Handle_Response, args=("voice",q)).start()
 		text = json(q.get())
 		if re.search(r'\b(shutdown|shut down)\b', text, re.IGNORECASE):
 			self.FSM.ToTransition("toShutdown")

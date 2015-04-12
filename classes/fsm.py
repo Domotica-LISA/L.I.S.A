@@ -24,7 +24,7 @@ class FSM(object):
 		if self.trans:
 			self.curState.exit()
 			self.trans.execute()
-			self.set_state(self.trans.to_state)
+			self.set_state(self.trans.toState)
 			self.curState.enter()
 			self.trans = None
 		self.curState.execute()

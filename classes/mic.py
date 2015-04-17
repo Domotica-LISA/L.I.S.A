@@ -58,6 +58,8 @@ class Mic:
 
 		threshold = self.fetch_threshold()
 
+		print "Ik doe iets"
+
 		stream = self._audio.open(
 			format=pyaudio.paInt16,
 			channels=1,

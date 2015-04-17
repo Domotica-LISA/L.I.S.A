@@ -15,10 +15,12 @@ class WitAiSTT(object):
 			r.raise_for_status()
 			text = r.json()['_text']
 		except requests.exceptions.HTTPError:
+			print ('Request failed with response: %r' % r.text)
 			return []
 		except requests.exceptions.RequestException:
 			return []
 		except ValueError as e:
+			print ('Cannot parse response: %s' % e.args[0])
 			return []
 		except KeyError:
 			return []

@@ -39,7 +39,7 @@ class State(object):
 			"red": 30,
 			"green": 30,
 			"blue": 30}
-		self.mic = mic.Mic(stt.WitAiSTT)
+		self.mic = mic.Mic(stt.WitAiSTT(config.config['wit_ai_token']))
 
 	def enter(self):
 		pass

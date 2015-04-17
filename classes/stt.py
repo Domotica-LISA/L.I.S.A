@@ -1,6 +1,5 @@
 # -*- coding: utf-8-*-
 
-import json
 import requests
 
 class WitAiSTT(object):
@@ -9,7 +8,7 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
+		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data)
 
 		try:
 			r.raise_for_status()
@@ -26,5 +25,4 @@ class WitAiSTT(object):
 			return []
 		else:
 			transcribed = [text.upper()]
-			data.close()
 			return transcribed

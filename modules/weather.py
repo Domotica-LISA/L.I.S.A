@@ -14,4 +14,4 @@ def handle(text, speaker, profile):
             time.sleep(2)
 
 def is_valid(text):
-    return bool(re.search(r'\b(hoe is het weer vandaag|wat voor weer wordt het vandaag)\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(hoe is het weer vandaag|wat voor weer wordt het vandaag|wat voor weer wordt het)\b', text, re.IGNORECASE))

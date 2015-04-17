@@ -12,6 +12,6 @@ class WitAiSTT(object):
 		requests = urllib2.Request('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
 		r = urllib2.urlopen(requests)
 
-		text = r.json()['_text']
+		text = json.loads(r)
 		transcribed = [text.upper()]
-		return transcribed
+		return transcribed['_text']

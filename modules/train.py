@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import httplib2
 import re
 from xml.dom import minidom

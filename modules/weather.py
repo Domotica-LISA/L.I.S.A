@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import re
 import feedparser
 import time

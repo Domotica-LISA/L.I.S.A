@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import os
 from pygame import mixer
 import re

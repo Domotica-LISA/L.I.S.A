@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import os
 
 appPath = os.path.normpath(os.path.join(

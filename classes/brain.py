@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import pkgutil
 import path_declarations
 import config

@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 class FSM(object):
 	def __init__(self, character):
 		self.char = character

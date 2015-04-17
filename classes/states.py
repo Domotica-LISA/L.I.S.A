@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from time import clock
 from random import randint
 import wit

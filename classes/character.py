@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import fsm
 import states
 import transitions

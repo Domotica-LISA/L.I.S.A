@@ -12,7 +12,7 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
+		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers())
 
 		try:
 			r.raise_for_status()

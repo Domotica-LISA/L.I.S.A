@@ -14,5 +14,5 @@ class WitAiSTT(object):
 
 		#print r
 		text = json.loads(r.read())
-		transcribed = [text.upper()]
-		return transcribed['_text']
+		transcribed = [text['_text'].upper()]
+		return transcribed

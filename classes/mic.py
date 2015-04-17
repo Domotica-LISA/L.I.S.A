@@ -35,7 +35,7 @@ class Mic:
 		lastN = [i for i in range(20)]
 
 		for i in range(0, rate / chunk * thresholdTime):
-			data = self._audio.read(chunk)
+			data = self._audio.read()
 			frames.append(data)
 
 			lastN.pop(0)
@@ -63,7 +63,7 @@ class Mic:
 		lastN = [threshold * 1.2 for i in range(30)]
 
 		for i in range(0, rate / chunk * listenTime):
-			data = self._audio.read(chunk)
+			data = self._audio.read()
 			frames.append(data)
 			score = self.get_score(data)
 

@@ -85,8 +85,6 @@ class Mic:
 		stream.stop_stream()
 		stream.close()
 
-		print "Ik doe iets"
-
 		with tempfile.SpooledTemporaryFile(mode='w+b') as f:
 			wav_fp = wave.open(f, 'wb')
 			wav_fp.setnchannels(1)

@@ -1,11 +1,14 @@
+import sys
 from time import clock
 import wit
-import classes.character
+from classes import character, path_declarations
+
+sys.path.append(path_declarations.libPath)
 
 if __name__ == '__main__':
 	try:
 		wit.init('cards.pcm.default')
-		lisa_fsm = classes.character.Lisa()
+		lisa_fsm = character.Lisa()
 		while True:
 			startTime = clock()
 			timeInterval = 1

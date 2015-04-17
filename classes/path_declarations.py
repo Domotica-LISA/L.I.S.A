@@ -5,6 +5,7 @@ appPath = os.path.normpath(os.path.join(
 	os.pardir))
 
 dataPath = os.path.join(appPath, "data")
+libPath = os.path.join(appPath, "classes")
 modulePath = os.path.join(appPath, "modules")
 
 configPath = appPath

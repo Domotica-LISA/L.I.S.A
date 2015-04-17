@@ -1,11 +1,9 @@
 # -*- coding: UTF-8 -*-
-from time import clock
-from random import randint
-import wit
+
 import config
 import re
 import time
-import json
+import mic
 
 from pixy import *
 from ctypes import *
@@ -40,6 +38,7 @@ class State(object):
 			"red": 30,
 			"green": 30,
 			"blue": 30}
+		self.mic = mic.Mic(WitAiSTT)
 
 	def enter(self):
 		pass
@@ -49,17 +48,6 @@ class State(object):
 
 	def exit(self):
 		pass
-
-	def handle_response(self):
-		return json.loads(wit.voice_query_auto(config.config['wit_ai_token']))
-
-	def handle_async_response(self, response):
-		text = json.loads(response)
-		if re.search(r'\b(power down|powerdown)\b', text['_text'], re.IGNORECASE):
-			self.fSM.to_transition("toShutdown")
-		else:
-			self.brain.query(text['_text'])
-		#return json.loads(response)
 
 	def get_color_code(self):
 		count = pixy_get_blocks(1, blocks)
@@ -103,7 +91,7 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
-		if re.search(self.persona, super(Scanning, self).handle_response()['_text'], re.IGNORECASE):
+		if re.search(self.persona, self.mic.active_listen(), re.IGNORECASE):
 			# send message to arduino to listen to serial data only
 			# get baseservo pos from arduino
 			self.fSM.to_transition("toMove")
@@ -143,11 +131,11 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).get_color_code()
 		
-		text = super(Track, self).handle_response()["_text"]
-		if re.search(r'\b(power down|powerdown)\b', text, re.IGNORECASE):
+		input = self.mic.active_listen()
+		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toShutdown")
 		else:
-			self.brain.query(text)
+			self.brain.query(input)
 
 	def exit(self):
 		print "Stop Tracking"
@@ -163,8 +151,8 @@ class Shutdown(State):
 
 	def execute(self):
 		print "Shutting down"
-		text = super(Shutdown, self).handle_response()["_text"]
-		if re.search(r'\b(opstarten|start up)\b', text, re.IGNORECASE):
+
+		if re.search(r'\b(opstarten|start up)\b', self.mic.active_listen(), re.IGNORECASE):
 			self.fSM.to_transition("toStartup")
 
 	def exit(self):

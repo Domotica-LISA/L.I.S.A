@@ -2,7 +2,6 @@
 import os
 from pygame import mixer
 import re
-import sys
 import argparse
 import time
 import urllib, urllib2
@@ -55,8 +54,6 @@ class Mp3TTSEngine(object):
 										"Chrome/18.0.1025.163 Safari/535.19"
 			}
 			req = urllib2.Request(mp3url, '', headers)
-			sys.stdout.write('.')
-			sys.stdout.flush()
 			if len(val) > 0:
 				try:
 					response = urllib2.urlopen(req)

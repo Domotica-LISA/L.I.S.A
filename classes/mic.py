@@ -44,7 +44,7 @@ class Mic:
 
 		threshold = average * thresholdMultiplier
 
-		return threshold
+		print threshold
 
 	def active_listen(self):
 		rate = 8000

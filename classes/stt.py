@@ -13,6 +13,6 @@ class WitAiSTT(object):
 		r = urllib2.urlopen(requests)
 
 		#print r
-		text = json.loads(r)
+		text = json.loads(r.read())
 		transcribed = [text.upper()]
 		return transcribed['_text']

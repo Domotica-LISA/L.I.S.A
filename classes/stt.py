@@ -4,7 +4,7 @@ import requests
 
 class WitAiSTT(object):
 	def __init__(self, accessToken):
-		self.headers = {'Authorization': 'Bearer VFE6BB6YN52KM6OKAHHN3SKQETGS53YS', 'accept': 'application/json', 'Content-Type': 'audio/wav'}
+		self.headers = {'Authorization': 'Bearer %s' % accessToken, 'accept': 'application/json', 'Content-Type': 'audio/wav'}
 
 	def transcribe(self, fp):
 		data = fp.read()

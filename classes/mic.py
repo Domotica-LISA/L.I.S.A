@@ -14,7 +14,7 @@ class Mic:
 		self._audio.terminate()
 
 	def get_score(self, data):
-		rms = audioop.rms(data, 2)
+		rms = audioop.max(data, 2)
 		score = rms / 3
 		return score
 

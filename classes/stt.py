@@ -1,7 +1,7 @@
 # -*- coding: utf-8-*-
 
 import json
-import urllib2
+import requests
 
 class WitAiSTT(object):
 	def __init__(self, accessToken):

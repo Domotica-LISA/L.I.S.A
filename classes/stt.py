@@ -9,10 +9,22 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		requests = urllib2.Request('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
-		r = urllib2.urlopen(requests)
+		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
 
-		#print r
-		text = json.loads(r.read())
-		transcribed = [text['_text'].upper()]
-		print transcribed
+		try:
+			r.raise_for_status()
+			text = r.json()['_text']
+		except requests.exceptions.HTTPError:
+			print ('Request failed with response: %r' % r.text)
+			return []
+		except requests.exceptions.RequestException:
+			return []
+		except ValueError as e:
+			print ('Cannot parse response: %s' % e.args[0])
+			return []
+		except KeyError:
+			return []
+		else:
+			transcribed = [text.upper()]
+			data.close()
+			return transcribed

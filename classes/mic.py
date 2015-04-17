@@ -58,8 +58,6 @@ class Mic:
 
 		threshold = self.fetch_threshold()
 
-		print "Ik doe iets"
-
 		stream = self._audio.open(
 			format=pyaudio.paInt16,
 			channels=1,
@@ -86,6 +84,8 @@ class Mic:
 
 		stream.stop_stream()
 		stream.close()
+
+		print "Ik doe iets"
 
 		with tempfile.SpooledTemporaryFile(mode='w+b') as f:
 			wav_fp = wave.open(f, 'wb')

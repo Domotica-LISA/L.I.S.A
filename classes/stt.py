@@ -8,15 +8,15 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
+		r = post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
 
 		try:
 			r.raise_for_status()
 			text = r.json()['_text']
-		except requests.exceptions.HTTPError:
+		except exceptions.HTTPError:
 			print ('Request failed with response: %r' % r.text)
 			return []
-		except requests.exceptions.RequestException:
+		except exceptions.RequestException:
 			return []
 		except ValueError as e:
 			print ('Cannot parse response: %s' % e.args[0])

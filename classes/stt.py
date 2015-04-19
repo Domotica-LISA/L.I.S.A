@@ -1,6 +1,6 @@
 # -*- coding: utf-8-*-
 
-import requests
+import urllib2, json
 
 class WitAiSTT(object):
 	def __init__(self, accessToken):
@@ -8,21 +8,9 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		r = requests.post('https://api.wit.ai/speech?v=20150101', data=data, headers=self.headers)
+		req = urllib2.Request('https://api.wit.ai/speech?v=20150101', data, self.headers)
+		r = urllib2.urlopen(req)
 
-		try:
-			r.raise_for_status()
-			text = r.json()['_text']
-		except requests.exceptions.HTTPError:
-			print ('Request failed with response: %r' % r.text)
-			return []
-		except requests.exceptions.RequestException:
-			return []
-		except ValueError as e:
-			print ('Cannot parse response: %s' % e.args[0])
-			return []
-		except KeyError:
-			return []
-		else:
-			transcribed = [text.upper()]
-			return transcribed
+		text = json.loads(r.read())
+		transcribed = [text['_text'].upper()]
+		return transcribed

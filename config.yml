@@ -1,10 +1,10 @@
 modules:
-    weather: False
-    time: False
-    train: False
+    weather: True
+    time: True
+    train: True
     music: False
     fealings: False
-    riddle: False
+    riddle: True
 
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 ns_api_key: 9zMZBc_mLFpII0OMTQct-OMPtf93EEvammhfuDUzQMfLG-NSE1QFDw

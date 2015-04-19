@@ -1,6 +1,6 @@
 # -*- coding: utf-8-*-
 
-import requests
+from requests import *
 
 class WitAiSTT(object):
 	def __init__(self, accessToken):

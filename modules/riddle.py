@@ -27,8 +27,8 @@ def get_random_joke(filename=path_declarations.data('JOKES.txt')):
 		start = ""
 		end = ""
 	jokes.append((start, end))
-    joke = random.choice(jokes)
-    return joke
+	joke = random.choice(jokes)
+	return joke
 
 
 def handle(text, speaker, profile):

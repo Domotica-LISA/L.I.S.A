@@ -94,7 +94,7 @@ class Scanning(State):
 		print "Scanning"
 		input = self.mic.active_listen()
 		print input
-		if input is not None:
+		if input is not '':
 			if re.search(self.persona, input, re.IGNORECASE):
 				# send message to arduino to listen to serial data only
 				# get baseservo pos from arduino

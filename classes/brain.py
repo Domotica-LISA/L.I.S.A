@@ -3,11 +3,14 @@ import pkgutil
 import path_declarations
 import config
 import tts
+import stt
+import mic
 
 class Brain(object):
 	def __init__(self):
 		self.modules = self.get_modules()
 		self.speaker = tts.GoogleTTS()
+		self.mic = mic.Mic(stt.WitAiSTT(config.config['wit_ai_token']))
 
 	@classmethod
 	def get_modules(cls):
@@ -34,7 +37,7 @@ class Brain(object):
 		for module in self.modules:
 			if module.is_valid(text):
 				try:
-					module.handle(text, self.speaker, config.config)
+					module.handle(text, self.speaker, self.mic, config.config)
 				except:
 					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							"Probeer het later nog eens.")

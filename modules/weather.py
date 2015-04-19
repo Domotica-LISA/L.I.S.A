@@ -5,7 +5,7 @@ import time
 
 WORDS = ["WEER"]
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
     entries = feedparser.parse("http://www.knmi.nl/rssfeeds/knmi-rssweer.cgi")['entries']
 
     for entry in entries:

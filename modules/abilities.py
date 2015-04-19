@@ -4,7 +4,7 @@ import time
 
 WORDS = ['WAT KAN JE ALLEMAAL']
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	response = ""
 	for moduleName in profile['modules']:
 		if profile['modules'][moduleName] == True:

@@ -5,7 +5,7 @@ from xml.dom import minidom
 
 WORDS = ['TREIN']
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	http = httplib2.Http(disable_ssl_certificate_validation=True)
 	http.follow_redirects = False
 	http.add_credentials('skievar@gmail.com', profile['ns_api_key'])

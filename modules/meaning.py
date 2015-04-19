@@ -4,7 +4,7 @@ import time
 
 WORDS = ["BETEKENT"]
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	speaker.say(profile['name'] + ' staat voor ' + profile['meaning'])
 	time.sleep(2)
 

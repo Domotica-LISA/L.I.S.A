@@ -4,7 +4,7 @@ import time
 
 WORDS = ["NAAM"]
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	speaker.say("Hoi mijn naam is " + profile['name'])
 	time.sleep(2)
 

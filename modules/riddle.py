@@ -31,7 +31,7 @@ def get_random_joke(filename=path_declarations.data('JOKES.txt')):
 	return joke
 
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	joke = get_random_joke()
 
 	speaker.say(joke[0])
@@ -40,7 +40,7 @@ def handle(text, speaker, profile):
 	def answer(text):
 		speaker.say(joke[1])
 
-	answer(mic.Mic.active_listen())
+	answer(mic.active_listen())
 
 def is_valid(text):
 	return bool(re.search(r'\braadsel\b', text, re.IGNORECASE))

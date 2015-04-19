@@ -3,8 +3,6 @@
 import config
 import re
 import time
-import mic
-import stt
 
 from pixy import *
 from ctypes import *
@@ -39,7 +37,6 @@ class State(object):
 			"red": 30,
 			"green": 30,
 			"blue": 30}
-		self.mic = mic.Mic(stt.WitAiSTT(config.config['wit_ai_token']))
 
 	def enter(self):
 		pass

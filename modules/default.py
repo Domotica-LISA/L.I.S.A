@@ -6,7 +6,7 @@ WORDS = []
 
 PRIORITY = -(maxint + 1)
 
-def handle(text, speaker, profile):
+def handle(text, speaker, mic, profile):
 	speaker.say("Sorry kan je dat herhalen")
 	time.sleep(2)
 

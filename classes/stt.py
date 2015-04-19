@@ -12,5 +12,6 @@ class WitAiSTT(object):
 		r = urllib2.urlopen(req)
 
 		text = json.loads(r.read())
-		transcribed = [text.upper()]
-		return transcribed
+		print text
+		#transcribed = [text.upper()]
+		#return transcribed

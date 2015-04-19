@@ -2,7 +2,7 @@
 import re
 import time
 import random
-from classes import path_declarations
+from classes import mic, path_declarations
 
 WORDS = ["RAADSEL"]
 
@@ -26,22 +26,21 @@ def get_random_joke(filename=path_declarations.data('JOKES.txt')):
 		jokes.append((start, end))
 		start = ""
 		end = ""
+	jokes.append((start, end))
+    joke = random.choice(jokes)
+    return joke
 
 
 def handle(text, speaker, profile):
 	joke = get_random_joke()
 
-	def firstline(text):
-		speaker.say(joke[0])
-		time.sleep(2)
+	speaker.say(joke[0])
+	time.sleep(2)
 
-		def answer(text):
-			speaker.say(joke[1])
+	def answer(text):
+		speaker.say(joke[1])
 
-		answer(speaker)
-	firstline(speaker)
-
-
+	answer(mic.Mic.active_listen())
 
 def is_valid(text):
 	return bool(re.search(r'\braadsel\b', text, re.IGNORECASE))

@@ -94,11 +94,11 @@ class Scanning(State):
 		print "Scanning"
 		input = self.mic.active_listen()
 		print input
-		#if input is not u'':
-		if re.search(self.persona, input, re.IGNORECASE):
-			# send message to arduino to listen to serial data only
-			# get baseservo pos from arduino
-			self.fSM.to_transition("toMove")
+		if input is not None:
+			if re.search(self.persona, input, re.IGNORECASE):
+				# send message to arduino to listen to serial data only
+				# get baseservo pos from arduino
+				self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Exit Scanning"
@@ -136,6 +136,7 @@ class Track(State):
 		super(Track, self).get_color_code()
 		
 		input = self.mic.active_listen()
+		print input
 		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toShutdown")
 		else:
@@ -157,6 +158,7 @@ class Shutdown(State):
 		print "Shutting down"
 
 		input = self.mic.active_listen()
+		print input
 		if re.search(r'\b(opstarten|start up)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toStartup")
 

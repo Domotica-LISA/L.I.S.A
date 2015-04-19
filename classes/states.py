@@ -92,10 +92,12 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
-		if re.search(self.persona, self.mic.active_listen(), re.IGNORECASE):
-			# send message to arduino to listen to serial data only
-			# get baseservo pos from arduino
-			self.fSM.to_transition("toMove")
+		input = self.mic.active_listen()
+		if text is not None:
+			if re.search(self.persona, input, re.IGNORECASE):
+				# send message to arduino to listen to serial data only
+				# get baseservo pos from arduino
+				self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Exit Scanning"
@@ -153,7 +155,8 @@ class Shutdown(State):
 	def execute(self):
 		print "Shutting down"
 
-		if re.search(r'\b(opstarten|start up)\b', self.mic.active_listen(), re.IGNORECASE):
+		input = self.mic.active_listen()
+		if re.search(r'\b(opstarten|start up)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toStartup")
 
 	def exit(self):

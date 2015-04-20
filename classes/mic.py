@@ -110,6 +110,7 @@ class Mic:
 			wav_fp = wave.open(f, 'wb')
 			wav_fp.setnchannels(1)
 			wav_fp.setsampwidth(pyaudio.get_sample_size(pyaudio.paInt16))
+			wav_fp.setframerate(rate)
 			wav_fp.writeframes(''.join(frames))
 			wav_fp.close()
 			f.seek(0)

@@ -69,7 +69,7 @@ class Mic:
 		lastN = [i for i in range(30)]
 
 		for i in range(0, rate / chunk * thresholdTime):
-			date = stream.read(chunk)
+			data = stream.read(chunk)
 			frames.append(data)
 
 			lastN.pop(0)
@@ -82,7 +82,7 @@ class Mic:
 		didDetect = False
 
 		for i in range(0, rate / chunk * listenTime):
-			date = stream.read(chunk)
+			data = stream.read(chunk)
 			frames.append(data)
 			score = self.get_score(data)
 

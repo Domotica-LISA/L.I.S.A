@@ -3,23 +3,15 @@
 import config
 import re
 import time
+import mythread
+import serial
+import blocks
 
 from pixy import *
-from ctypes import *
-import serial
 
 pixy_init()
 
-class Blocks(Structure):
-	_fields_ = [ ("type", c_uint),
-		("signature", c_uint),
-		("x", c_uint),
-		("y", c_uint),
-		("width", c_uint),
-		("height", c_uint)]
-
 ser = serial.Serial('/dev/ttyACM0', 9600)
-blocks = Blocks()
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -48,9 +40,9 @@ class State(object):
 		pass
 
 	def get_color_code(self):
-		count = pixy_get_blocks(1, blocks)
+		count = pixy_get_blocks(1, blocks.block)
 		if count > 0:
-			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
+			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
 			self.ccDetected = True
 		else:
 			self.ccDetected = False
@@ -65,7 +57,7 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
-		#ser,write("({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}) ".format(a,b,c,d,e,f,g))
+		#ser,write("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7} ".format(a,b,c,d,e,f,g))
 		ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
@@ -113,7 +105,7 @@ class Move(State):
 	def execute(self):
 		print "Moving to sound origin"
 		self.fSM.to_transition("toTrack")
-		super(Move, self).get_color_code()
+		#super(Move, self).get_color_code()
 		#if self.ccDetected:
 			#self.fSM.to_transition("toTrack")
 
@@ -127,20 +119,23 @@ class Track(State):
 
 	def enter(self):
 		print "Start Tracking"
+		threads = []
+
+		voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
+		colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)
+
+		voiceThread.start()
+		colorCodeThread.start()
+
+		threads.append(voiceThread)
+		threads.append(colorCodeThread)
+
 		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"
-		super(Track, self).get_color_code()
-		
-		input = self.brain.mic.active_listen()
-		print input
-		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
-			self.fSM.to_transition("toShutdown")
-		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
-			self.fSM.to_transition("toScanning")
-		else:
-			self.brain.query(input)
+		for t in threads:
+			t.join()
 
 	def exit(self):
 		print "Stop Tracking"

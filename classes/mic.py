@@ -148,7 +148,7 @@ class Mic:
 
 			average = sum(lastN) / float(len(lastN))
 
-			if average < threshold * 1.5:
+			if average < threshold * 1.2:
 				break
 
 		stream.stop_stream()

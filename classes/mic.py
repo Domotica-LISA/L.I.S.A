@@ -114,8 +114,8 @@ class Mic:
 			wav_fp.close()
 			f.seek(0)
 
-			return transcribed = self.sttEngine.transcribe(f)
-
+			transcribed = self.sttEngine.transcribe(f)
+		return transcribed
 
 
 	def active_listen(self):

@@ -77,7 +77,7 @@ class Mic:
 			lastN.append(self.get_score(data))
 			average = sum(lastN) / len(lastN)
 
-		threshold = average * thresholdTime
+		threshold = average * thresholdMultiplier
 
 		frames = []
 		didDetect = False

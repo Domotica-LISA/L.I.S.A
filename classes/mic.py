@@ -147,7 +147,8 @@ class Mic:
 			lastN.append(score)
 
 			average = sum(lastN) / float(len(lastN))
-			print lastN
+			print average
+			print threshold
 			
 			if average < threshold * 1.0:
 				break

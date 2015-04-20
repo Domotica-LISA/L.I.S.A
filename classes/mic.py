@@ -19,7 +19,7 @@ class Mic:
 		return score
 
 	def fetch_threshold(self):
-		thresholdMultiplier = 1.8
+		thresholdMultiplier = 1.5
 		rate = 8000
 		chunk = 1024
 

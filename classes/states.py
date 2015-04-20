@@ -65,7 +65,7 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
-		#ser.write("0, %s" % str(self.servoPos['basePos']))
+		ser.write("0, 100" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		#ser.write("0, %s, %s" % str(self.servoPos['basePos']), str(self.servoPos['armPos']))

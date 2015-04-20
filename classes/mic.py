@@ -52,6 +52,7 @@ class Mic:
 		return threshold
 
 	def passive_listen(self):
+		thresholdMultiplier = 1.8
 		rate = 8000
 		chunk = 1024
 		thresholdTime = 1

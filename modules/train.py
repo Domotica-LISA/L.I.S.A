@@ -22,4 +22,4 @@ def handle(text, speaker, mic, profile):
 	    speaker.say("De trein naar " + eindBestemming + " op spoor " + vertrekSpoor + " vertrekt om " + vertrekTijd[11] + vertrekTijd[12] + vertrekTijd[13] + vertrekTijd[14] + vertrekTijd[15])
 
 def is_valid(text):
-    return bool(re.search(r'\b(hoelaat vertrekt de trein|hoe laat vertrekt de trein|rijden er nog treinen|hoelaat gaat de trein|hoe laat gaat de trein)\b', text, re.IGNORECASE))    
+    return bool(re.search(r'\b(hoelaat vertrekt de trein|hoe laat vertrekt de trein|rijden er nog treinen|hoelaat gaat de trein|hoe laat gaat de trein|rijden er treinen|treinen)\b', text, re.IGNORECASE))    

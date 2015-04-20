@@ -147,8 +147,6 @@ class Mic:
 			lastN.append(score)
 
 			average = sum(lastN) / float(len(lastN))
-			print average
-			print threshold
 			
 			if average < threshold * 0.9:
 				break
@@ -157,6 +155,9 @@ class Mic:
 		for i in range(0, rate / chunk * delayMultiplier):
 			date = stream.read(chunk)
 			frames.append(data)
+
+		print average
+		print threshold			
 
 		stream.stop_stream()
 		stream.close()

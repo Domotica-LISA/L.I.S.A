@@ -123,7 +123,7 @@ class Mic:
 	def active_listen(self):
 		rate = 8000
 		chunk = 1024
-		listenTime = 12
+		listenTime = 10
 
 		threshold = self.fetch_threshold()
 
@@ -150,8 +150,13 @@ class Mic:
 			print average
 			print threshold
 			
-			if average < threshold * 1.0:
+			if average < threshold * 0.9:
 				break
+
+		delayMultiplier = 1
+		for i in range(0, rate / chunk * delayMultiplier):
+			date = stream.read(chunk)
+			frames.append(data)
 
 		stream.stop_stream()
 		stream.close()

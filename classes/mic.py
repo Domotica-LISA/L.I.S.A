@@ -150,7 +150,7 @@ class Mic:
 			print average
 			print threshold
 			
-			if average < threshold * 1.05:
+			if average < threshold * 1.0:
 				break
 
 		stream.stop_stream()

@@ -136,6 +136,8 @@ class Track(State):
 		print input
 		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toShutdown")
+		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toScanning")
 		else:
 			self.brain.query(input)
 

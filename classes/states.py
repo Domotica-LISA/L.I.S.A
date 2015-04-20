@@ -132,7 +132,7 @@ class Track(State):
 		print "Tracking"
 		super(Track, self).get_color_code()
 		
-		input = self.brain.mic.passive_listen()
+		input = self.brain.mic.active_listen()
 		print input
 		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toShutdown")

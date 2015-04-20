@@ -65,19 +65,20 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
+		#ser,write("({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}) ".format(a,b,c,d,e,f,g))
 		ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
-		#ser.write("0, %s, %s" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']))
+		#ser.write("0, %s, %s" % (str(self.servoPos['headPos']), str(self.servoPos['rotationPos'])))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
-		#ser.write("0, %s, %s, %s" % str(self.servoPos['basePos']), str(self.servoPos['armPos']), str(self.servoPos['rotationPos']), str(self.servoPos['headPos']))
+		#ser.write("0, %s, %s, %s" % (str(self.servoPos['basePos']), str(self.servoPos['armPos']), str(self.servoPos['rotationPos']), str(self.servoPos['headPos'])))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
 		self.brain.speaker.say("Opstarten voltooid.")
-		#ser.write("%s, %s, %s, %s, %s, %sself.arduinoActive, str(self.servoPos['basePos']), self.ledRingColor['red'], self.ledRingColor['green'], self.ledRingColor['blue'])
+		#ser.write("%s, %s, %s, %s, %s, %s" % (str(self.arduinoActive), str(self.servoPos['basePos']), str(self.servoPos['armPos']), str(self.servoPos['rotationPos'], str(self.servoPos['headPos'])))
 
 class Scanning(State):
 	def __init__(self, fSM, brain):

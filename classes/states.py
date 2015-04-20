@@ -19,7 +19,7 @@ class Blocks(Structure):
 		("height", c_uint)]
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
-blocks = Block()
+blocks = Blocks()
 
 class State(object):
 	def __init__(self, fSM, brain):

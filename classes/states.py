@@ -65,13 +65,13 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
-		ser.write("0, 100" % str(self.servoPos['headPos']))
+		ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
-		ser.write("0, 75, 60" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']))
+		ser.write("0, %s, %s" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
-		ser.write("0, 105, 100, 120" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']), str(self.servoPos['armPos']), str(self.servoPos['headPos']))
+		ser.write("0, %s, %s, %s" % str(self.servoPos['basePos']), str(self.servoPos['armPos']), str(self.servoPos['rotationPos']), str(self.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):

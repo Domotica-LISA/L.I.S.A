@@ -18,7 +18,7 @@ class Blocks(Structure):
 		("width", c_uint),
 		("height", c_uint)]
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 blocks = Blocks()
 
 class State(object):
@@ -65,7 +65,7 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
-		ser.write("0, %s" % str(self.servoPos['headPos']))
+		#ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		#ser.write("0, %s, %s" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']))

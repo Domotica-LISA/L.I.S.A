@@ -92,7 +92,7 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
-		super(Track, self).get_color_code()
+		#super(Track, self).get_color_code()
 		
 		input = self.brain.mic.active_listen()
 		print input

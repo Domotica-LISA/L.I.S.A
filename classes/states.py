@@ -129,7 +129,6 @@ class Track(State):
 		self.voiceThread.start()
 		self.colorCodeThread.start()
 		time.sleep(10)
-		threading.Thread.__init__(self)
 
 	def exit(self):
 		print "Stop Tracking"

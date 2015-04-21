@@ -26,6 +26,7 @@ class VoiceThread(threading.Thread):
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
+		threading.Thread.__init__(self)
 
 	def run(self):
 		input = self.brain.mic.active_listen()

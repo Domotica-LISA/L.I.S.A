@@ -101,7 +101,7 @@ class Move(State):
 	def enter(self):
 		print "Start Moving"
 		self.brain.speaker.say("Riep iemand mij?")
-		self.servoPos['basePos'] = ser.readline()
+		#self.servoPos['basePos'] = ser.readline()
 
 	def execute(self):
 		print "Moving to sound origin"

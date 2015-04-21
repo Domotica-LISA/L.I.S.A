@@ -8,7 +8,7 @@ from pixy import *
 from ctypes import *
 import serial
 
-pixy_init()
+#pixy_init()
 
 class Blocks(Structure):
 	_fields_ = [ ("type", c_uint),
@@ -48,7 +48,7 @@ class State(object):
 		pass
 
 	def get_color_code(self):
-		count = pixy_get_blocks(1, blocks)
+		count = pixy_get_blocks(1, blocks.type)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
 			self.ccDetected = True

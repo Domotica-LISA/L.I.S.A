@@ -5,8 +5,6 @@ import threading
 import blocks
 import myservo
 
-blocks.block
-
 class ColorCodeThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):#, serial):
 		self.threadID = threadID
@@ -67,6 +65,12 @@ class VoiceThread(threading.Thread):
 		self.fSM = fSM
 
 	def run(self):
+		self.brain.ledRingColor['red'] = 5
+		self.brain.ledRingColor['green'] = 30
+		self.brain.ledRingColor['blue'] = 5
+
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
+
 		input = self.brain.mic.active_listen()
 		print input
 		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
@@ -74,4 +78,9 @@ class VoiceThread(threading.Thread):
 		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
 			self.fSM.to_transition("toScanning")
 		else:
+			self.brain.ledRingColor['red'] = 30
+			self.brain.ledRingColor['green'] = 5
+			self.brain.ledRingColor['blue'] = 5
+
+			self.brain.ledRing.set_color(self.brain.ledRingColor)
 			self.brain.query(input)

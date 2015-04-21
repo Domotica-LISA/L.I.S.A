@@ -2,15 +2,21 @@
 import pkgutil
 import path_declarations
 import config
-import tts
-import stt
-import mic
+from tts import GoogleTTS
+from stt import WitAiSTT
+from mic import Mic
+from ledring import LedRing
 
 class Brain(object):
 	def __init__(self):
 		self.modules = self.get_modules()
-		self.speaker = tts.GoogleTTS()
-		self.mic = mic.Mic(stt.WitAiSTT(config.config['wit_ai_token']))
+		self.speaker = GoogleTTS()
+		self.mic = Mic(WitAiSTT(config.config['wit_ai_token']))
+		self.ledRing = LedRing()
+		self.ledRingColor = {
+			"red": 30,
+			"green": 0,
+			"blue": 30}
 
 	@classmethod
 	def get_modules(cls):
@@ -30,7 +36,7 @@ class Brain(object):
 					modules.append(mod)
 			modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY')
                      else 0, reverse=True)
-		print modules
+		#print modules
 		return modules
 
 	def query(self, text):

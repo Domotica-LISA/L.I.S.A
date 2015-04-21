@@ -19,11 +19,6 @@ class State(object):
 		self.fSM = fSM
 		self.persona = r"\b" + config.config['name'] + "\\b"
 		self.brain = brain
-		self.arduinoActive = 0
-		self.ledRingColor = {
-			"red": 30,
-			"green": 30,
-			"blue": 30}
 		self.direction = 'right'
 
 	def enter(self):
@@ -36,12 +31,17 @@ class State(object):
 		pass
 
 	def get_color_code(self):
+		self.brain.ledRingColor['red'] = 5
+		self.brain.ledRingColor['green'] = 5
+		self.brain.ledRingColor['blue'] = 30
+
 		count = pixy_get_blocks(1, blocks.block)
 		if count > 0:
 			#print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
 			return True
 		else:
 			#sweep left to right or right to left and up and down
+			self.brain.ledRing.set_color(self.brain.ledRingColor)
 			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
 			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
@@ -53,7 +53,6 @@ class State(object):
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
 		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -88,6 +87,7 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
 		#ser.write("1, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def execute(self):
@@ -140,7 +140,9 @@ class Track(State):
 		print "Tracking"
 		self.voiceThread.start()
 		self.colorCodeThread.start()
+
 		time.sleep(10)
+
 		self.voiceThread.exit()
 		self.colorCodeThread.exit()
 
@@ -154,6 +156,11 @@ class Shutdown(State):
 	def enter(self):
 		print "Entering shutdown"
 		self.brain.speaker.say("Bezig met afsluiten.")
+		self.brain.ledRingColor['red'] = 0
+		self.brain.ledRingColor['green'] = 0
+		self.brain.ledRingColor['blue'] = 0
+
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
 		# set servo's to transport position
 		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoStoragePos['basePos'], myservo.servoStoragePos['armPos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
 

@@ -11,7 +11,7 @@ from pixy import *
 
 pixy_init()
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -58,7 +58,7 @@ class Startup(State):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
 		#ser,write("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7} ".format(a,b,c,d,e,f,g))
-		ser.write("0, %s" % str(self.servoPos['headPos']))
+		#ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		#ser.write("0, %s, %s" % (str(self.servoPos['headPos']), str(self.servoPos['rotationPos'])))
@@ -123,7 +123,7 @@ class Track(State):
 		threads = []
 
 		voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
-		colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM, ser)
+		colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
 
 		voiceThread.start()
 		colorCodeThread.start()

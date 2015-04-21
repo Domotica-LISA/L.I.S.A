@@ -7,16 +7,16 @@ import blocks
 blocks.block
 
 class ColorCodeThread(threading.Thread):
-	def __init__(self, threadID, name, brain, fSM, serial):
+	def __init__(self, threadID, name, brain, fSM):#, serial):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
-		self.serial = serial
+		#self.serial = serial
 
 	def run(self):
-		self.serial.write("0,90,90,90,90")
+		#self.serial.write("0,90,90,90,90")
 
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):

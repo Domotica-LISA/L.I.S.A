@@ -120,7 +120,7 @@ class Track(State):
 
 	def enter(self):
 		print "Start Tracking"
-		threads = []
+		global threads = []
 
 		voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
 		colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)

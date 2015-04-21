@@ -19,7 +19,7 @@ class ColorCodeThread(threading.Thread):
 		#self.serial.write("0,90,90,90,90")
 		print "hoi"
 
-class VoiceThread(object):
+class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
@@ -36,4 +36,3 @@ class VoiceThread(object):
 			self.fSM.to_transition("toScanning")
 		else:
 			self.brain.query(input)
-

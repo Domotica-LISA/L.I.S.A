@@ -6,42 +6,25 @@ import time
 import mythread
 import serial
 import blocks
+import myservo
 
 from pixy import *
 
-#pixy_init()
-
-<<<<<<< HEAD
-class Blocks(Structure):
-	_fields_ = [ ("type", c_uint),
-		("signature", c_uint),
-		("x", c_uint),
-		("y", c_uint),
-		("width", c_uint),
-		("height", c_uint)]
+pixy_init()
 
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-blocks = Blocks()
-=======
-#ser = serial.Serial('/dev/ttyACM0', 9600)
->>>>>>> parent of f89907b... Revert 531091b..fac7f55
 
 class State(object):
 	def __init__(self, fSM, brain):
 		self.fSM = fSM
 		self.persona = r"\b" + config.config['name'] + "\\b"
 		self.brain = brain
-		self.servoPos = {
-			"basePos": 25,
-			"armPos": 60,
-			"rotationPos": 90,
-			"headPos": 25}
 		self.arduinoActive = 0
-		self.ccDetected = False
 		self.ledRingColor = {
 			"red": 30,
 			"green": 30,
 			"blue": 30}
+		self.direction = 'right'
 
 	def enter(self):
 		pass
@@ -53,22 +36,24 @@ class State(object):
 		pass
 
 	def get_color_code(self):
-<<<<<<< HEAD
-		pass
-		#count = pixy_get_blocks(1, blocks.type)
-		#if count > 0:
-		#	print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.type, blocks.signature, blocks.x, blocks.y, blocks.width, blocks.height)
-		#	self.ccDetected = True
-		#else:
-		#	self.ccDetected = False
-=======
 		count = pixy_get_blocks(1, blocks.block)
 		if count > 0:
-			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
-			self.ccDetected = True
+			#print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
+			return True
 		else:
-			self.ccDetected = False
->>>>>>> parent of f89907b... Revert 531091b..fac7f55
+			#sweep left to right or right to left and up and down
+			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
+				self.direction = 'left'
+			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
+				myservo.servoPos['basePos'] = 90
+				return False
+
+			if self.direction is 'left':
+				myservo.servoPos['basePos'] -= 1
+			elif self.direction is 'right':
+				myservo.servoPos['basePos'] += 1
+		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -80,23 +65,22 @@ class Startup(State):
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
-<<<<<<< HEAD
-=======
-		#ser,write("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7} ".format(a,b,c,d,e,f,g))
->>>>>>> parent of f89907b... Revert 531091b..fac7f55
+		myservo.servoPos['basePos'] = 90
+		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		#ser.write("0, %s" % str(self.servoPos['headPos']))
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
+		myservo.servoPos['armPos'] = 45
 		#ser.write("0, %s, %s" % str(self.servoPos['headPos']), str(self.servoPos['rotationPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
+		myservo.servoPos['headPos'] = 45
 		#ser.write("0, %s, %s, %s" % str(self.servoPos['basePos']), str(self.servoPos['armPos']), str(self.servoPos['rotationPos']), str(self.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
 		self.brain.speaker.say("Opstarten voltooid.")
-		#ser.write("%s, %s, %s, %s, %s, %sself.arduinoActive, str(self.servoPos['basePos']), self.ledRingColor['red'], self.ledRingColor['green'], self.ledRingColor['blue'])
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -104,7 +88,7 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
-		self.arduinoActive = True
+		#ser.write("1, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def execute(self):
 		print "Scanning"
@@ -113,12 +97,12 @@ class Scanning(State):
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				# send message to arduino to listen to serial data only
-				# get baseservo pos from arduino
+				#myservo.servoPos['basePos'] = ser.readline()
+				#ser,write("0, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos']))
 				self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Exit Scanning"
-		self.arduinoActive = False
 
 class Move(State):
 	def __init__(self, fSM, brain):
@@ -127,14 +111,16 @@ class Move(State):
 	def enter(self):
 		print "Start Moving"
 		self.brain.speaker.say("Riep iemand mij?")
-		#self.servoPos['basePos'] = ser.readline()
+		self.direction = 'right'
 
 	def execute(self):
 		print "Moving to sound origin"
 		self.fSM.to_transition("toTrack")
-		#super(Move, self).get_color_code()
-		#if self.ccDetected:
+		#ccDetected = super(Move, self).get_color_code()
+		#if ccDetected is True:
 			#self.fSM.to_transition("toTrack")
+		#elif ccDetected is False:
+			#self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Stop Moving"
@@ -155,6 +141,8 @@ class Track(State):
 		self.voiceThread.start()
 		self.colorCodeThread.start()
 		time.sleep(10)
+		self.voiceThread.exit()
+		self.colorCodeThread.exit()
 
 	def exit(self):
 		print "Stop Tracking"
@@ -167,6 +155,7 @@ class Shutdown(State):
 		print "Entering shutdown"
 		self.brain.speaker.say("Bezig met afsluiten.")
 		# set servo's to transport position
+		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoStoragePos['basePos'], myservo.servoStoragePos['armPos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
 
 	def execute(self):
 		print "Shutting down"

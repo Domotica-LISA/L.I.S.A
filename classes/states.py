@@ -18,7 +18,7 @@ class Blocks(Structure):
 		("width", c_uint),
 		("height", c_uint)]
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 blocks = Blocks()
 
 class State(object):

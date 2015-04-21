@@ -21,7 +21,7 @@ class ColorCodeThread(threading.Thread):
 
 class VoiceThread(object):
 	def __init__(self, threadID, name, brain, fSM):
-		threading.Thread.__init__(self)
+		#threading.Thread.__init__(self)
 		self.thread = threading.Thread(target=self.run)
 		self.threadID = threadID
 		self.name = name
@@ -37,3 +37,4 @@ class VoiceThread(object):
 			self.fSM.to_transition("toScanning")
 		else:
 			self.brain.query(input)
+

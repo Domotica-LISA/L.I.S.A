@@ -117,19 +117,17 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
+		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
+		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
 
 	def enter(self):
 		print "Start Tracking"
-
-		voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
-		colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
-
 		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"
-		voiceThread.start()
-		colorCodeThread.start()
+		self.voiceThread.start()
+		self.colorCodeThread.start()
 		time.sleep(10)
 
 	def exit(self):

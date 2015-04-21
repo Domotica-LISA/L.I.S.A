@@ -17,6 +17,7 @@ class ColorCodeThread(threading.Thread):
 
 	def run(self):
 		#self.serial.write("0,90,90,90,90")
+		print "hoi"
 
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):

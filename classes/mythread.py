@@ -26,7 +26,6 @@ class VoiceThread(threading.Thread):
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
-		threading.Thread.__init__(self)
 
 	def run(self):
 		input = self.brain.mic.active_listen()
@@ -37,3 +36,4 @@ class VoiceThread(threading.Thread):
 			self.fSM.to_transition("toScanning")
 		else:
 			self.brain.query(input)
+		threading.Thread.__init__(self)

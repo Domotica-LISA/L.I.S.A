@@ -22,6 +22,8 @@ class ColorCodeThread(threading.Thread):
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):
 		threading.Thread.__init__(self)
+		threading.Thread(target=self.run)
+		threading.Thread.daemon = True
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain

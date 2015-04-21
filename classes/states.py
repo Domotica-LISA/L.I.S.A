@@ -82,13 +82,16 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
+		super(Track, self).get_color_code()
+		
 		input = self.brain.mic.active_listen()
 		print input
-		if input is not None:
-			if re.search(self.persona, input, re.IGNORECASE):
-				# send message to arduino to listen to serial data only
-				# get baseservo pos from arduino
-				self.fSM.to_transition("toMove")
+		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toShutdown")
+		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toScanning")
+		else:
+			self.brain.query(input)
 
 	def exit(self):
 		print "Exit Scanning"

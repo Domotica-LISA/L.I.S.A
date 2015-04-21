@@ -36,4 +36,4 @@ class VoiceThread(threading.Thread):
 			self.fSM.to_transition("toScanning")
 		else:
 			self.brain.query(input)
-		threading.Thread.__init__(self)
+		self.voiceThread.start()

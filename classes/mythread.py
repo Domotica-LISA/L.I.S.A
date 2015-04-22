@@ -72,6 +72,7 @@ class VoiceThread(threading.Thread):
 		self.fSM = fSM
 
 	def run(self):
+<<<<<<< HEAD
 		while 1:
 
 			self.brain.ledRingColor['red'] = 5
@@ -98,3 +99,24 @@ class VoiceThread(threading.Thread):
 
 	def kill(self):
 		threading._Thread_stop()
+=======
+		self.brain.ledRingColor['red'] = 5
+		self.brain.ledRingColor['green'] = 30
+		self.brain.ledRingColor['blue'] = 5
+
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
+
+		input = self.brain.mic.active_listen()
+		print input
+		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toShutdown")
+		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toScanning")
+		else:
+			self.brain.ledRingColor['red'] = 30
+			self.brain.ledRingColor['green'] = 5
+			self.brain.ledRingColor['blue'] = 5
+
+			self.brain.ledRing.set_color(self.brain.ledRingColor)
+			self.brain.query(input)
+>>>>>>> parent of 8db5af2... geen led

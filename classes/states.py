@@ -41,7 +41,7 @@ class State(object):
 			return True
 		else:
 			#sweep left to right or right to left and up and down
-			#self.brain.ledRing.set_color(self.brain.ledRingColor)
+			self.brain.ledRing.set_color(self.brain.ledRingColor)
 			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
 			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
@@ -87,7 +87,7 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
-		#self.brain.ledRing.set_color(self.brain.ledRingColor)
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
 		#ser.write("1, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def execute(self):
@@ -165,7 +165,7 @@ class Shutdown(State):
 		self.brain.ledRingColor['green'] = 0
 		self.brain.ledRingColor['blue'] = 0
 
-		#self.brain.ledRing.set_color(self.brain.ledRingColor)
+		self.brain.ledRing.set_color(self.brain.ledRingColor)
 		# set servo's to transport position
 		#ser.write("0, {0}, {1}, {2}, {3}".format(myservo.servoStoragePos['basePos'], myservo.servoStoragePos['armPos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
 

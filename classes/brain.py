@@ -5,14 +5,14 @@ import config
 from tts import GoogleTTS
 from stt import WitAiSTT
 from mic import Mic
-#from ledring import LedRing
+from ledring import LedRing
 
 class Brain(object):
 	def __init__(self):
 		self.modules = self.get_modules()
 		self.speaker = GoogleTTS()
 		self.mic = Mic(WitAiSTT(config.config['wit_ai_token']))
-		#self.ledRing = LedRing()
+		self.ledRing = LedRing()
 		self.ledRingColor = {
 			"red": 30,
 			"green": 0,

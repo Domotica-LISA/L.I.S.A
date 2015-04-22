@@ -60,6 +60,9 @@ class ColorCodeThread(threading.Thread):
 
 		return center
 
+	def kill(self):
+		threading._Thread_stop()
+
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):
 		threading.Thread.__init__(self)
@@ -92,3 +95,6 @@ class VoiceThread(threading.Thread):
 
 				#self.brain.ledRing.set_color(self.brain.ledRingColor)
 				self.brain.query(input)
+
+	def kill(self):
+		threading._Thread_stop()

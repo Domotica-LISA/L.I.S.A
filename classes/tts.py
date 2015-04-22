@@ -9,12 +9,12 @@ import urllib, urllib2
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		pass
-		#mixer.init(16000)
-		#mixer.music.load(filename)
-		#mixer.music.play()
-		#while mixer.music.get_busy() == True:
-			#continue
+		#pass
+		mixer.init(16000)
+		mixer.music.load(filename)
+		mixer.music.play()
+		while mixer.music.get_busy() == True:
+			continue
 
 	def split_text(self, input_text, max_length=100):
 		def split_text_rec(input_text, regexps, max_length=max_length):

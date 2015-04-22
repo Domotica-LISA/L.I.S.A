@@ -136,7 +136,7 @@ class Track(State):
 		global threads
 		threads = []
 		threads.append(self.voiceThread)
-		threads.append(self.colorCodeThread)
+		#threads.append(self.colorCodeThread)
 		print "Start Tracking"
 		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 

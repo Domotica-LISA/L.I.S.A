@@ -148,8 +148,8 @@ class Track(State):
 		time.sleep(10)
 		for t in threads:
 			t.join()
-		#self.voiceThread.kill()
-		#self.colorCodeThread.exit()
+		self.voiceThread.kill()
+		self.colorCodeThread.kill()
 
 	def exit(self):
 		print "Stop Tracking"

@@ -9,7 +9,6 @@ import urllib, urllib2
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		#pass
 		mixer.init(16000)
 		mixer.music.load(filename)
 		mixer.music.play()

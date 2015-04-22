@@ -1,21 +1,17 @@
 # -*- coding: UTF-8 -*-
 
 servoStoragePos = { "basePos": 25,
-					"armPos": 60,
-					"rotationPos": 90,
-					"headPos": 25}
+					"rotationPos": 100,
+					"headPos": 130}
 
 servoPos = {"basePos": 25,
-			"armPos": 60,
-			"rotationPos": 90,
-			"headPos": 25}
+			"rotationPos": 100,
+			"headPos": 130}
 
 servoMinPos = { "basePos": 25,
-				"armPos": 60,
-				"rotationPos": 60,
-				"headPos": 25}
+				"rotationPos": 85,
+				"headPos": 30}
 
 servoMaxPos = { "basePos": 160,
-				"armPos": 180,
 				"rotationPos": 115,
-				"headPos": 140}
+				"headPos": 130}

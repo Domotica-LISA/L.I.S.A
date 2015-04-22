@@ -51,75 +51,6 @@ class Mic:
 
 		return threshold
 
-	def passive_listen(self):
-		thresholdMultiplier = 1.8
-		rate = 8000
-		chunk = 1024
-		thresholdTime = 1
-		listenTime = 10
-
-		stream = self._audio.open(
-			format=pyaudio.paInt16,
-			channels=1,
-			rate=rate,
-			input=True,
-			frames_per_buffer=chunk)
-
-		frames = []
-
-		lastN = [i for i in range(30)]
-
-		for i in range(0, rate / chunk * thresholdTime):
-			data = stream.read(chunk)
-			frames.append(data)
-
-			lastN.pop(0)
-			lastN.append(self.get_score(data))
-			average = sum(lastN) / len(lastN)
-
-		threshold = average * thresholdMultiplier
-
-		frames = []
-		didDetect = False
-
-		for i in range(0, rate / chunk * listenTime):
-			data = stream.read(chunk)
-			frames.append(data)
-			score = self.get_score(data)
-
-			if score > threshold:
-				didDetect = True
-				break
-
-		if not didDetect:
-			print "No disturbance detected"
-			stream.stop_stream()
-			stream.close()
-			return (None, None)
-
-		frames = frames[-20:]
-
-		delayMultiplier = 1
-		for i in range(0, rate / chunk * delayMultiplier):
-			date = stream.read(chunk)
-			frames.append(data)
-
-		stream.stop_stream()
-		stream.close()
-
-		with tempfile.NamedTemporaryFile(mode='w+b') as f:
-			wav_fp = wave.open(f, 'wb')
-			wav_fp.setnchannels(1)
-			wav_fp.setsampwidth(pyaudio.get_sample_size(pyaudio.paInt16))
-			wav_fp.setframerate(rate)
-			wav_fp.writeframes(''.join(frames))
-			wav_fp.close()
-			f.seek(0)
-
-			transcribed = self.sttEngine.transcribe(f)
-		return transcribed
-
-
 	def active_listen(self):
 		rate = 8000
 		chunk = 1024
@@ -146,10 +77,7 @@ class Mic:
 			lastN.pop(0)
 			lastN.append(score)
 
-			average = sum(lastN) / float(len(lastN))
-
-			#if average < threshold * 0.9:
-				#break		
+			average = sum(lastN) / float(len(lastN))	
 
 		stream.stop_stream()
 		stream.close()

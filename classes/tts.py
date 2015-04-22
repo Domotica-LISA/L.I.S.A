@@ -10,7 +10,8 @@ import cmd
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		cmd = ['omxplayer', str(filename)]
+		pass
+		#cmd = ['omxplayer', str(filename)]
 		#mixer.init(8000)
 		#mixer.music.load(filename)
 		#mixer.music.play()

@@ -16,14 +16,15 @@ def handle(text, speaker, mic, profile):
 	xmldoc = minidom.parseString(content);
 
 	for node in xmldoc.getElementsByTagName('VertrekkendeTrein'):
+	    if teller > 5:
+	    	break
+
 	    vertrekTijd = node.getElementsByTagName("VertrekTijd")[0].firstChild.data
 	    eindBestemming = node.getElementsByTagName("EindBestemming")[0].firstChild.data
 	    vertrekSpoor = node.getElementsByTagName("VertrekSpoor")[0].firstChild.data
-	    teller = teller + 1
-	    if teller > 5:
-	    	break
 	    
 	    speaker.say("De trein naar " + eindBestemming + " op spoor " + vertrekSpoor + " vertrekt om " + vertrekTijd[11] + vertrekTijd[12] + vertrekTijd[13] + vertrekTijd[14] + vertrekTijd[15])
+	    teller = teller + 1
 
 def is_valid(text):
     return bool(re.search(r'\b(hoelaat vertrekt de trein|hoe laat vertrekt de trein|rijden er nog treinen|hoelaat gaat de trein|hoe laat gaat de trein|rijden er treinen|treinen)\b', text, re.IGNORECASE))    

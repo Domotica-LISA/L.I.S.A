@@ -86,6 +86,7 @@ class VoiceThread(threading.Thread):
 				self.fSM.to_transition("toShutdown")
 				break
 			elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
+				self.brain.speaker.say("graag gedaan. Bye Bye")
 				self.fSM.to_transition("toScanning")
 				break
 			else:

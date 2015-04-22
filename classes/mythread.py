@@ -7,6 +7,7 @@ import myservo
 
 class ColorCodeThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):#, serial):
+		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain
@@ -59,6 +60,7 @@ class ColorCodeThread(threading.Thread):
 
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):
+		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain

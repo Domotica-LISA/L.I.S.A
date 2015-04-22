@@ -9,4 +9,4 @@ def handle(text, speaker, mic, profile):
 	time.sleep(2)
 
 def is_valid(text):
-	return bool(re.search(r'\bwat is je naam\b', text, re.IGNORECASE))
+	return bool(re.search(r'\bwat is je naam|hoe heet je\b', text, re.IGNORECASE))

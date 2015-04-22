@@ -16,7 +16,7 @@ def handle(text, speaker, mic, profile):
 	xmldoc = minidom.parseString(content);
 
 	for node in xmldoc.getElementsByTagName('VertrekkendeTrein'):
-	    if teller > 5:
+	    if teller == 5:
 	    	break
 
 	    vertrekTijd = node.getElementsByTagName("VertrekTijd")[0].firstChild.data

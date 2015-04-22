@@ -1,37 +1,19 @@
 # -*- coding: UTF-8 -*-
 import os
-#from pygame import mixer
+from pygame import mixer
 import re
 import argparse
 import time
 import urllib, urllib2
-from pydub import AudioSegment
-import pyaudio
-import wave
 
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		chunk = 1024
-		mp3File = AudioSegment.from_mp3(filename)
-		wavFile = mp3File.export(mp3File, format="wav")
-		wf = wave.open(wavFile, 'rb')
-		p = pyaudio.PyAudio()
-		stream = p.open(format=p.get_format_from_width(wf.getsampwidth()), channels=wf.getnchannels(), rate=wf.getframerate(), output=True)
-		data = wf.readframes(chunk)
-		while date != '':
-			stream.write(data)
-			data = wf.readframes(chunk)
-
-		stream.stop_stream()
-		stream.close()
-		p.terminate()
-		#cmd = ['omxplayer', str(filename)]
-		#mixer.init(8000)
-		#mixer.music.load(filename)
-		#mixer.music.play()
-		#while mixer.music.get_busy() == True:
-			#continue
+		mixer.init(16000)
+		mixer.music.load(filename)
+		mixer.music.play()
+		while mixer.music.get_busy() == True:
+			continue
 
 	def split_text(self, input_text, max_length=100):
 		def split_text_rec(input_text, regexps, max_length=max_length):

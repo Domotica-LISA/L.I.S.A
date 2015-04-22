@@ -143,7 +143,7 @@ class Track(State):
 
 		time.sleep(10)
 
-		self.voiceThread.exit()
+		self.voiceThread.kill()
 		self.colorCodeThread.exit()
 
 	def exit(self):

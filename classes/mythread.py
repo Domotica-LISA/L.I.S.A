@@ -17,7 +17,7 @@ class ColorCodeThread(threading.Thread):
 	def run(self):
 		while 1:
 		#self.serial.write("0,90,90,90,90")
-			center = get_center_stick()
+			center = self.get_center_stick()
 
 			if center['x'] > 200 and center['x'] < 285: 
 				print "rotate left"

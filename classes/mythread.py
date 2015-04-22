@@ -61,7 +61,9 @@ class ColorCodeThread(threading.Thread):
 		return center
 
 	def kill(self):
-		threading._Thread_stop()
+		for thread in threading.enumerate():
+			if thread.isAlive():
+				thread._Thread_stop()
 
 class VoiceThread(threading.Thread):
 	def __init__(self, threadID, name, brain, fSM):
@@ -97,4 +99,6 @@ class VoiceThread(threading.Thread):
 				self.brain.query(input)
 
 	def kill(self):
-		threading._Thread_stop()
+		for thread in threading.enumerate():
+			if thread.isAlive():
+				thread._Thread_stop()

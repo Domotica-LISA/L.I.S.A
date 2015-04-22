@@ -6,6 +6,7 @@ from xml.dom import minidom
 WORDS = ['TREIN']
 
 def handle(text, speaker, mic, profile):
+	teller = 0
 	http = httplib2.Http(disable_ssl_certificate_validation=True)
 	http.follow_redirects = False
 	http.add_credentials('skievar@gmail.com', profile['ns_api_key'])
@@ -18,6 +19,9 @@ def handle(text, speaker, mic, profile):
 	    vertrekTijd = node.getElementsByTagName("VertrekTijd")[0].firstChild.data
 	    eindBestemming = node.getElementsByTagName("EindBestemming")[0].firstChild.data
 	    vertrekSpoor = node.getElementsByTagName("VertrekSpoor")[0].firstChild.data
+	    teller = teller + 1
+	    if teller > 5:
+	    	break
 	    
 	    speaker.say("De trein naar " + eindBestemming + " op spoor " + vertrekSpoor + " vertrekt om " + vertrekTijd[11] + vertrekTijd[12] + vertrekTijd[13] + vertrekTijd[14] + vertrekTijd[15])
 

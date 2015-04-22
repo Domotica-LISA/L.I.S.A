@@ -7,7 +7,7 @@ WORDS = ["TIJD", "HOE LAAT", "HOELAAT" "IS", "HET", "WAT", "IS", "DE"]
 
 def handle(text, speaker, mic, profile):
 	now = datetime.time.now()
-	response = now.time.hour() + now.time.minute()
+	response = str(now.time.hour()) + str(now.time.minute())
 	speaker.say("Het is nu %s" % response)
 	time.sleep(2)
 

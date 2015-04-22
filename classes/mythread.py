@@ -69,7 +69,7 @@ class VoiceThread(threading.Thread):
 		self.brain.ledRingColor['green'] = 30
 		self.brain.ledRingColor['blue'] = 5
 
-		self.brain.ledRing.set_color(self.brain.ledRingColor)
+		#self.brain.ledRing.set_color(self.brain.ledRingColor)
 
 		input = self.brain.mic.active_listen()
 		print input
@@ -82,5 +82,5 @@ class VoiceThread(threading.Thread):
 			self.brain.ledRingColor['green'] = 5
 			self.brain.ledRingColor['blue'] = 5
 
-			self.brain.ledRing.set_color(self.brain.ledRingColor)
+			#self.brain.ledRing.set_color(self.brain.ledRingColor)
 			self.brain.query(input)

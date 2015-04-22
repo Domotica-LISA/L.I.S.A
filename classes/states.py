@@ -133,6 +133,10 @@ class Track(State):
 		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
 
 	def enter(self):
+		global threads
+		threads = []
+		threads.append(self.voiceThread)
+		threads.append(self.colorCodeThread)
 		print "Start Tracking"
 		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 
@@ -142,7 +146,8 @@ class Track(State):
 		self.colorCodeThread.start()
 
 		time.sleep(10)
-
+		for t in threads:
+			t.join()
 		#self.voiceThread.kill()
 		#self.colorCodeThread.exit()
 

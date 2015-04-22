@@ -12,7 +12,7 @@ from pixy import *
 
 pixy_init()
 
-#ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):

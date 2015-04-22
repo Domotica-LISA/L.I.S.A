@@ -148,9 +148,6 @@ class Mic:
 
 			average = sum(lastN) / float(len(lastN))
 
-			print average
-			print threshold
-			
 			#if average < threshold * 0.9:
 				#break		
 

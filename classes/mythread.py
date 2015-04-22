@@ -6,13 +6,13 @@ import blocks
 import myservo
 
 class ColorCodeThread(threading.Thread):
-	def __init__(self, threadID, name, brain, fSM):#, serial):
+	def __init__(self, threadID, name, brain, fSM, serial):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
-		#self.serial = serial
+		self.serial = serial
 
 	def run(self):
 		while 1:
@@ -72,14 +72,13 @@ class VoiceThread(threading.Thread):
 		self.fSM = fSM
 
 	def run(self):
-<<<<<<< HEAD
 		while 1:
 
 			self.brain.ledRingColor['red'] = 5
 			self.brain.ledRingColor['green'] = 30
 			self.brain.ledRingColor['blue'] = 5
 
-			#self.brain.ledRing.set_color(self.brain.ledRingColor)
+			self.brain.ledRing.set_color(self.brain.ledRingColor)
 
 			input = self.brain.mic.active_listen()
 			print input
@@ -94,29 +93,8 @@ class VoiceThread(threading.Thread):
 				self.brain.ledRingColor['green'] = 5
 				self.brain.ledRingColor['blue'] = 5
 
-				#self.brain.ledRing.set_color(self.brain.ledRingColor)
+				self.brain.ledRing.set_color(self.brain.ledRingColor)
 				self.brain.query(input)
 
 	def kill(self):
 		threading._Thread_stop()
-=======
-		self.brain.ledRingColor['red'] = 5
-		self.brain.ledRingColor['green'] = 30
-		self.brain.ledRingColor['blue'] = 5
-
-		self.brain.ledRing.set_color(self.brain.ledRingColor)
-
-		input = self.brain.mic.active_listen()
-		print input
-		if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
-			self.fSM.to_transition("toShutdown")
-		elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
-			self.fSM.to_transition("toScanning")
-		else:
-			self.brain.ledRingColor['red'] = 30
-			self.brain.ledRingColor['green'] = 5
-			self.brain.ledRingColor['blue'] = 5
-
-			self.brain.ledRing.set_color(self.brain.ledRingColor)
-			self.brain.query(input)
->>>>>>> parent of 8db5af2... geen led

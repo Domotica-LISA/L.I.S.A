@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
 import os
-from pygame import mixer
+#from pygame import mixer
 import re
 import argparse
 import time
 import urllib, urllib2
+import cmd
 
 
 class Mp3TTSEngine(object):

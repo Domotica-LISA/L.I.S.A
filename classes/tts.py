@@ -5,12 +5,27 @@ import re
 import argparse
 import time
 import urllib, urllib2
-import cmd
+from pydub import AudioSegment
+import pyaudio
+import wave
 
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		pass
+		chunk = 1024
+		mp3File = AudioSegment.from_mp3(filename)
+		wavFile = mp3File.export(mp3File, format="wav")
+		wf = wave.open(wavFile, 'rb')
+		p = pyaudio.PyAudio()
+		stream = p.open(format=p.get_format_from_width(wf.getsampwidth()), channels=wf.getnchannels(), rate=wf.getframerate(), output=True)
+		data = wf.readframes(chunk)
+		while date != '':
+			stream.write(data)
+			data = wf.readframes(chunk)
+
+		stream.stop_stream()
+		stream.close()
+		p.terminate()
 		#cmd = ['omxplayer', str(filename)]
 		#mixer.init(8000)
 		#mixer.music.load(filename)

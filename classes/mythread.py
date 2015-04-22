@@ -32,7 +32,8 @@ class ColorCodeThread(threading.Thread):
 				print "base right"
 				#myservo.servoPos['basePos'] += 1
 			else:
-				print "deadzone x"
+				#print "deadzone x"
+				pass
 
 			if center['y'] > 100 and center['y'] < 175:
 				print "head up"
@@ -47,7 +48,8 @@ class ColorCodeThread(threading.Thread):
 				print "arm down"
 				#myservo.servoPos['armPos'] += 1
 			else:
-				print "deadzone y"
+				#print "deadzone y"
+				pass
 
 			#self.serial.write("0, {0}, {1}, {2}, {3}".format(myservo.servoPos['basePos'], myservo.servoPos['armPos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 

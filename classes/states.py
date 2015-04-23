@@ -12,7 +12,7 @@ from pixy import *
 
 pixy_init()
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -51,12 +51,14 @@ class State(object):
 				myservo.servoPos['basePos'] -= 1
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
+		"""
 		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
 															myservo.servoPos['rotationPos'], 
 															myservo.servoPos['headPos'], 
 															self.brain.ledRingColor['red'], 
 															self.brain.ledRingColor['green'], 
 															self.brain.ledRingColor['blue']))
+		"""
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -71,11 +73,11 @@ class Startup(State):
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		myservo.servoPos['basePos'] = 90
-		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 		myservo.servoPos['headPos'] = 45
-		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
@@ -88,12 +90,14 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
+		"""
 		ser.write("1, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
 																	myservo.servoPos['rotationPos'], 
 																	myservo.servoPos['headPos'], 
 																	self.brain.ledRingColor['red'], 
 																	self.brain.ledRingColor['green'], 
 																	self.brain.ledRingColor['blue']))
+		"""
 
 	def execute(self):
 		print "Scanning"
@@ -119,12 +123,14 @@ class Move(State):
 
 	def execute(self):
 		print "Moving to sound origin"
-		#self.fSM.to_transition("toTrack")
+		self.fSM.to_transition("toTrack")
+		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:
 			self.fSM.to_transition("toTrack")
 		elif ccDetected is False:
 			self.fSM.to_transition("toScanning")
+		"""
 
 	def exit(self):
 		print "Stop Moving"
@@ -133,8 +139,8 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM, ser)
-		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM, ser)
+		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)#, ser)
+		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
 
 	def enter(self):
 		global threads
@@ -168,12 +174,14 @@ class Shutdown(State):
 		self.brain.ledRingColor['blue'] = 0
 
 		# set servo's to transport position
+		"""
 		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoStoragePos['basePos'], 
 																	myservo.servoStoragePos['rotationPos'], 
 																	myservo.servoStoragePos['headPos'], 
 																	self.brain.ledRingColor['red'], 
 																	self.brain.ledRingColor['green'], 
 																	self.brain.ledRingColor['blue']))
+		"""
 
 	def execute(self):
 		print "Shutting down"

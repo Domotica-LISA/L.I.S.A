@@ -137,7 +137,7 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)
+		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM, ser)
 		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM, ser)
 
 	def enter(self):

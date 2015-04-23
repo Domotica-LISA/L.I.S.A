@@ -6,7 +6,7 @@ modules:
     fealings: False
     riddle: True
     food: True
-    toilet:True
+    toilet: True
 
 wit_ai_token: VFE6BB6YN52KM6OKAHHN3SKQETGS53YS
 ns_api_key: 9zMZBc_mLFpII0OMTQct-OMPtf93EEvammhfuDUzQMfLG-NSE1QFDw

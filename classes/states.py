@@ -51,12 +51,12 @@ class State(object):
 				myservo.servoPos['basePos'] -= 1
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
-		self.serial.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
-																	myservo.servoPos['rotationPos'], 
-																	myservo.servoPos['headPos'], 
-																	self.brain.ledRingColor['red'], 
-																	self.brain.ledRingColor['green'], 
-																	self.brain.ledRingColor['blue']))
+		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
+															myservo.servoPos['rotationPos'], 
+															myservo.servoPos['headPos'], 
+															self.brain.ledRingColor['red'], 
+															self.brain.ledRingColor['green'], 
+															self.brain.ledRingColor['blue']))
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -71,13 +71,13 @@ class Startup(State):
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		myservo.servoPos['basePos'] = 90
-		self.serial.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
+		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
 																	myservo.servoPos['rotationPos'], 
 																	myservo.servoPos['headPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 		myservo.servoPos['headPos'] = 45
-		self.serial.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
+		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
 																	myservo.servoPos['rotationPos'], 
 																	myservo.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
@@ -92,7 +92,7 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
-		self.serial.write("1, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
+		ser.write("1, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
 																	myservo.servoPos['rotationPos'], 
 																	myservo.servoPos['headPos'], 
 																	self.brain.ledRingColor['red'], 
@@ -172,7 +172,7 @@ class Shutdown(State):
 		self.brain.ledRingColor['blue'] = 0
 
 		# set servo's to transport position
-		self.serial.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoStoragePos['basePos'], 
+		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoStoragePos['basePos'], 
 																	myservo.servoStoragePos['rotationPos'], 
 																	myservo.servoStoragePos['headPos'], 
 																	self.brain.ledRingColor['red'], 

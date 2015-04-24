@@ -12,7 +12,8 @@ from pixy import *
 
 pixy_init()
 
-#ser = serial.Serial('/dev/ttyACM0', 9600)
+#serServo = serial.Serial('/dev/ttyACM0', 9600)
+#serLed = serial.Serial('/dev/ttyACM1', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -52,12 +53,8 @@ class State(object):
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
 		"""
-		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
-															myservo.servoPos['rotationPos'], 
-															myservo.servoPos['headPos'], 
-															self.brain.ledRingColor['red'], 
-															self.brain.ledRingColor['green'], 
-															self.brain.ledRingColor['blue']))
+		serServo.write("0, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 		"""
 
 class Startup(State):
@@ -91,12 +88,8 @@ class Scanning(State):
 	def enter(self):
 		print "Start Scanning"
 		"""
-		ser.write("1, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoPos['basePos'], 
-																	myservo.servoPos['rotationPos'], 
-																	myservo.servoPos['headPos'], 
-																	self.brain.ledRingColor['red'], 
-																	self.brain.ledRingColor['green'], 
-																	self.brain.ledRingColor['blue']))
+		serServo.write("1, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 		"""
 
 	def execute(self):
@@ -139,8 +132,8 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)#, ser)
-		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, ser)
+		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM)#, serServo, serLed)
+		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM)#, serServo, serLed)
 
 	def enter(self):
 		global threads
@@ -175,12 +168,8 @@ class Shutdown(State):
 
 		# set servo's to transport position
 		"""
-		ser.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoStoragePos['basePos'], 
-																	myservo.servoStoragePos['rotationPos'], 
-																	myservo.servoStoragePos['headPos'], 
-																	self.brain.ledRingColor['red'], 
-																	self.brain.ledRingColor['green'], 
-																	self.brain.ledRingColor['blue']))
+		serServo.write("0, {0}, {1}, {2}, {3}, {4}, {5}".format( myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 		"""
 
 	def execute(self):

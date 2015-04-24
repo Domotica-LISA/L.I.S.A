@@ -45,7 +45,7 @@ class ColorCodeThread(threading.Thread):
 				#print "deadzone y"
 				pass
 
-			self.serialServo.write("0, {0}, {1}, {2}".format(myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
@@ -71,7 +71,7 @@ class VoiceThread(threading.Thread):
 			self.brain.ledRingColor['green'] = 30
 			self.brain.ledRingColor['blue'] = 5
 			
-			self.serialServo.write("0, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 			
 
@@ -89,7 +89,7 @@ class VoiceThread(threading.Thread):
 				self.brain.ledRingColor['green'] = 5
 				self.brain.ledRingColor['blue'] = 5
 				
-				self.serialServo.write("0, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+				self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 				
 				

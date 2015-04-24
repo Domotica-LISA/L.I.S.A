@@ -62,7 +62,7 @@ class VoiceThread(threading.Thread):
 		self.brain = brain
 		self.fSM = fSM
 		self.serialServo = serialServo
-		self.serialLed = serialLed
+		#self.serialLed = serialLed
 
 	def run(self):
 		while 1:

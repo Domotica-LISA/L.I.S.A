@@ -6,14 +6,14 @@ import blocks
 import myservo
 
 class ColorCodeThread(threading.Thread):
-	def __init__(self, threadID, name, brain, fSM, serialServo):#, serialLed):
+	def __init__(self, threadID, name, brain, fSM, serialServo, serialLed):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
 		self.serialServo = serialServo
-		#self.serialLed = serialLed
+		self.serialLed = serialLed
 
 	def run(self):
 		while 1:
@@ -55,14 +55,14 @@ class ColorCodeThread(threading.Thread):
 		return center
 
 class VoiceThread(threading.Thread):
-	def __init__(self, threadID, name, brain, fSM, serialServo):#, serialLed):
+	def __init__(self, threadID, name, brain, fSM, serialServo, serialLed):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
 		self.brain = brain
 		self.fSM = fSM
 		self.serialServo = serialServo
-		#self.serialLed = serialLed
+		self.serialLed = serialLed
 
 	def run(self):
 		while 1:
@@ -72,7 +72,7 @@ class VoiceThread(threading.Thread):
 			self.brain.ledRingColor['blue'] = 5
 			
 			self.serialServo.write("0, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-			#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 			
 
 			input = self.brain.mic.active_listen()
@@ -90,7 +90,7 @@ class VoiceThread(threading.Thread):
 				self.brain.ledRingColor['blue'] = 5
 				
 				self.serialServo.write("0, {0}, {1}, {2}".format( myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-				#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 				
 				
 				self.brain.query(input)

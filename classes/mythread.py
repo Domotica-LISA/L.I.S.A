@@ -11,7 +11,7 @@ def get_center_stick():
 
 	return center
 
-def run_color_code_thread():#serialServo):
+def run_color_code_thread(serialServo):
 	while 1:
 		center = get_center_stick()
 
@@ -41,17 +41,17 @@ def run_color_code_thread():#serialServo):
 			#print "deadzone y"
 			pass
 
-		#serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
-def run_voice_thread(brain, fSM):#, serialServo, serialLed):
+def run_voice_thread(brain, fSM, serialServo, serialLed):
 	while 1:
 
 		brain.ledRingColor['red'] = 5
 		brain.ledRingColor['green'] = 30
 		brain.ledRingColor['blue'] = 5
 		
-		#serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		#serialLed.write("%s, %s, %s" % (brain.ledRingColor['red'], brain.ledRingColor['green'], brain.ledRingColor['blue']))
+		serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serialLed.write("%s, %s, %s" % (brain.ledRingColor['red'], brain.ledRingColor['green'], brain.ledRingColor['blue']))
 		
 
 		input = brain.mic.active_listen()
@@ -68,8 +68,8 @@ def run_voice_thread(brain, fSM):#, serialServo, serialLed):
 			brain.ledRingColor['green'] = 5
 			brain.ledRingColor['blue'] = 5
 			
-			#serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-			#serialLed.write("%s, %s, %s" % (brain.ledRingColor['red'], brain.ledRingColor['green'], brain.ledRingColor['blue']))
+			serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			serialLed.write("%s, %s, %s" % (brain.ledRingColor['red'], brain.ledRingColor['green'], brain.ledRingColor['blue']))
 			
 			
 			brain.query(input)

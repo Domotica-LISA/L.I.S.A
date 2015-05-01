@@ -132,7 +132,7 @@ class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
 		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(self.brain, self.fSM)) #serServo, serLed))
-		self.colorCodeProcess = Process(target=myprocess.run_color_code_process) #args=(serServo,))
+		#self.colorCodeProcess = Process(target=myprocess.run_color_code_process) #args=(serServo,))
 
 	def enter(self):
 		print "Start Tracking"

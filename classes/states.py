@@ -163,7 +163,7 @@ class Track(State):
 		print "Stop Tracking"
 
 		for p in processs:
-			p.terminate()
+			p.kill()
 			processs.remove(p)
 
 class Shutdown(State):
@@ -191,3 +191,10 @@ class Shutdown(State):
 
 	def exit(self):
 		print "Exit shutdown"
+
+
+
+
+
+
+

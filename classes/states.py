@@ -142,7 +142,7 @@ class Track(State):
 		processs = []
 		processs.append(self.voiceProcess)
 
-		self.brain.speaker.say("Hoi, waarmee kan ik je helpen mark en ivar?")
+		self.brain.speaker.say("Hoi, waarmee kan ik je helpen mark?")
 
 	def execute(self):
 		print "Tracking"

@@ -13,8 +13,8 @@ from pixy import *
 
 #pixy_init()
 
-serServo = serial.Serial('/dev/ttyACM1', 9600)
-serLed = serial.Serial('/dev/ttyACM0', 9600)
+#serServo = serial.Serial('/dev/ttyACM1', 9600)
+#serLed = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -54,8 +54,8 @@ class State(object):
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
 		
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -70,11 +70,11 @@ class Startup(State):
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		myservo.servoPos['basePos'] = 90
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 		myservo.servoPos['headPos'] = 45
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
@@ -88,8 +88,8 @@ class Scanning(State):
 	def enter(self):
 		print "Start Scanning"
 		
-		serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		#serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):
 		print "Scanning"
@@ -98,7 +98,7 @@ class Scanning(State):
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				# send message to arduino to listen to serial data only
-				myservo.servoPos['basePos'] = serServo.readline()
+				#myservo.servoPos['basePos'] = serServo.readline()
 				self.fSM.to_transition("toMove")
 
 	def exit(self):
@@ -131,8 +131,8 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(self.brain, self.fSM, serServo, serLed))
-		self.colorCodeProcess = Process(target=myprocess.run_color_code_process, args=(serServo,))
+		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(self.brain, self.fSM)) #serServo, serLed))
+		self.colorCodeProcess = Process(target=myprocess.run_color_code_process)) #args=(serServo,))
 
 	def enter(self):
 		print "Start Tracking"
@@ -142,7 +142,7 @@ class Track(State):
 		processs = []
 		processs.append(self.voiceProcess)
 
-		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
+		self.brain.speaker.say("Hoi, waarmee kan ik je helpen mark en ivar?")
 
 	def execute(self):
 		print "Tracking"
@@ -174,8 +174,8 @@ class Shutdown(State):
 		self.brain.ledRingColor['blue'] = 0
 
 		# set servo's to transport position
-		serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		#serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
+		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):
 		print "Shutting down"

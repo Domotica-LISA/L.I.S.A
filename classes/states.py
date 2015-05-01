@@ -142,7 +142,7 @@ class Track(State):
 		processs = []
 		processs.append(self.voiceProcess)
 
-		self.brain.speaker.say("Hoi, waarmee kan ik jullie helpen? Trollollollol")
+		self.brain.speaker.say("Hoi, waarmee kan ik jullie helpen? blablabla")
 
 	def execute(self):
 		print "Tracking"
@@ -163,7 +163,7 @@ class Track(State):
 		print "Stop Tracking"
 
 		for p in processs:
-			p.kill()
+			p.terminate()
 			processs.remove(p)
 
 class Shutdown(State):

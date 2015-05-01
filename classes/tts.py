@@ -17,7 +17,7 @@ class Mp3TTSEngine(object):
 			continue
 		"""
 		cmd = ['play', str(filename)]
-		with tempfile.TemporaryFile() as f:
+		with filename as f:
 			subprocess.call(cmd, stdout=f, strerr=f)
 			f.seek(0)
 			output = f.read()

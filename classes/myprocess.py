@@ -70,6 +70,4 @@ def run_voice_process(brain, fSM): # serialServo, serialLed):
 			
 			#serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 			#serialLed.write("%s, %s, %s" % (brain.ledRingColor['red'], brain.ledRingColor['green'], brain.ledRingColor['blue']))
-			print 'een leuke text'
 			brain.query(input)
-			print 'een leuke text 2'

@@ -152,8 +152,8 @@ class Track(State):
 
 		time.sleep(10)
 
-		for p in processs:
-			p.join()
+		#for p in processs:
+			#p.join()
 
 	def exit(self):
 		print "Stop Tracking"

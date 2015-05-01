@@ -44,6 +44,7 @@ class Brain(object):
 				try:
 					print ' text'
 					module.handle(text, self.speaker, self.mic, config.config)
+					print 'text2'
 				except:
 					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
 							"Probeer het later nog eens.")

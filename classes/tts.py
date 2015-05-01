@@ -16,7 +16,12 @@ class Mp3TTSEngine(object):
 		while mixer.music.get_busy() == True:
 			continue
 		"""
-		cmd = ['play %s' % filename]
+		cmd = ['play', str(filename)]
+		with tempfile.TemporaryFile() as f:
+			subprocess.call(cmd, stdout=f, strerr=f)
+			f.seek(0)
+			output = f.read()
+
 
 
 	def split_text(self, input_text, max_length=100):

@@ -148,12 +148,12 @@ class Track(State):
 		print "Tracking"
 
 		self.voiceProcess.start()
-		self.colorCodeProcess.start()
+		#self.colorCodeProcess.start()
 
 		time.sleep(10)
 
-		#for p in processs:
-			#p.join()
+		for p in processs:
+			p.join()
 
 	def exit(self):
 		print "Stop Tracking"

@@ -11,7 +11,7 @@ import myservo
 
 from pixy import *
 
-pixy_init()
+#pixy_init()
 
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)

@@ -5,6 +5,8 @@ import re
 import argparse
 import time
 import urllib, urllib2
+import tempfile
+import subprocess
 
 
 class Mp3TTSEngine(object):
@@ -17,7 +19,7 @@ class Mp3TTSEngine(object):
 			continue
 		"""
 		cmd = ['play', str(filename)]
-		with filename as f:
+		with tempfile.TemporaryFile() as f:
 			subprocess.call(cmd, stdout=f, strerr=f)
 			f.seek(0)
 			output = f.read()

@@ -131,21 +131,20 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(brain, fSM)) #serServo, serLed))
-		#self.colorCodeProcess = Process(target=myprocess.run_color_code_process) #args=(serServo,))
 
 	def enter(self):
 		print "Start Tracking"
-
-		global processs
-
-		processs = []
-		processs.append(self.voiceProcess)
 
 		self.brain.speaker.say("Hoi, waarmee kan ik jullie helpen? blablablablablabla")
 
 	def execute(self):
 		print "Tracking"
+
+		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(brain, fSM)) #serServo, serLed))
+		#self.colorCodeProcess = Process(target=myprocess.run_color_code_process) #args=(serServo,))
+
+		processs = []
+		processs.append(self.voiceProcess)
 
 		self.voiceProcess.start()
 		#self.colorCodeProcess.start()
@@ -154,10 +153,6 @@ class Track(State):
 
 		for p in processs:
 			p.join()
-
-		for p in processs:
-			p.terminate()
-			processs.remove(p)
 
 	def exit(self):
 		print "Stop Tracking"

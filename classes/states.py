@@ -137,8 +137,8 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM, serServo, serLed)
-		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM, serServo, serLed)
+		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM)#, serServo, serLed)
+		self.colorCodeThread = mythread.ColorCodeThread()#serServo)
 
 		threads = []
 		threads.append(self.voiceThread)

@@ -3,8 +3,7 @@
 import config
 import re
 import time
-import myprocess
-from multiprocessing import Process
+import mythread
 import serial
 import blocks
 import myservo
@@ -131,35 +130,28 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-
+		
 	def enter(self):
 		print "Start Tracking"
-
-		self.brain.speaker.say("Hoi, waarmee kan ik jullie helpen? blablablablablabla")
+		self.brain.speaker.say("Hoi, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"
+		self.voiceThread = mythread.VoiceThread(1, "Voice Thread", self.brain, self.fSM, serServo, serLed)
+		self.colorCodeThread = mythread.ColorCodeThread(1, "Color Code Thread", self.brain, self.fSM, serServo, serLed)
 
-		self.voiceProcess = Process(target=myprocess.run_voice_process, args=(brain, fSM)) #serServo, serLed))
-		#self.colorCodeProcess = Process(target=myprocess.run_color_code_process) #args=(serServo,))
+		threads = []
+		threads.append(self.voiceThread)
 
-		processs = []
-		processs.append(self.voiceProcess)
-
-		self.voiceProcess.start()
-		#self.colorCodeProcess.start()
+		self.voiceThread.start()
+		self.colorCodeThread.start()
 
 		time.sleep(10)
-
-		for p in processs:
-			p.join()
+		for t in threads:
+			t.join()
 
 	def exit(self):
 		print "Stop Tracking"
-
-		for p in processs:
-			p.terminate()
-			processs.remove(p)
 
 class Shutdown(State):
 	def __init__(self, fSM, brain):

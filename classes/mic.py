@@ -21,7 +21,7 @@ class Mic:
 	def fetch_threshold(self):
 		thresholdMultiplier = 1.5
 		rate = 44100
-		chunk = 4096
+		chunk = 8192
 
 		thresholdTime = 1
 
@@ -53,7 +53,7 @@ class Mic:
 
 	def active_listen(self):
 		rate = 44100
-		chunk = 4096
+		chunk = 8192
 		listenTime = 10
 
 		threshold = self.fetch_threshold()

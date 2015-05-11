@@ -37,7 +37,13 @@ class Mic:
 		lastN = [i for i in range(20)]
 
 		for i in range(0, rate / chunk * thresholdTime):
-			data = stream.read(chunk)
+			try:
+				data = stream.read(chunk)
+			except IOError, e:
+				if e.args[1] == pyaudio.paInputOverflowed:
+					data = '\x00'*chunk
+				else:
+					raise
 			frames.append(data)
 
 			lastN.pop(0)
@@ -70,7 +76,14 @@ class Mic:
 		lastN = [threshold * 1.2 for i in range(30)]
 
 		for i in range(0, rate / chunk * listenTime):
-			data = stream.read(chunk)
+			try:
+				data = stream.read(chunk)
+			except IOError, e:
+				if e.args[1] == pyaudio.paInputOverflowed:
+					data = '\x00'*chunk
+				else:
+					raise
+			
 			frames.append(data)
 			score = self.get_score(data)
 

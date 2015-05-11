@@ -69,7 +69,7 @@ class VoiceThread(threading.Thread):
 		
 		input = self.brain.mic.active_listen()
 		print input
-		if input is not None:
+		"""if input is not None:
 			if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 				self.fSM.to_transition("toShutdown")
 				#break
@@ -84,5 +84,6 @@ class VoiceThread(threading.Thread):
 				
 				#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 				#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+				"""
 				
-				self.brain.query(input)
+		self.brain.query(input)

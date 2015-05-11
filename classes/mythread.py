@@ -11,6 +11,7 @@ class ColorCodeThread(threading.Thread):
 		#self.serialServo = serialServo
 
 	def run(self):
+		"""
 		while 1:
 			center = self.get_center_stick()
 
@@ -39,6 +40,8 @@ class ColorCodeThread(threading.Thread):
 			else:
 				#print "deadzone y"
 				pass
+			"""
+		print "hoi"
 
 			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
@@ -58,31 +61,31 @@ class VoiceThread(threading.Thread):
 		#self.serialLed = serialLed
 
 	def run(self):
-		#while 1:
+		while 1:
 
-		self.brain.ledRingColor['red'] = 5
-		self.brain.ledRingColor['green'] = 30
-		self.brain.ledRingColor['blue'] = 5
+			self.brain.ledRingColor['red'] = 5
+			self.brain.ledRingColor['green'] = 30
+			self.brain.ledRingColor['blue'] = 5
+				
+			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 			
-		#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
-		
-		input = self.brain.mic.active_listen()
-		print input
-		if input is not None:
-			if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
-				self.fSM.to_transition("toShutdown")
-				#break
-			elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
-				self.brain.speaker.say("graag gedaan. Bye Bye")
-				self.fSM.to_transition("toScanning")
-				#break
-			else:
-				self.brain.ledRingColor['red'] = 30
-				self.brain.ledRingColor['green'] = 5
-				self.brain.ledRingColor['blue'] = 5
-				
-				#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-				#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
-				
-				self.brain.query(input)
+			input = self.brain.mic.active_listen()
+			print input
+			if input is not None:
+				if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
+					self.fSM.to_transition("toShutdown")
+					break
+				elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
+					self.brain.speaker.say("graag gedaan. Bye Bye")
+					self.fSM.to_transition("toScanning")
+					break
+				else:
+					self.brain.ledRingColor['red'] = 30
+					self.brain.ledRingColor['green'] = 5
+					self.brain.ledRingColor['blue'] = 5
+					
+					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+					#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+					
+					self.brain.query(input)

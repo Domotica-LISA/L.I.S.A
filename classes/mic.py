@@ -21,7 +21,7 @@ class Mic:
 	def fetch_threshold(self):
 		thresholdMultiplier = 1.5
 		rate = 48000
-		chunk = 8192
+		chunk = 4096
 
 		thresholdTime = 1
 
@@ -56,7 +56,7 @@ class Mic:
 		chunk = 4096
 		listenTime = 10
 
-		#threshold = self.fetch_threshold()
+		threshold = self.fetch_threshold()
 
 		stream = self._audio.open(
 			format=pyaudio.paInt16,
@@ -67,17 +67,17 @@ class Mic:
 
 		frames = []
 
-		#lastN = [threshold * 1.2 for i in range(30)]
+		lastN = [threshold * 1.2 for i in range(30)]
 
 		for i in range(0, rate / chunk * listenTime):
 			data = stream.read(chunk)
 			frames.append(data)
-			#score = self.get_score(data)
+			score = self.get_score(data)
 
-			#lastN.pop(0)
-			#lastN.append(score)
+			lastN.pop(0)
+			lastN.append(score)
 
-			#average = sum(lastN) / float(len(lastN))	
+			average = sum(lastN) / float(len(lastN))	
 
 		stream.stop_stream()
 		stream.close()

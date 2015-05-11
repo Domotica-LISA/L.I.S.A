@@ -59,8 +59,8 @@ class Mic:
 		#threshold = self.fetch_threshold()
 
 		stream = self._audio.open(
-			format=pyaudio.paInt24,
-			channels=2,
+			format=pyaudio.paInt16,
+			channels=1,
 			rate=rate,
 			input=True,
 			frames_per_buffer=chunk)
@@ -84,8 +84,8 @@ class Mic:
 
 		with tempfile.SpooledTemporaryFile(mode='w+b') as f:
 			wav_fp = wave.open(f, 'wb')
-			wav_fp.setnchannels(2)
-			wav_fp.setsampwidth(pyaudio.get_sample_size(pyaudio.paInt24))
+			wav_fp.setnchannels(1)
+			wav_fp.setsampwidth(pyaudio.get_sample_size(pyaudio.paInt16))
 			wav_fp.setframerate(rate)
 			wav_fp.writeframes(''.join(frames))
 			wav_fp.close()

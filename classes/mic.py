@@ -83,6 +83,7 @@ class Mic:
 					data = '\x00'*chunk
 					print "overflow"
 				else:
+					print e
 					raise
 
 			frames.append(data)

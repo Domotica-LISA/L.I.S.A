@@ -5,26 +5,24 @@ import re
 import argparse
 import time
 import urllib, urllib2
-import tempfile
-import subprocess
-import platform
+#import tempfile
+#import subprocess
+#import platform
 
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):
-		"""
 		mixer.init(16000)
 		mixer.music.load(filename)
 		mixer.music.play()
 		while mixer.music.get_busy() == True:
 			continue
-		"""
-		cmd = ['play', str(filename)]
+		"""cmd = ['play', str(filename)]
 		with tempfile.TemporaryFile() as f:
 			subprocess.call(cmd, stdout=f)
 			f.seek(0)
 			output = f.read()
-
+		"""
 
 
 	def split_text(self, input_text, max_length=100):

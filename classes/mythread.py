@@ -72,11 +72,11 @@ class VoiceThread(threading.Thread):
 		if input is not None:
 			if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 				self.fSM.to_transition("toShutdown")
-				break
+				#break
 			elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
 				self.brain.speaker.say("graag gedaan. Bye Bye")
 				self.fSM.to_transition("toScanning")
-				break
+				#break
 			else:
 				self.brain.ledRingColor['red'] = 30
 				self.brain.ledRingColor['green'] = 5

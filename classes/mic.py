@@ -81,7 +81,7 @@ class Mic:
 			except IOError, e:
 				if e.args[1] == pyaudio.paInputOverflowed:
 					data = '\x00'*chunk
-					print "overflow"
+					#print "overflow"
 				else:
 					raise
 

@@ -10,4 +10,4 @@ class Blocks(Structure):
 		("width", c_uint),
 		("height", c_uint)]
 
-block = Blocks()
+block = Block()

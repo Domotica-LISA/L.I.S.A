@@ -38,7 +38,7 @@ class State(object):
 
 		count = pixy_get_blocks(1, blocks.block)
 		if count > 0:
-			#print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
+			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
 			return True
 		else:
 			#sweep left to right or right to left and up and down
@@ -114,7 +114,8 @@ class Move(State):
 
 	def execute(self):
 		print "Moving to sound origin"
-		self.fSM.to_transition("toTrack")
+		#self.fSM.to_transition("toTrack")
+		super(Move, self).get_color_code()
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

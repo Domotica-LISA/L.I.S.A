@@ -36,7 +36,7 @@ class State(object):
 		self.brain.ledRingColor['green'] = 5
 		self.brain.ledRingColor['blue'] = 30
 
-		block = blocks.Blocks()
+		block = Block()
 
 		count = pixy_get_blocks(1, block)
 		if count > 0:

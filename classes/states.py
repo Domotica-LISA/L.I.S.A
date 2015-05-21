@@ -13,7 +13,7 @@ from pixy import *
 pixy_init()
 
 #serServo = serial.Serial('/dev/ttyACM1', 9600)
-#serLed = serial.Serial('/dev/ttyACM0', 9600)
+serLed = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -54,7 +54,7 @@ class State(object):
 				myservo.servoPos['basePos'] += 1
 		
 		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -88,7 +88,7 @@ class Scanning(State):
 		print "Start Scanning"
 		
 		#serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):
 		print "Scanning"
@@ -138,7 +138,7 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM)#, serServo, serLed)
+		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed)#, serServo)
 		self.colorCodeThread = mythread.ColorCodeThread()#serServo)
 
 		threads = []
@@ -167,7 +167,7 @@ class Shutdown(State):
 
 		# set servo's to transport position
 		#serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
-		#serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):
 		print "Shutting down"

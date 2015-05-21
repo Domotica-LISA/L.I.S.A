@@ -53,12 +53,12 @@ class ColorCodeThread(threading.Thread):
 		return center
 
 class VoiceThread(threading.Thread):
-	def __init__(self, brain, fSM):#, serialServo, serialLed):
+	def __init__(self, brain, fSM, serialLed):#, serialServo):
 		threading.Thread.__init__(self)
 		self.brain = brain
 		self.fSM = fSM
 		#self.serialServo = serialServo
-		#self.serialLed = serialLed
+		self.serialLed = serialLed
 
 	def run(self):
 		while 1:
@@ -68,7 +68,7 @@ class VoiceThread(threading.Thread):
 			self.brain.ledRingColor['blue'] = 5
 				
 			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-			#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 			
 			input = self.brain.mic.active_listen()
 			print input
@@ -86,6 +86,6 @@ class VoiceThread(threading.Thread):
 					self.brain.ledRingColor['blue'] = 5
 					
 					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-					#self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+					self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 					
 					self.brain.query(input)

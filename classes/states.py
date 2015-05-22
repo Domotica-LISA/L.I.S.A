@@ -5,12 +5,12 @@ import re
 import time
 import mythread
 import serial
-import blocks
 import myservo
 
 from pixy import *
 
 pixy_init()
+block = Block()
 
 serServo = serial.Serial('/dev/ttyACM0', 9600)
 serLed = serial.Serial('/dev/ttyACM1', 9600)
@@ -36,9 +36,9 @@ class State(object):
 		self.brain.ledRingColor['green'] = 5
 		self.brain.ledRingColor['blue'] = 30
 
-		count = pixy_get_blocks(1, blocks.block)
+		count = pixy_get_blocks(1, block)
 		if count > 0:
-			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks.block.type, blocks.block.signature, blocks.block.x, blocks.block.y, blocks.block.width, blocks.block.height)
+			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (block.type, block.signature, block.x, block.y, block.width, block.height)
 			return True
 		else:
 			#sweep left to right or right to left and up and down

@@ -2,8 +2,10 @@
 
 import re
 import threading
-import blocks
 import myservo
+from pixy import *
+
+block = Block()
 
 class ColorCodeThread(threading.Thread):
 	def __init__(self, serialServo):
@@ -47,8 +49,8 @@ class ColorCodeThread(threading.Thread):
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
-		center['x'] = blocks.block.x + (blocks.block.width / 2)
-		center['y'] = blocks.block.y + (blocks.block.height / 2)
+		center['x'] = block.x + (block.width / 2)
+		center['y'] = block.y + (block.height / 2)
 
 		return center
 
@@ -67,11 +69,17 @@ class VoiceThread(threading.Thread):
 			self.brain.ledRingColor['green'] = 30
 			self.brain.ledRingColor['blue'] = 5
 				
-			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 			
 			input = self.brain.mic.active_listen()
 			print input
+			self.brain.ledRingColor['red'] = 30
+			self.brain.ledRingColor['green'] = 5
+			self.brain.ledRingColor['blue'] = 5
+
+			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+
 			if input is not None:
 				if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 					self.fSM.to_transition("toShutdown")
@@ -81,11 +89,6 @@ class VoiceThread(threading.Thread):
 					self.fSM.to_transition("toScanning")
 					break
 				else:
-					self.brain.ledRingColor['red'] = 30
-					self.brain.ledRingColor['green'] = 5
-					self.brain.ledRingColor['blue'] = 5
-					
-					self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-					self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
-					
+					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+										
 					self.brain.query(input)

@@ -97,7 +97,7 @@ class Scanning(State):
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				# send message to arduino to listen to serial data only
-				myservo.servoPos['basePos'] = serServo.readline()
+				myservo.servoPos['basePos'] = int(re.search(r'\d+', serServo.readline()).group())
 				self.fSM.to_transition("toMove")
 
 	def exit(self):

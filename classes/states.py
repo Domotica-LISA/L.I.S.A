@@ -70,10 +70,12 @@ class Startup(State):
 		self.brain.speaker.say("Biep... ")
 		myservo.servoPos['basePos'] = 90
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		print myservo.servoPos
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		print myservo.servoPos
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
@@ -88,6 +90,7 @@ class Scanning(State):
 		print "Start Scanning"
 		
 		serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		print myservo.servoPos
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):

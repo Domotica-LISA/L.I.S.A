@@ -8,7 +8,7 @@ import myservo
 class ColorCodeThread(threading.Thread):
 	def __init__(self, serialServo):
 		threading.Thread.__init__(self)
-		#self.serialServo = serialServo
+		self.serialServo = serialServo
 
 	def run(self):
 		"""

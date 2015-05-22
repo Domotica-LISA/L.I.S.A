@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-
+from pixy import *
 from ctypes import *
 
 class Blocks(Structure):

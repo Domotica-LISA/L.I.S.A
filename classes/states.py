@@ -42,18 +42,18 @@ class State(object):
 			return True
 		else:
 			#sweep left to right or right to left and up and down
-			if int(myservo.servoPos['basePos']) > int(myservo.servoMaxPos['basePos']):
+			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
-			elif int(myservo.servoPos['basePos']) < int(myservo.servoMinPos['basePos']):
-				int(myservo.servoPos['basePos']) = 90
+			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
+				myservo.servoPos['basePos'] = 90
 				return False
 
 			if self.direction is 'left':
-				int(myservo.servoPos['basePos']) = int(myservo.servoPos['basePos']) - 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] - 1
 			elif self.direction is 'right':
-				int(myservo.servoPos['basePos']) = int(myservo.servoPos['basePos']) + 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] + 1
 		
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 class Startup(State):

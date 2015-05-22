@@ -49,9 +49,9 @@ class State(object):
 				return False
 
 			if self.direction is 'left':
-				myservo.servoPos['basePos'] -= 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] - 1
 			elif self.direction is 'right':
-				myservo.servoPos['basePos'] += 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] + 1
 		
 		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))

@@ -12,7 +12,7 @@ from pixy import *
 
 pixy_init()
 
-#serServo = serial.Serial('/dev/ttyACM1', 9600)
+serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
 
 class State(object):
@@ -69,11 +69,11 @@ class Startup(State):
 		time.sleep(1)
 		self.brain.speaker.say("Biep... ")
 		myservo.servoPos['basePos'] = 90
-		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		time.sleep(0.5)
 		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
 		myservo.servoPos['headPos'] = 45
-		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
@@ -87,7 +87,7 @@ class Scanning(State):
 	def enter(self):
 		print "Start Scanning"
 		
-		#serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):
@@ -97,7 +97,7 @@ class Scanning(State):
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				# send message to arduino to listen to serial data only
-				#myservo.servoPos['basePos'] = serServo.readline()
+				myservo.servoPos['basePos'] = serServo.readline()
 				self.fSM.to_transition("toMove")
 
 	def exit(self):
@@ -138,8 +138,8 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed)#, serServo)
-		self.colorCodeThread = mythread.ColorCodeThread()#serServo)
+		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
+		self.colorCodeThread = mythread.ColorCodeThread(serServo)
 
 		threads = []
 		threads.append(self.voiceThread)
@@ -166,7 +166,7 @@ class Shutdown(State):
 		self.brain.ledRingColor['blue'] = 0
 
 		# set servo's to transport position
-		#serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
+		serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 	def execute(self):

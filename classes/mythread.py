@@ -2,7 +2,7 @@
 
 import re
 import threading
-#import blocks
+import blocks
 import myservo
 
 class ColorCodeThread(threading.Thread):
@@ -47,8 +47,8 @@ class ColorCodeThread(threading.Thread):
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
-		#center['x'] = blocks.block.x + (blocks.block.width / 2)
-		#center['y'] = blocks.block.y + (blocks.block.height / 2)
+		center['x'] = blocks.block.x + (blocks.block.width / 2)
+		center['y'] = blocks.block.y + (blocks.block.height / 2)
 
 		return center
 

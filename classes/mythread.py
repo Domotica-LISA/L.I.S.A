@@ -74,11 +74,6 @@ class VoiceThread(threading.Thread):
 			
 			input = self.brain.mic.active_listen()
 			print input
-			self.brain.ledRingColor['red'] = 30
-			self.brain.ledRingColor['green'] = 5
-			self.brain.ledRingColor['blue'] = 5
-
-			self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 			if input is not None:
 				if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
@@ -90,5 +85,15 @@ class VoiceThread(threading.Thread):
 					break
 				else:
 					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-										
+					self.brain.ledRingColor['red'] = 30
+					self.brain.ledRingColor['green'] = 5
+					self.brain.ledRingColor['blue'] = 5
+
+					self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 					self.brain.query(input)
+			else:
+				self.brain.ledRingColor['red'] = 30
+				self.brain.ledRingColor['green'] = 5
+				self.brain.ledRingColor['blue'] = 5
+
+				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))

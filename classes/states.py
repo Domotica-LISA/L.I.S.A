@@ -53,7 +53,7 @@ class State(object):
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
 		
-		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 
 class Startup(State):
@@ -117,8 +117,8 @@ class Move(State):
 
 	def execute(self):
 		print "Moving to sound origin"
-		self.fSM.to_transition("toTrack")
-		#super(Move, self).get_color_code()
+		#self.fSM.to_transition("toTrack")
+		super(Move, self).get_color_code()
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

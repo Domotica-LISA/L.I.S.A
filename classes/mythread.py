@@ -42,9 +42,6 @@ class ColorCodeThread(threading.Thread):
 			else:
 				#print "deadzone y"
 				pass
-		"""
-		print "hoi"
-		"""
 
 			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 

@@ -2,6 +2,7 @@
 
 import re
 import threading
+import time
 import myservo
 from pixy import *
 
@@ -13,7 +14,6 @@ class ColorCodeThread(threading.Thread):
 		self.serialServo = serialServo
 
 	def run(self):
-		"""
 		while 1:
 			center = self.get_center_stick()
 
@@ -42,10 +42,11 @@ class ColorCodeThread(threading.Thread):
 			else:
 				#print "deadzone y"
 				pass
-			"""
+		"""
 		print "hoi"
+		"""
 
-			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
@@ -97,3 +98,4 @@ class VoiceThread(threading.Thread):
 				self.brain.ledRingColor['blue'] = 5
 
 				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+				time.sleep(0.5)

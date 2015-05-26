@@ -16,6 +16,7 @@ class ColorCodeThread(threading.Thread):
 	def run(self):
 		while 1:
 			center = self.get_center_stick()
+			print myservo.servoPos
 
 			if center['x'] > 200 and center['x'] < 285: 
 				#print "rotate left"
@@ -95,4 +96,11 @@ class VoiceThread(threading.Thread):
 				self.brain.ledRingColor['blue'] = 5
 
 				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
-				time.sleep(0.5)
+				time.sleep(1.5)
+				self.brain.ledRingColor['red'] = 5
+				self.brain.ledRingColor['green'] = 30
+				self.brain.ledRingColor['blue'] = 5
+					
+				#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+				self.serialLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+			

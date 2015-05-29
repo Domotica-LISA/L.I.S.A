@@ -122,7 +122,7 @@ class Move(State):
 
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("5,5,30")
-		time.sleep(0.1)
+		time.sleep(1)
 
 	def exit(self):
 		print "Stop Moving"

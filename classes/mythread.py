@@ -65,7 +65,7 @@ class VoiceThread(threading.Thread):
 	def run(self):
 		while 1:
 
-			self.setRingColor(5, 30, 5)
+			self.setRingColor(5, 5, 30)
 
 			input = self.brain.mic.active_listen()
 			print input

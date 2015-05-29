@@ -72,7 +72,7 @@ class Startup(State):
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
 		time.sleep(0.5)
-		self.brain.speaker.say("raawwrr!")
+		self.brain.speaker.say("Wie durft mij wakker te maken!?")
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos

@@ -56,10 +56,6 @@ class State(object):
 				servoPos[0] = servoPos[0] - 1
 			elif self.direction is 'right':
 				servoPos[0] = servoPos[0] + 1
-		
-			print servoPos
-			serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[0], servoPos[0]))
-			serLed.write("5,5,30")
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -125,6 +121,8 @@ class Move(State):
 		print "Moving to sound origin"
 		#self.fSM.to_transition("toTrack")
 		super(Move, self).get_color_code()
+		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
+		serLed.write("5,5,30")
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

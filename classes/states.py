@@ -113,7 +113,7 @@ class Move(State):
 		print "Moving to sound origin"
 		#self.fSM.to_transition("toTrack")
 		super(Move, self).get_color_code()
-		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("5,5,30")
 		time.sleep(0.1)
 		"""

@@ -123,7 +123,7 @@ class Move(State):
 		super(Move, self).get_color_code()
 		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		serLed.write("5,5,30")
-		time.sleep(10)
+		time.sleep(1)
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

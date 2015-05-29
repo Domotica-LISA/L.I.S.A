@@ -16,7 +16,8 @@ class ColorCodeThread(threading.Thread):
 	def run(self):
 		
 		while 1:
-			print center = self.get_center_stick()
+			center = self.get_center_stick()
+			print center
 
 			if center['x'] > 200 and center['x'] < 285: 
 				print "rotate left"

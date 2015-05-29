@@ -52,6 +52,7 @@ class ColorCodeThread(threading.Thread):
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
+		pixy_get_blocks(1, block)
 		center['x'] = block.x + (block.width / 2)
 		center['y'] = block.y + (block.height / 2)
 

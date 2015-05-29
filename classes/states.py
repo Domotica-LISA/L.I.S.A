@@ -57,6 +57,7 @@ class State(object):
 			elif self.direction is 'right':
 				servoPos['basePos'] = servoPos['basePos'] + 1
 		
+		print servoPos
 		serServo.write("0, %s, %s, %s" % (servoPos['basePos'], servoPos['rotationPos'], servoPos['headPos']))
 		serLed.write("5,5,30")
 

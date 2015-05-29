@@ -45,7 +45,7 @@ class ColorCodeThread(threading.Thread):
 				pass
 				
 
-		print "hoi"
+			#print "hoi"
 
 			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 

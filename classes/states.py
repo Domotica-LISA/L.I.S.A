@@ -34,7 +34,7 @@ class State(object):
 	def get_color_code(self):
 		count = pixy_get_blocks(1, block)
 		if count > 0:
-			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (block.type, block.signature, block.x, block.y, block.width, block.height)
+			#print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (block.type, block.signature, block.x, block.y, block.width, block.height)
 			return True
 		else:
 			#sweep left to right or right to left and up and down
@@ -69,7 +69,7 @@ class Startup(State):
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
-		self.fSM.to_transition("toMove")
+		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
@@ -85,7 +85,7 @@ class Scanning(State):
 		
 		serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("30, 0, 30")
 
 	def execute(self):
 		print "Scanning"
@@ -112,17 +112,17 @@ class Move(State):
 	def execute(self):
 		print "Moving to sound origin"
 		#self.fSM.to_transition("toTrack")
-		super(Move, self).get_color_code()
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		serLed.write("5,5,30")
-		time.sleep(0.1)
-		"""
+		#super(Move, self).get_color_code()
+		
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:
 			self.fSM.to_transition("toTrack")
 		elif ccDetected is False:
 			self.fSM.to_transition("toScanning")
-		"""
+
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serLed.write("5,5,30")
+		time.sleep(0.1)
 
 	def exit(self):
 		print "Stop Moving"
@@ -138,13 +138,13 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		#self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
+		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
 		self.colorCodeThread = mythread.ColorCodeThread(serServo)
 
 		threads = []
-		threads.append(self.colorCodeThread)
+		threads.append(self.voiceThread)
 
-		#self.voiceThread.start()
+		self.voiceThread.start()
 		self.colorCodeThread.start()
 
 		time.sleep(10)
@@ -161,13 +161,10 @@ class Shutdown(State):
 	def enter(self):
 		print "Entering shutdown"
 		self.brain.speaker.say("Bezig met afsluiten.")
-		self.brain.ledRingColor['red'] = 0
-		self.brain.ledRingColor['green'] = 0
-		self.brain.ledRingColor['blue'] = 0
 
 		# set servo's to transport position
 		serServo.write("0, %s, %s, %s" % (myservo.servoStoragePos['basePos'], myservo.servoStoragePos['rotationPos'], myservo.servoStoragePos['headPos']))
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("0,0,0")
 
 	def execute(self):
 		print "Shutting down"

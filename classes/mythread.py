@@ -48,12 +48,9 @@ class ColorCodeThread(threading.Thread):
 				else:
 					#print "deadzone y"
 					pass
-				
 
-			#print "hoi"
-
-				self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-				time.sleep(0.1)
+			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			time.sleep(0.1)
 
 class VoiceThread(threading.Thread):
 	def __init__(self, brain, fSM, serialLed, serialServo):
@@ -64,7 +61,6 @@ class VoiceThread(threading.Thread):
 		self.serialLed = serialLed
 
 	def run(self):
-		"""
 		while 1:
 
 			self.setRingColor(5, 30, 5)
@@ -81,12 +77,9 @@ class VoiceThread(threading.Thread):
 					self.fSM.to_transition("toScanning")
 					break
 				else:
-					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 					self.setRingColor(30, 5, 5)
 					self.brain.query(input)
-					"""
-		print "hoi"
 
 	def setRingColor(self, red, green, blue):
 		self.serialLed.write("%s, %s, %s" % (red, green, blue))
-		time.sleep(1)
+		time.sleep(0.1)

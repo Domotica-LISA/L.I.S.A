@@ -14,7 +14,7 @@ class ColorCodeThread(threading.Thread):
 		self.serialServo = serialServo
 
 	def run(self):
-		"""
+		
 		while 1:
 			center = self.get_center_stick()
 
@@ -43,11 +43,11 @@ class ColorCodeThread(threading.Thread):
 			else:
 				#print "deadzone y"
 				pass
-				"""
+				
 
 		print "hoi"
 
-			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+			self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 
 	def get_center_stick(self):
 		center = {'x': 0, 'y': 0}
@@ -65,6 +65,7 @@ class VoiceThread(threading.Thread):
 		self.serialLed = serialLed
 
 	def run(self):
+		"""
 		while 1:
 
 			self.setRingColor(5, 30, 5)
@@ -84,6 +85,8 @@ class VoiceThread(threading.Thread):
 					#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 					self.setRingColor(30, 5, 5)
 					self.brain.query(input)
+					"""
+		print "hoi"
 
 	def setRingColor(self, red, green, blue):
 		self.serialLed.write("%s, %s, %s" % (red, green, blue))

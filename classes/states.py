@@ -72,7 +72,7 @@ class Startup(State):
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
 		time.sleep(0.5)
-		self.brain.speaker.say("Opweg om de meest toffe robot te worden.")
+		self.brain.speaker.say("rawr!")
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
@@ -112,7 +112,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("Wat moet je?")
+		self.brain.speaker.say("Wat moet je van me?")
 		self.direction = 'right'
 
 	def execute(self):
@@ -137,7 +137,7 @@ class Track(State):
 		
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hoi onderdanen, waarmee kan ik je helpen?")
+		self.brain.speaker.say("Hey onderdaan, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"

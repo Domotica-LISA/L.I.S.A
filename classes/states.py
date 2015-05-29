@@ -32,7 +32,6 @@ class State(object):
 		pass
 
 	def get_color_code(self):
-		"""
 		count = pixy_get_blocks(1, block)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (block.type, block.signature, block.x, block.y, block.width, block.height)
@@ -49,9 +48,8 @@ class State(object):
 				myservo.servoPos['basePos'] -= 1
 			elif self.direction is 'right':
 				myservo.servoPos['basePos'] += 1
-
-		"""		
-		#serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		
+		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		serLed.write("%s, %s, %s" % (5, 5, 30))
 
 class Startup(State):

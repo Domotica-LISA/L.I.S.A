@@ -44,7 +44,7 @@ class ColorCodeThread(threading.Thread):
 					myservo.servoPos['headPos'] = myservo.servoPos['headPos'] - 1
 				elif center['y'] > 225 and center['y'] < 400:
 					print "head down"
-					myservo.servoPos['headPos'] = myservo.servoPos['headPos'] 1
+					myservo.servoPos['headPos'] = myservo.servoPos['headPos'] + 1
 				else:
 					#print "deadzone y"
 					pass

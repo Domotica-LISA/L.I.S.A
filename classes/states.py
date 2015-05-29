@@ -15,14 +15,6 @@ block = Block()
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
 
-servoStoragePos = [25,110,90]
-
-servoPos = [25,110,90]
-
-servoMinPos = [25,90,30]
-
-servoMaxPos = [160,130,130]
-
 class State(object):
 	def __init__(self, fSM, brain):
 		self.fSM = fSM
@@ -46,16 +38,16 @@ class State(object):
 			return True
 		else:
 			#sweep left to right or right to left and up and down
-			if servoPos[0] > servoMaxPos[0]:
+			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
-			elif servoPos[0] < servoMinPos[0]:
-				servoPos[0] = 120
+			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
+				myservo.servoPos['basePos'] = 90
 				return False
 
 			if self.direction is 'left':
-				servoPos[0] = servoPos[0] - 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] - 1
 			elif self.direction is 'right':
-				servoPos[0] = servoPos[0] + 1
+				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] + 1
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -123,7 +115,7 @@ class Move(State):
 		super(Move, self).get_color_code()
 		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		serLed.write("5,5,30")
-		time.sleep(1)
+		time.sleep(0.1)
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:
@@ -147,7 +139,7 @@ class Track(State):
 	def execute(self):
 		print "Tracking"
 		#self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
-		self.colorCodeThread = mythread.ColorCodeThread(serServo, servoPos)
+		self.colorCodeThread = mythread.ColorCodeThread(serServo)
 
 		threads = []
 		threads.append(self.colorCodeThread)

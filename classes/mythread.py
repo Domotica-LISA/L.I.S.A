@@ -20,8 +20,8 @@ class ColorCodeThread(threading.Thread):
 
 			count = pixy_get_blocks(1, block)
 			if count > 0:
-				center['x'] = block.x + (block.width / 2)
-				center['y'] = block.y + (block.height / 2)
+				center['x'] = block.x + (block.width)
+				center['y'] = block.y + (block.height)
 
 				if center['x'] > 200 and center['x'] < 285: 
 					print "rotate left"

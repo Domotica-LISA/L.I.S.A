@@ -85,8 +85,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
-		self.brain.speaker.say("Buig voor jullie heerser") 
-		time.sleep(2) 
+		self.brain.speaker.say("Buig voor jullie heerser")  
 		self.brain.speaker.say("muahahaha.")
 
 class Scanning(State):

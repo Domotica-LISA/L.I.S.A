@@ -116,7 +116,8 @@ class Move(State):
 	def execute(self):
 		print "Moving to sound origin"
 		#self.fSM.to_transition("toTrack")
-		super(Move, self).get_color_code()
+		#super(Move, self).get_color_code()
+		serLed.write("5,5,30")
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

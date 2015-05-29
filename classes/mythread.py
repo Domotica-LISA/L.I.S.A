@@ -9,9 +9,10 @@ from pixy import *
 block = Block()
 
 class ColorCodeThread(threading.Thread):
-	def __init__(self, serialServo):
+	def __init__(self, serialServo, servoPos):
 		threading.Thread.__init__(self)
 		self.serialServo = serialServo
+		self.servoPos = servoPos
 
 	def run(self):
 		
@@ -25,26 +26,26 @@ class ColorCodeThread(threading.Thread):
 
 				if center['x'] > 200 and center['x'] < 285: 
 					print "rotate left"
-					myservo.servoPos['rotationPos'] = myservo.servoPos['rotationPos'] - 1
+					self.servoPos['rotationPos'] = self.servoPos['rotationPos'] - 1
 				elif center['x'] > 0 and center['x'] < 200: 
 					print "base left"
-					myservo.servoPos['basePos'] = myservo.servoPos['basePos'] - 1
+					self.servoPos['basePos'] = self.servoPos['basePos'] - 1
 				elif center['x'] > 355 and center['x'] < 440:
 					print "rotate right"
-					myservo.servoPos['rotationPos'] = myservo.servoPos['rotationPos'] + 1
+					self.servoPos['rotationPos'] = self.servoPos['rotationPos'] + 1
 				elif center['x'] > 440 and center['x'] < 640:
 					print "base right"
-					myservo.servoPos['basePos'] = myservo.servoPos['basePos'] + 1
+					self.servoPos['basePos'] = self.servoPos['basePos'] + 1
 				else:
 					#print "deadzone x"
 					pass
 
 				if center['y'] > 0 and center['y'] < 175:
 					print "head up"
-					myservo.servoPos['headPos'] = myservo.servoPos['headPos'] - 1
+					self.servoPos['headPos'] = self.servoPos['headPos'] - 1
 				elif center['y'] > 225 and center['y'] < 400:
 					print "head down"
-					myservo.servoPos['headPos'] = myservo.servoPos['headPos'] + 1
+					self.servoPos['headPos'] = self.servoPos['headPos'] + 1
 				else:
 					#print "deadzone y"
 					pass
@@ -52,7 +53,7 @@ class ColorCodeThread(threading.Thread):
 
 			#print "hoi"
 
-				self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+				self.serialServo.write("0, %s, %s, %s" % (self.servoPos['basePos'], self.servoPos['rotationPos'], self.servoPos['headPos']))
 
 class VoiceThread(threading.Thread):
 	def __init__(self, brain, fSM, serialLed, serialServo):

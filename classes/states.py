@@ -15,21 +15,13 @@ block = Block()
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
 
-servoStoragePos = { "basePos": 25,
-					"rotationPos": 110,
-					"headPos": 130}
+servoStoragePos = { "basePos": 25, "rotationPos": 110, "headPos": 130 }
 
-servoPos = {"basePos": 25,
-			"rotationPos": 110,
-			"headPos": 130}
+servoPos = { "basePos": 25, "rotationPos": 110, "headPos": 130 }
 
-servoMinPos = { "basePos": 25,
-				"rotationPos": 90,
-				"headPos": 30}
+servoMinPos = { "basePos": 25, "rotationPos": 90, "headPos": 30 }
 
-servoMaxPos = { "basePos": 160,
-				"rotationPos": 130,
-				"headPos": 130}
+servoMaxPos = { "basePos": 160, "rotationPos": 130, "headPos": 130 }
 
 class State(object):
 	def __init__(self, fSM, brain):

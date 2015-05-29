@@ -14,6 +14,7 @@ class ColorCodeThread(threading.Thread):
 		self.serialServo = serialServo
 
 	def run(self):
+		"""
 		while 1:
 			center = self.get_center_stick()
 
@@ -42,8 +43,9 @@ class ColorCodeThread(threading.Thread):
 			else:
 				#print "deadzone y"
 				pass
+				"""
 
-		#print "hoi"
+		print "hoi"
 
 			#self.serialServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 

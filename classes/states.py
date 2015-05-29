@@ -15,13 +15,13 @@ block = Block()
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
 
-servoStoragePos = { "basePos": 25, "rotationPos": 110, "headPos": 130 }
+servoStoragePos = [25,110,90]
 
-servoPos = { "basePos": 25, "rotationPos": 110, "headPos": 130 }
+servoPos = [25,110,90]
 
-servoMinPos = { "basePos": 25, "rotationPos": 90, "headPos": 30 }
+servoMinPos = [25,90,30]
 
-servoMaxPos = { "basePos": 160, "rotationPos": 130, "headPos": 130 }
+servoMaxPos = [160,130,130]
 
 class State(object):
 	def __init__(self, fSM, brain):
@@ -46,19 +46,19 @@ class State(object):
 			return True
 		else:
 			#sweep left to right or right to left and up and down
-			if servoPos['basePos'] > servoMaxPos['basePos']:
+			if servoPos[0] > servoMaxPos[0]:
 				self.direction = 'left'
-			elif servoPos['basePos'] < servoMinPos['basePos']:
-				servoPos['basePos'] = 120
+			elif servoPos[0] < servoMinPos[0]:
+				servoPos[0] = 120
 				return False
 
 			if self.direction is 'left':
-				servoPos['basePos'] = servoPos['basePos'] - 1
+				servoPos[0] = servoPos[0] - 1
 			elif self.direction is 'right':
-				servoPos['basePos'] = servoPos['basePos'] + 1
+				servoPos[0] = servoPos[0] + 1
 		
 			print servoPos
-			serServo.write("0, %s, %s, %s" % (servoPos['basePos'], servoPos['rotationPos'], servoPos['headPos']))
+			serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[0], servoPos[0]))
 			serLed.write("5,5,30")
 
 class Startup(State):

@@ -93,7 +93,6 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
 		input = self.brain.mic.active_listen()
 		print input
 		if input is not None:
@@ -101,8 +100,6 @@ class Scanning(State):
 				# send message to arduino to listen to serial data only
 				#myservo.servoPos['basePos'] = int(serServo.readline())
 				self.fSM.to_transition("toMove")
-		else:
-			serLed.write("5,0,5")
 
 	def exit(self):
 		print "Exit Scanning"

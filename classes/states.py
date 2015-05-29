@@ -41,7 +41,7 @@ class State(object):
 			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
 			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
-				myservo.servoPos['basePos'] = 90
+				myservo.servoPos['basePos'] = 120
 				return False
 
 			if self.direction is 'left':
@@ -113,8 +113,8 @@ class Move(State):
 
 	def execute(self):
 		print "Moving to sound origin"
-		self.fSM.to_transition("toTrack")
-		#super(Move, self).get_color_code()
+		#self.fSM.to_transition("toTrack")
+		super(Move, self).get_color_code()
 		"""
 		ccDetected = super(Move, self).get_color_code()
 		if ccDetected is True:

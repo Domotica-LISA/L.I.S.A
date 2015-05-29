@@ -65,14 +65,14 @@ class Startup(State):
 
 	def execute(self):
 		print "Starting up"
-		self.brain.speaker.say("Biep... ")
+		self.brain.speaker.say("Toet... ")
 		time.sleep(1)
-		self.brain.speaker.say("Biep... ")
+		self.brain.speaker.say("Toet... ")
 		myservo.servoPos['basePos'] = 90
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
 		time.sleep(0.5)
-		self.brain.speaker.say("Bezig met het opstarten van mijn primaire functies.")
+		self.brain.speaker.say("Opweg om de meest toffe robot te worden.")
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
@@ -80,7 +80,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
-		self.brain.speaker.say("Opstarten voltooid.")
+		self.brain.speaker.say("Buig voor jullie heerser.")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -112,7 +112,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("Riep iemand mij?")
+		self.brain.speaker.say("Wat moet je?")
 		self.direction = 'right'
 
 	def execute(self):
@@ -137,7 +137,7 @@ class Track(State):
 		
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hoi Jeffrey, waarmee kan ik je helpen?")
+		self.brain.speaker.say("Hoi onderdanen, waarmee kan ik je helpen?")
 
 	def execute(self):
 		print "Tracking"

@@ -32,10 +32,6 @@ class State(object):
 		pass
 
 	def get_color_code(self):
-		self.brain.ledRingColor['red'] = 5
-		self.brain.ledRingColor['green'] = 5
-		self.brain.ledRingColor['blue'] = 30
-
 		count = pixy_get_blocks(1, block)
 		if count > 0:
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (block.type, block.signature, block.x, block.y, block.width, block.height)
@@ -54,7 +50,7 @@ class State(object):
 				myservo.servoPos['basePos'] += 1
 		
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		serLed.write("%s, %s, %s" % (self.brain.ledRingColor['red'], self.brain.ledRingColor['green'], self.brain.ledRingColor['blue']))
+		serLed.write("%s, %s, %s" % (5, 5, 30))
 
 class Startup(State):
 	def __init__(self, fSM, brain):

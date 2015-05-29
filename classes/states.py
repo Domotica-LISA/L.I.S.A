@@ -76,7 +76,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
-		self.brain.speaker.say("Buig voor jullie heerser.  Hahaha.")
+		self.brain.speaker.say("Buig voor jullie heerser Hahaha.")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):

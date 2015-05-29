@@ -72,7 +72,7 @@ class Startup(State):
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
-		self.fSM.to_transition("toTrack")
+		self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Startup complete"
@@ -133,22 +133,22 @@ class Track(State):
 		
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hey onderdaan, u whote mate")# waarmee kan ik je helpen?")
+		self.brain.speaker.say("Hey onderdaan, wat wil je van mij?")
 
 	def execute(self):
 		print "Tracking"
-		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
+		#self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
 		self.colorCodeThread = mythread.ColorCodeThread(serServo)
 
-		threads = []
-		threads.append(self.voiceThread)
+		#threads = []
+		#threads.append(self.voiceThread)
 
-		self.voiceThread.start()
+		#self.voiceThread.start()
 		self.colorCodeThread.start()
 
-		time.sleep(10)
-		for t in threads:
-			t.join()
+		#time.sleep(10)
+		#for t in threads:
+			#t.join()
 
 	def exit(self):
 		print "Stop Tracking"

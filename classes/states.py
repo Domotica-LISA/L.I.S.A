@@ -61,9 +61,9 @@ class Startup(State):
 
 	def execute(self):
 		print "Starting up"
-		self.brain.speaker.say("Boem... ")
+		self.brain.speaker.say("Biep... ")
 		time.sleep(1)
-		self.brain.speaker.say("Bam... ")
+		self.brain.speaker.say("Boep... ")
 		myservo.servoPos['basePos'] = 90
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos

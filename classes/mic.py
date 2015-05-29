@@ -54,7 +54,7 @@ class Mic:
 	def active_listen(self):
 		rate = 44100
 		chunk = 8192
-		listenTime = 10
+		listenTime = 5
 
 		threshold = self.fetch_threshold()
 

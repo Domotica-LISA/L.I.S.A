@@ -72,7 +72,7 @@ class Startup(State):
 		myservo.servoPos['headPos'] = 45
 		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
 		print myservo.servoPos
-		self.fSM.to_transition("toScanning")
+		self.fSM.to_transition("toTrack")
 
 	def exit(self):
 		print "Startup complete"

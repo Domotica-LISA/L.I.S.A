@@ -47,9 +47,9 @@ class State(object):
 				return False
 
 			if self.direction is 'left':
-				servoPos[0] = servoPos[0] - 1
+				servoPos[0] = servoPos[0] - 2
 			elif self.direction is 'right':
-				servoPos[0] = servoPos[0] + 1
+				servoPos[0] = servoPos[0] + 2
 
 class Startup(State):
 	def __init__(self, fSM, brain):

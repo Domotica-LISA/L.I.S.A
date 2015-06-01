@@ -24,16 +24,10 @@ class ColorCodeThread(threading.Thread):
 				center['x'] = block.x + (block.width)
 				center['y'] = block.y + (block.height)
 
-				if center['x'] > 200 and center['x'] < 285: 
-					print "rotate left"
-					self.servoPos[1] = self.servoPos[1] + 2
-				elif center['x'] > 0 and center['x'] < 200: 
+				if center['x'] > 0 and center['x'] < 285: 
 					print "base left"
 					self.servoPos[0] = self.servoPos[0] + 2
-				elif center['x'] > 355 and center['x'] < 440:
-					print "rotate right"
-					self.servoPos[1] = self.servoPos[1] - 2
-				elif center['x'] > 440 and center['x'] < 640:
+				elif center['x'] > 355 and center['x'] < 640:
 					print "base right"
 					self.servoPos[0] = self.servoPos[0] - 2
 				else:

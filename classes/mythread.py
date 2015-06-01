@@ -51,6 +51,7 @@ class ColorCodeThread(threading.Thread):
 
 			self.serialServo.write("0,130,110,130")
 			#self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
+			time.sleep(1)
 
 class VoiceThread(threading.Thread):
 	def __init__(self, brain, fSM, serialLed, serialServo):

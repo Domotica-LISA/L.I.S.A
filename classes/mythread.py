@@ -49,10 +49,13 @@ class ColorCodeThread(threading.Thread):
 				else:
 					#print "deadzone y"
 					pass
-				print center	
-			
-			self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
-			time.sleep(1)
+				print self.servoPos	
+
+			self.setServo()
+
+	def setServo(self):
+		self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
+		time.sleep(1)
 
 class VoiceThread(threading.Thread):
 	def __init__(self, brain, fSM, serialLed, serialServo):

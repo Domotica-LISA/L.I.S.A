@@ -12,7 +12,7 @@ from pixy import *
 pixy_init()
 block = Block()
 
-servoPos = [25, 110, 45]
+servoPos = [25, 110, 30]
 
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
@@ -68,7 +68,7 @@ class Startup(State):
 		print servoPos
 		time.sleep(0.5)
 		self.brain.speaker.say("Wie durft mij wakker te maken!?")
-		servoPos[0] = 45
+		servoPos[2] = 45
 		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		print servoPos
 		self.fSM.to_transition("toScanning")

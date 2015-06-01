@@ -2,7 +2,7 @@
 
 servoStoragePos = { "basePos": 25,
 					"rotationPos": 110,
-					"headPos": 45}
+					"headPos": 30}
 
 servoMinPos = { "basePos": 25,
 				"rotationPos": 90,

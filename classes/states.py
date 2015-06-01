@@ -12,6 +12,8 @@ from pixy import *
 pixy_init()
 block = Block()
 
+servoPos = [25, 110, 45]
+
 serServo = serial.Serial('/dev/ttyACM1', 9600)
 serLed = serial.Serial('/dev/ttyACM0', 9600)
 
@@ -38,16 +40,16 @@ class State(object):
 			return True
 		else:
 			#sweep left to right or right to left and up and down
-			if myservo.servoPos['basePos'] > myservo.servoMaxPos['basePos']:
+			if servoPos[0] > myservo.servoMaxPos['basePos']:
 				self.direction = 'left'
-			elif myservo.servoPos['basePos'] < myservo.servoMinPos['basePos']:
-				myservo.servoPos['basePos'] = 90
+			elif servoPos[0] < myservo.servoMinPos['basePos']:
+				servoPos[0] = 90
 				return False
 
 			if self.direction is 'left':
-				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] - 1
+				servoPos[0] = servoPos[0] - 1
 			elif self.direction is 'right':
-				myservo.servoPos['basePos'] = myservo.servoPos['basePos'] + 1
+				servoPos[0] = servoPos[0] + 1
 
 class Startup(State):
 	def __init__(self, fSM, brain):
@@ -61,14 +63,14 @@ class Startup(State):
 		self.brain.speaker.say("Biep... ")
 		time.sleep(1)
 		self.brain.speaker.say("Boep... ")
-		myservo.servoPos['basePos'] = 90
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		print myservo.servoPos
+		servoPos[0] = 90
+		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
+		print servoPos
 		time.sleep(0.5)
 		self.brain.speaker.say("Wie durft mij wakker te maken!?")
-		myservo.servoPos['headPos'] = 45
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		print myservo.servoPos
+		servoPos[0] = 45
+		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
+		print servoPos
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
@@ -83,8 +85,8 @@ class Scanning(State):
 	def enter(self):
 		print "Start Scanning"
 		
-		serServo.write("1, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
-		print myservo.servoPos
+		serServo.write("1, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
+		print servoPos
 		serLed.write("30, 0, 30")
 
 	def execute(self):
@@ -120,7 +122,7 @@ class Move(State):
 		elif ccDetected is False:
 			self.fSM.to_transition("toScanning")
 
-		serServo.write("0, %s, %s, %s" % (myservo.servoPos['basePos'], myservo.servoPos['rotationPos'], myservo.servoPos['headPos']))
+		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		serLed.write("5,5,30")
 		time.sleep(1)
 
@@ -139,7 +141,7 @@ class Track(State):
 	def execute(self):
 		print "Tracking"
 		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
-		self.colorCodeThread = mythread.ColorCodeThread(serServo)
+		self.colorCodeThread = mythread.ColorCodeThread(serServo, servoPos)
 
 		threads = []
 		threads.append(self.voiceThread)

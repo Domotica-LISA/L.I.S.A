@@ -49,8 +49,8 @@ class ColorCodeThread(threading.Thread):
 				pass
 			print center	
 
-			self.serialServo.write("0,130,110,130")
-			#self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
+			#self.serialServo.write("0,130,110,130")
+			self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
 			time.sleep(1)
 
 class VoiceThread(threading.Thread):

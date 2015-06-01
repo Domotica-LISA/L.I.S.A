@@ -71,7 +71,7 @@ class Startup(State):
 		servoPos[2] = 45
 		serServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		print servoPos
-		self.fSM.to_transition("toScanning")
+		self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Startup complete"

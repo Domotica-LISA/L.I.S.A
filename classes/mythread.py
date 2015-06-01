@@ -9,12 +9,11 @@ from pixy import *
 block = Block()
 
 class ColorCodeThread(threading.Thread):
-	def __init__(self, serialServo, servoPos):
+	def __init__(self, serialServo):
 		threading.Thread.__init__(self)
 		self.serialServo = serialServo
-		self.servoPos = servoPos
 
-	def run(self):
+	def run(self, servoPos):
 		
 		while 1:
 			center = {'x': 0, 'y': 0}
@@ -26,35 +25,35 @@ class ColorCodeThread(threading.Thread):
 
 				if center['x'] > 200 and center['x'] < 285: 
 					print "rotate left"
-					self.servoPos[1] = self.servoPos[1] - 2
+					servoPos[1] = servoPos[1] + 2
 				elif center['x'] > 0 and center['x'] < 200: 
 					print "base left"
-					self.servoPos[0] = self.servoPos[0] - 2
+					servoPos[0] = servoPos[0] + 2
 				elif center['x'] > 355 and center['x'] < 440:
 					print "rotate right"
-					self.servoPos[1] = self.servoPos[1] + 2
+					servoPos[1] = servoPos[1] - 2
 				elif center['x'] > 440 and center['x'] < 640:
 					print "base right"
-					self.servoPos[0] = self.servoPos[0] + 2
+					servoPos[0] = servoPos[0] - 2
 				else:
 					#print "deadzone x"
 					pass
 
 				if center['y'] > 0 and center['y'] < 175:
 					print "head up"
-					self.servoPos[2] = self.servoPos[2] - 2
+					servoPos[2] = servoPos[2] + 2
 				elif center['y'] > 225 and center['y'] < 400:
 					print "head down"
-					self.servoPos[2] = self.servoPos[2] + 2
+					servoPos[2] = servoPos[2] - 2
 				else:
 					#print "deadzone y"
 					pass
-				print self.servoPos	
+				print servoPos	
 
-			self.setServo()
+			self.setServo(servoPos)
 
-	def setServo(self):
-		self.serialServo.write("0, %s, %s, %s" % (self.servoPos[0], self.servoPos[1], self.servoPos[2]))
+	def setServo(self, servoPos):
+		self.serialServo.write("0, %s, %s, %s" % (servoPos[0], servoPos[1], servoPos[2]))
 		time.sleep(1)
 
 class VoiceThread(threading.Thread):

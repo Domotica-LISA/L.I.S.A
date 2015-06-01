@@ -143,16 +143,15 @@ class Track(State):
 		self.voiceThread = mythread.VoiceThread(self.brain, self.fSM, serLed, serServo)
 		self.colorCodeThread = mythread.ColorCodeThread(serServo, servoPos)
 
-		threads = []
-		threads.append(self.voiceThread)
-		threads.append(self.colorCodeThread)
+		#threads = []
+		#threads.append(self.voiceThread)
 
 		self.voiceThread.start()
 		self.colorCodeThread.start()
 
 		time.sleep(10)
-		for t in threads:
-			t.join()
+		#for t in threads:
+			#t.join()
 
 	def exit(self):
 		print "Stop Tracking"

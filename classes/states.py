@@ -107,6 +107,7 @@ class Track(State):
 		serLed.write("5, 30, 5")
 
 		input = self.brain.mic.active_listen()
+		serLed.write("30, 5, 5")
 		print input
 
 		if input is not None:
@@ -118,7 +119,6 @@ class Track(State):
 				self.fSM.to_transition("toScanning")
 				break
 			else:
-				serLed("30, 5, 5")
 				self.brain.query(input)
 
 	def exit(self):

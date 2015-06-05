@@ -113,11 +113,9 @@ class Track(State):
 		if input is not None:
 			if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 				self.fSM.to_transition("toShutdown")
-				break
 			elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
 				self.brain.speaker.say("graag gedaan. Bye Bye")
 				self.fSM.to_transition("toScanning")
-				break
 			else:
 				self.brain.query(input)
 

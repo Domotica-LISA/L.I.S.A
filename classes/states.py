@@ -30,8 +30,6 @@ class Startup(State):
 	def enter(self):
 		print "Entering startup"
 
-		serServo.write("4")
-
 	def execute(self):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
@@ -43,6 +41,7 @@ class Startup(State):
 
 	def exit(self):
 		print "Startup complete"
+		serServo.write("4")
 		self.brain.speaker.say("Buig voor jullie heerser")  
 		self.brain.speaker.say("muahahaha.")
 

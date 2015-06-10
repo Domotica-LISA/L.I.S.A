@@ -37,7 +37,7 @@ class Startup(State):
 		self.brain.speaker.say("Boep... ")
 		time.sleep(0.5)
 		self.brain.speaker.say("Wie durft mij wakker te maken!?")
-		self.fSM.to_transition("toScanning")
+		self.fSM.to_transition("toMove")
 
 	def exit(self):
 		print "Startup complete"

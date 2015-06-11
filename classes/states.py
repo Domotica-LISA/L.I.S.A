@@ -81,6 +81,7 @@ class Move(State):
 		#super(Move, self).get_color_code()
 		
 		ccDetected = serServo.readline()
+		print ccDetected
 		if re.search("detected", ccDetected, re.IGNORECASE):
 			self.fSM.to_transition("toTrack")
 		elif re.search("failed", ccDetected, re.IGNORECASE):

@@ -34,7 +34,7 @@ class Startup(State):
 		print "Starting up"
 		self.brain.speaker.say("Biep... ")
 		time.sleep(1)
-		self.brain.speaker.say("Boep... ")
+		self.brain.speaker.say("Bloep... ")
 		time.sleep(0.5)
 		self.brain.speaker.say("Wie durft mij wakker te maken!?")
 		self.fSM.to_transition("toScanning")
@@ -42,7 +42,7 @@ class Startup(State):
 	def exit(self):
 		print "Startup complete"
 		serServo.write("4")
-		self.brain.speaker.say("Buig voor jullie heerser")  
+		self.brain.speaker.say("Buig voor jullie robotheerser")  
 		self.brain.speaker.say("muahahaha.")
 
 class Scanning(State):

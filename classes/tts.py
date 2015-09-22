@@ -42,7 +42,7 @@ class Mp3TTSEngine(object):
 		#print combined_text
 		#download chunks and write them to the output file
 		for idx, val in enumerate(combined_text):
-			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s" % (
+			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s&client=t" % (
 				urllib.quote(val),
 				len(combined_text),
 				idx)

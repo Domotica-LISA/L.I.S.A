@@ -47,7 +47,6 @@ class Mp3TTSEngine(object):
 				len(combined_text),
 				idx)
 			headers = {	"Host": "translate.google.com",
-						"Referer": "http://www.gstatic.com/translate/sound_player2.swf",
 						"User-Agent": 	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) "
 										"AppleWebKit/535.19 (KHTML, like Gecko) "
 										"Chrome/18.0.1025.163 Safari/535.19"

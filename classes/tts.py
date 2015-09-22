@@ -88,10 +88,10 @@ class FestivalTTS(TTSEngine):
 		cmd = ['text2wave']
 		with tempfile.NamedTemporaryFile(suffix='.wav') as out_f:
             with tempfile.SpooledTemporaryFile() as in_f:
-                in_f.write(phrase)
-                in_f.seek(0)
-                with tempfile.SpooledTemporaryFile() as err_f:
-                    subprocess.call(cmd, stdin=in_f, stdout=out_f, stderr=err_f)
-                    err_f.seek(0)
-                    output = err_f.read()
+            	in_f.write(phrase)
+            	in_f.seek(0)
+            	with tempfile.SpooledTemporaryFile() as err_f:
+            		subprocess.call(cmd, stdin=in_f, stdout=out_f, stderr=err_f)
+            		err_f.seek(0)
+            		output = err_f.read()
             self.play(out_f.name)

@@ -6,6 +6,7 @@ import argparse
 import time
 import urllib, urllib2
 import tempfile
+import subprocess
 
 class Mp3TTSEngine(object):
 	def play_mp3(self, filename):

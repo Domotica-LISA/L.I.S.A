@@ -3,7 +3,7 @@ import httplib2
 import re
 from xml.dom import minidom
 
-WORDS = ['TREIN']
+WORDS = ['TRAIN']
 
 def handle(text, speaker, mic, profile):
 	teller = 0
@@ -27,4 +27,4 @@ def handle(text, speaker, mic, profile):
 	    teller = teller + 1
 
 def is_valid(text):
-    return bool(re.search(r'\b(hoelaat vertrekt de trein|hoe laat vertrekt de trein|rijden er nog treinen|hoelaat gaat de trein|hoe laat gaat de trein|rijden er treinen|treinen)\b', text, re.IGNORECASE))    
+    return bool(re.search(r'\b(what time does the train leave|what time will the train|trains|train)\b', text, re.IGNORECASE))    

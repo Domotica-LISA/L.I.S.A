@@ -3,7 +3,7 @@ import re
 import datetime
 import time
 
-WORDS = ["TIJD", "HOE LAAT", "HOELAAT" "IS", "HET", "WAT", "IS", "DE"]
+WORDS = ["TIME", "WHAT TIME", "WHAT TIME IS"]
 
 def set_prefix(minuten):
 	if minuten == 1:
@@ -48,4 +48,4 @@ def handle(text, speaker, mic, profile):
 	time.sleep(2)
 
 def is_valid(text):
-	return bool(re.search(r'\b(hoe laat is het|wat is de tijd|hoelaat is het)\b', text, re.IGNORECASE))
+	return bool(re.search(r'\b(what time is it)\b', text, re.IGNORECASE))

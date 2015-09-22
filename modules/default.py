@@ -8,7 +8,7 @@ WORDS = []
 PRIORITY = -(maxint + 1)
 
 def handle(text, speaker, mic, profile):
-	defanswer = ('Sorry kan je dat herhalen', 'Dat heb ik niet helemaal begrepen', 'Wat was je vraag precies', 'Ik heb je niet verstaan, wat zei je')
+	defanswer = ('Excuse me could you repeat that', 'I did not quit get that', 'What was your question exactly', 'I could not hear you, what did you say')
 	speaker.say(random.choice(defanswer))
 	time.sleep(2)
 

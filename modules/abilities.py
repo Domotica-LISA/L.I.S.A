@@ -2,21 +2,20 @@
 import re
 import time
 
-WORDS = ['WAT KAN JE ALLEMAAL']
+WORDS = ['WHAT CAN YOU DO']
 
 def handle(text, speaker, mic, profile):
 	response = ""
 	for moduleName in profile['modules']:
 		if profile['modules'][moduleName] == True:
 			if moduleName == 'train':
-				response += " Ik kan wat vertellen over hoelaat de treinen vertrekken vanaf %s." % profile['location']
+				response += " I can tell you something about when trains leave from %s." % profile['location']
 			if moduleName == "weather":
-				response += " Voor als je wil weten wat voor weer het wordt, ik ben je Dame."
+				response += " If you would like to know what the weather will be like, I am your lady'."
 			if moduleName == "time":
-				response += " Ik ben een precisie machine. Ik kan je tot op de minuut vertellen hoelaat het is."
-	response += " Daarnaast kan ik je zeggen waar mijn naam voor staat. En gezien we hier op een congres staan, weet ik ook waar de toiletten zijn en waar je een hapje kan eten."
-	speaker.say("%s En voor een workshop in 3d printen, kan ik je ook wijzer maken waar ze die geven." % response)
+				response += " I am a precision machine. I can tell you what time it is up to the minute."
+	response += " Beside that I can also explain what my name means."
 	time.sleep(2)
 
 def is_valid(text):
-	return bool(re.search(r'\bwat kan je\b', text, re.IGNORECASE))
+	return bool(re.search(r'\bwhat can you do\b', text, re.IGNORECASE))

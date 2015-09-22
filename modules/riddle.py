@@ -4,7 +4,7 @@ import time
 import random
 from classes import mic, path_declarations
 
-WORDS = ["RAADSEL"]
+WORDS = ["RIDDLE"]
 
 def get_random_joke(filename=path_declarations.data('JOKES.txt')):
 	jokeFile = open(filename, "r")
@@ -43,4 +43,4 @@ def handle(text, speaker, mic, profile):
 	answer(mic.active_listen())
 
 def is_valid(text):
-	return bool(re.search(r'\braadsel\b', text, re.IGNORECASE))
+	return bool(re.search(r'\briddle\b', text, re.IGNORECASE))

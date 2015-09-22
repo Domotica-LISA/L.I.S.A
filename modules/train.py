@@ -23,7 +23,7 @@ def handle(text, speaker, mic, profile):
 	    eindBestemming = node.getElementsByTagName("EindBestemming")[0].firstChild.data
 	    vertrekSpoor = node.getElementsByTagName("VertrekSpoor")[0].firstChild.data
 	    
-	    speaker.say("De trein naar " + eindBestemming + " op spoor " + vertrekSpoor + " vertrekt om " + vertrekTijd[11] + vertrekTijd[12] + vertrekTijd[13] + vertrekTijd[14] + vertrekTijd[15])
+	    speaker.say("The train to " + eindBestemming + " on track " + vertrekSpoor + " leaves at " + vertrekTijd[11] + vertrekTijd[12] + vertrekTijd[13] + vertrekTijd[14] + vertrekTijd[15])
 	    teller = teller + 1
 
 def is_valid(text):

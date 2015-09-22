@@ -8,7 +8,7 @@ class WitAiSTT(object):
 
 	def transcribe(self, fp):
 		data = fp.read()
-		req = urllib2.Request('https://api.wit.ai/speech?v=20150101', data, self.headers)
+		req = urllib2.Request('https://api.wit.ai/speech?v=20150922', data, self.headers)
 		r = urllib2.urlopen(req)
 
 		text = json.loads(r.read())

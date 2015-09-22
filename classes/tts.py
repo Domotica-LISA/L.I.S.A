@@ -42,16 +42,17 @@ class Mp3TTSEngine(object):
 		#print combined_text
 		#download chunks and write them to the output file
 		for idx, val in enumerate(combined_text):
-			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s&client=t" % (
+			mp3url = "http://translate.google.com/translate_tts?tl=nl&q=%s&total=%s&idx=%s&client=t&ie=UTF-8" % (
 				urllib.quote(val),
 				len(combined_text),
 				idx)
 			headers = {	"Host": "translate.google.com",
+						"Referer": "http://www.gstatic.com/translate/sound_player2.swf",
 						"User-Agent": 	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) "
 										"AppleWebKit/535.19 (KHTML, like Gecko) "
 										"Chrome/18.0.1025.163 Safari/535.19"
 			}
-			req = urllib2.Request(mp3url, '', headers)
+			req = urllib2.Request(mp3url)
 			if len(val) > 0:
 				try:
 					response = urllib2.urlopen(req)

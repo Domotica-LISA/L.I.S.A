@@ -43,7 +43,7 @@ class Brain(object):
 				try:
 					module.handle(text, self.speaker, self.mic, config.config)
 				except:
-					self.speaker.say("Sorry. Ik heb problemen met het uitvoeren daarvan. " +
-							"Probeer het later nog eens.")
+					self.speaker.say("Sorry. I am having some trouble with. " +
+							"Try again please.")
 				finally:
 					return

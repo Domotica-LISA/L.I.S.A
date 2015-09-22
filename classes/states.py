@@ -36,13 +36,13 @@ class Startup(State):
 		time.sleep(1)
 		self.brain.speaker.say("Bloep... ")
 		time.sleep(0.5)
-		self.brain.speaker.say("Wie durft mij wakker te maken!?")
+		self.brain.speaker.say("Who dares to wake me!?")
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
 		serServo.write("4")
-		self.brain.speaker.say("Buig voor jullie robotheerser")  
+		self.brain.speaker.say("Bow to your robot ruler")  
 		self.brain.speaker.say("muahahaha.")
 
 class Scanning(State):
@@ -72,7 +72,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("Wat moet je van me?")
+		self.brain.speaker.say("What do you want from me")
 		serServo.write("2")
 
 	def execute(self):
@@ -99,7 +99,7 @@ class Track(State):
 		
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hey onderdaan, wat wil je van mij?")
+		self.brain.speaker.say("Hey subject, what do you want from me?")
 		serServo.write("3")
 
 	def execute(self):
@@ -113,8 +113,8 @@ class Track(State):
 		if input is not None:
 			if re.search(r'\b(power down|powerdown)\b', input, re.IGNORECASE):
 				self.fSM.to_transition("toShutdown")
-			elif re.search(r'\b(dankje|tot ziens)\b', input, re.IGNORECASE):
-				self.brain.speaker.say("graag gedaan. Bye Bye")
+			elif re.search(r'\b(dankje|tot ziens|thank you|bye)\b', input, re.IGNORECASE):
+				self.brain.speaker.say("you are welcome. Bye Bye")
 				self.fSM.to_transition("toScanning")
 			else:
 				self.brain.query(input)
@@ -128,7 +128,7 @@ class Shutdown(State):
 
 	def enter(self):
 		print "Entering shutdown"
-		self.brain.speaker.say("Bezig met afsluiten.")
+		self.brain.speaker.say("Shutting down.")
 
 		# set servo's to transport position
 		serServo.write("5")

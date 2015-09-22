@@ -87,7 +87,7 @@ class FestivalTTS(TTSEngine):
 	def say(self, phrase):
 		cmd = ['text2wave']
 		with tempfile.NamedTemporaryFile(suffix='.wav') as out_f:
-            with tempfile.SpooledTemporaryFile() as in_f:
+			with tempfile.SpooledTemporaryFile() as in_f:
             	in_f.write(phrase)
             	in_f.seek(0)
             	with tempfile.SpooledTemporaryFile() as err_f:

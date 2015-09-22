@@ -64,11 +64,11 @@ class Mp3TTSEngine(object):
 
 class TTSEngine(object):
 	def play(self, filename):
-        cmd = ['aplay', '-D', 'plughw:1,0', str(filename)]
-        with tempfile.TemporaryFile() as f:
-            subprocess.call(cmd, stdout=f, stderr=f)
-            f.seek(0)
-            output = f.read()
+		cmd = ['aplay', '-D', 'plughw:1,0', str(filename)]
+		with tempfile.TemporaryFile() as f:
+			subprocess.call(cmd, stdout=f, stderr=f)
+			f.seek(0)
+			output = f.read()
 
 class GoogleTTS(Mp3TTSEngine):
 	def __init__(self):

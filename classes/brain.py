@@ -2,7 +2,7 @@
 import pkgutil
 import path_declarations
 import config
-from tts import GoogleTTS
+from tts import GoogleTTS, FestivalTTS
 from stt import WitAiSTT
 from mic import Mic
 

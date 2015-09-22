@@ -62,6 +62,14 @@ class Mp3TTSEngine(object):
 		output.close()
 		#print('Saved MP3 to %s' % output.name)
 
+class TTSEngine(object):
+	def play(self, filename):
+        cmd = ['aplay', '-D', 'plughw:1,0', str(filename)]
+        with tempfile.TemporaryFile() as f:
+            subprocess.call(cmd, stdout=f, stderr=f)
+            f.seek(0)
+            output = f.read()
+
 class GoogleTTS(Mp3TTSEngine):
 	def __init__(self):
 		pass
@@ -71,3 +79,19 @@ class GoogleTTS(Mp3TTSEngine):
 		self.save("output.mp3", phrase)
 		self.play_mp3("output.mp3")
 		os.remove("output.mp3")
+
+class FestivalTTS(TTSEngine):
+	def __init__(self):
+		pass
+
+	def say(self, phrase):
+		cmd = ['text2wave']
+		with tempfile.NamedTemporaryFile(suffix='.wav') as out_f:
+            with tempfile.SpooledTemporaryFile() as in_f:
+                in_f.write(phrase)
+                in_f.seek(0)
+                with tempfile.SpooledTemporaryFile() as err_f:
+                    subprocess.call(cmd, stdin=in_f, stdout=out_f, stderr=err_f)
+                    err_f.seek(0)
+                    output = err_f.read()
+            self.play(out_f.name)

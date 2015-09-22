@@ -9,7 +9,7 @@ from mic import Mic
 class Brain(object):
 	def __init__(self):
 		self.modules = self.get_modules()
-		self.speaker = GoogleTTS()
+		self.speaker = FestivalTTS()
 		self.mic = Mic(WitAiSTT(config.config['wit_ai_token']))
 		self.ledRingColor = {
 			"red": 30,

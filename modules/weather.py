@@ -15,4 +15,4 @@ def handle(text, speaker, mic, profile):
             time.sleep(2)
 
 def is_valid(text):
-    return bool(re.search(r'\b(how is the weather today|what is the weather today|what is the weather|weather today|what is the weather like)\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(how is the weather today|what is the weather today|what is the weather|weather today|what is the weather like|weather)\b', text, re.IGNORECASE))

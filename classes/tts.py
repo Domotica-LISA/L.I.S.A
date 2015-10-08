@@ -87,7 +87,7 @@ class FestivalTTS(TTSEngine):
 		pass
 
 	def say(self, phrase):
-		cmd = ['text2wave -eval "(voice_cmu_us_clb_arctic_clunits)"']
+		cmd = ['text2wave']
 		with tempfile.NamedTemporaryFile(suffix='.wav') as out_f:
 			with tempfile.SpooledTemporaryFile() as in_f:
 				in_f.write(phrase)

@@ -3,7 +3,7 @@ import re
 import feedparser
 import time
 
-WORDS = ["WHEATER"]
+WORDS = ["WEATHER"]
 
 def handle(text, speaker, mic, profile):
     entries = feedparser.parse("http://rss.wunderground.com/auto/rss_full/%s"%profile['weather_location'])['entries']

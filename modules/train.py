@@ -11,7 +11,7 @@ def handle(text, speaker, mic, profile):
 	http.follow_redirects = False
 	http.add_credentials('skievar@gmail.com', profile['ns_api_key'])
 
-	resp, content = http.request("https://webservices.ns.nl/ns-api-avt?station=" + profile['location'])
+	resp, content = http.request("https://webservices.ns.nl/ns-api-avt?station=" + profile['train_location'])
 
 	xmldoc = minidom.parseString(content);
 

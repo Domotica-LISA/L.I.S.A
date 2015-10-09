@@ -6,12 +6,12 @@ import time
 WORDS = ["WHEATER"]
 
 def handle(text, speaker, mic, profile):
-    entries = feedparser.parse("http://www.knmi.nl/rssfeeds/knmi-rssweer.cgi")['entries']
+    entries = feedparser.parse("http://rss.wunderground.com/auto/rss_full/%s"%profile['weather_location'])['entries']
 
     for entry in entries:
         date_desc = entry['title'].split()[1].strip().lower()
-        if date_desc == 'verwachting':
-            speaker.say("The weather for today is %s" % entry['summary'].replace('<br />','')[:-33])
+        if date_desc == 'forcast':
+            speaker.say("The weather for today is %s" % entry['summary'])
             time.sleep(2)
 
 def is_valid(text):

@@ -16,4 +16,5 @@ meaning: Locale Interactive Service Android
 
 makers: Mark en Ivar
 
-location: Beverwijk
+weather_location: Haarlem
+train_location: Beverwijk

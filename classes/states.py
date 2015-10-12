@@ -55,10 +55,10 @@ class Scanning(State):
 
 	def execute(self):
 		print "Scanning"
-		serLed.write("30, 0, 30")
+		serLed.write("30,0,30")
 
 		input = self.brain.mic.active_listen()
-		serLed.write("55, 38, 0")
+		serLed.write("55,38,0")
 		print(input)
 
 		if input is not None:
@@ -108,10 +108,10 @@ class Track(State):
 
 	def execute(self):
 		print "Tracking"
-		serLed.write("5, 30, 5")
+		serLed.write("5,30,5")
 
 		input = self.brain.mic.active_listen()
-		serLed.write("30, 5, 5")
+		serLed.write("30,5,5")
 		print input
 
 		if input is not None:

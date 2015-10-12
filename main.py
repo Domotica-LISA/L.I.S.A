@@ -5,7 +5,7 @@ from classes import character, path_declarations
 
 sys.path.append(path_declarations.libPath)
 
-if __name__ == '__main__':
+def startLisa():
 	try:
 		lisa_fsm = character.Lisa()
 		while True:
@@ -16,3 +16,6 @@ if __name__ == '__main__':
 			lisa_fsm.execute()
 	except KeyboardInterrupt:
 		print "Bye Bye!"
+
+if __name__ == '__main__':
+	startLisa()

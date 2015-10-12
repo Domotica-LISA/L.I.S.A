@@ -59,7 +59,7 @@ class Scanning(State):
 	def execute(self):
 		print "Scanning"
 		input = self.brain.mic.active_listen()
-		sys.stderr.write(input)
+		sys.stdout.write(input)
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")

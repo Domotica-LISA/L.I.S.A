@@ -6,7 +6,7 @@ import time
 WORDS = ["WEATHER"]
 
 def handle(text, speaker, mic, profile):
-    entries = feedparser.parse("http://rss.wunderground.com/auto/rss_full/" + profile['weather_location'])['entries']
+    entries = feedparser.parse("http://rss.wunderground.com/auto/rss_full/%s"%profile['weather_location'])['entries']
 
     for entry in entries:
         date_desc = entry['title'].split()[1].strip().lower()

@@ -60,9 +60,12 @@ class Scanning(State):
 		input = self.brain.mic.active_listen()
 		serLed.write("55, 38, 0")
 		print(input)
+
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")
+			else:
+				self.brain.speaker.say("I don't know what you mean!")
 
 	def exit(self):
 		print "Exit Scanning"

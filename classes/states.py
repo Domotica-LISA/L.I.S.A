@@ -34,9 +34,9 @@ class Startup(State):
 	def execute(self):
 		sys.stdout.write("Starting up")
 		self.brain.speaker.say("Biep... ")
-		time.sleep(1)
+		#time.sleep(1)
 		self.brain.speaker.say("Boep... ")
-		time.sleep(0.5)
+		#time.sleep(0.5)
 		self.brain.speaker.say("Who dares to wake me")
 		self.fSM.to_transition("toScanning")
 
@@ -51,13 +51,12 @@ class Scanning(State):
 
 	def enter(self):
 		print "Start Scanning"
-		
 		serServo.write("1")
-		
 
 	def execute(self):
 		print "Scanning"
 		serLed.write("30, 0, 30")
+
 		input = self.brain.mic.active_listen()
 		serLed.write("55, 38, 0")
 		print(input)

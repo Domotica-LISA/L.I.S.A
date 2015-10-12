@@ -4,6 +4,7 @@ import config
 import re
 import time
 import serial
+import sys
 
 serServo = serial.Serial('/dev/ttyACM0', 9600)
 serLed = serial.Serial('/dev/ttyACM1', 9600)

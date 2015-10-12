@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 import os
-import sys
 
 appPath = os.path.normpath(os.path.join(
 	os.path.dirname(os.path.abspath(__file__)), 

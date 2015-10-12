@@ -43,8 +43,7 @@ class Startup(State):
 	def exit(self):
 		print "Startup complete"
 		serServo.write("4")
-		self.brain.speaker.say("Bow to your robot ruler")  
-		self.brain.speaker.say("hahaha")
+		self.brain.speaker.say("Bow to your robot ruler. HaHaHa")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -59,7 +58,7 @@ class Scanning(State):
 	def execute(self):
 		print "Scanning"
 		input = self.brain.mic.active_listen()
-		sys.stdout.write(input)
+		print(input)
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")

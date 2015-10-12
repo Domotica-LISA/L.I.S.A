@@ -53,11 +53,13 @@ class Scanning(State):
 		print "Start Scanning"
 		
 		serServo.write("1")
-		serLed.write("30, 0, 30")
+		
 
 	def execute(self):
 		print "Scanning"
+		serLed.write("30, 0, 30")
 		input = self.brain.mic.active_listen()
+		serLed.write("55, 38, 0")
 		print(input)
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):

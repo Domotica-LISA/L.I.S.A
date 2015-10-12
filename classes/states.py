@@ -28,10 +28,10 @@ class Startup(State):
 		super(Startup, self).__init__(fSM, brain)
 
 	def enter(self):
-		print "Entering startup"
+		sys.stdout.write("Entering startup")
 
 	def execute(self):
-		print "Starting up"
+		sys.stdout.write("Starting up")
 		self.brain.speaker.say("Biep... ")
 		time.sleep(1)
 		self.brain.speaker.say("Boep... ")
@@ -58,7 +58,7 @@ class Scanning(State):
 	def execute(self):
 		print "Scanning"
 		input = self.brain.mic.active_listen()
-		print input
+		sys.stdout.write(input)
 		if input is not None:
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")

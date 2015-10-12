@@ -29,10 +29,10 @@ class Startup(State):
 		super(Startup, self).__init__(fSM, brain)
 
 	def enter(self):
-		sys.stdout.write("Entering startup")
+		print "Entering startup"
 
 	def execute(self):
-		sys.stdout.write("Starting up")
+		print "Starting up"
 		self.brain.speaker.say("Biep... ")
 		#time.sleep(1)
 		self.brain.speaker.say("Boep... ")
@@ -65,7 +65,7 @@ class Scanning(State):
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")
 			else:
-				self.brain.speaker.say("I don't know what you mean!")
+				self.brain.speaker.say("Say what?")
 
 	def exit(self):
 		print "Exit Scanning"

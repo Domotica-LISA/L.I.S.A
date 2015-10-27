@@ -9,4 +9,4 @@ def handle(text, speaker, mic, profile):
 	time.sleep(2)
 
 def is_valid(text):
-	return bool(re.search(r'\bwhat is the meaning of life | meaning life\b', text, re.IGNORECASE))
+	return bool(re.search(r'\bwhat is the meaning of life|what\'s the meaning of life|meaning life\b', text, re.IGNORECASE))

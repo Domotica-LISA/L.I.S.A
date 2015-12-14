@@ -11,7 +11,7 @@ def handle(text, speaker, mic, profile):
     for entry in entries:
         date_desc = entry['title'].split()[1].strip().lower()
         if date_desc == 'forcast':
-        	print entry['summary']
+            print entry['summary']
             speaker.say("The weather for today is %s" % entry['summary'])
             time.sleep(2)
 

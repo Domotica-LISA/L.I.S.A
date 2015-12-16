@@ -7,12 +7,12 @@ import json
 WORDS = ["WEATHER"]
 
 def handle(text, speaker, mic, profile):
-    url = "http://api.openweathermap.org/data/2.5/weather?q=" + profile['location'] + "&appid=" + profile['weather_api_key'] + "&units=metric"
+    url = "http://api.openweathermap.org/data/2.5/weather?q=" + str(profile['location']) + "&appid=" + str(profile['weather_api_key']) + "&units=metric"
 
     response = urllib.urlopen(url)
     data = json.loads(response.read())
-    weather_description = data['weather'][0]['description']
-    temp = data['main']['temp']
+    weather_description = str(data['weather'][0]['description'])
+    temp = str(data['main']['temp'])
     speaker.say("The weather for today is " + weather_description + " and the temperature is " + temp)
     time.sleep(2)
 

@@ -105,7 +105,7 @@ class Track(State):
 
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hey, there you are you sweety")
+		self.brain.speaker.say("Hey there you are, you sweety")
 		serServo.write("3")
 
 	def execute(self):

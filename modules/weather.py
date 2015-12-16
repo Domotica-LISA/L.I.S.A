@@ -1,19 +1,20 @@
 # -*- coding: UTF-8 -*-
 import re
-import feedparser
 import time
+import urllib
+import json
 
 WORDS = ["WEATHER"]
 
 def handle(text, speaker, mic, profile):
-    entries = feedparser.parse("http://rss.wunderground.com/auto/rss_full/%s"%profile['weather_location'])['entries']
+    url = "http://api.openweathermap.org/data/2.5/weather?q=" + profile['location'] + "&appid=" + profile['weather_api_key'] + "&units=metric"
 
-    for entry in entries:
-        date_desc = entry['title'].split()[1].strip().lower()
-        if date_desc == 'forcast':
-            print entry['summary']
-            speaker.say("The weather for today is %s" % entry['summary'])
-            time.sleep(2)
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    weather_description = data['weather'][0]['description']
+    temp = data['main']['temp']
+    speaker.say("The weather for today is " + weather_description + " and the temperature is " + temp)
+    time.sleep(2)
 
 def is_valid(text):
     return bool(re.search(r'\b(how is the weather today|what is the weather today|what is the weather|weather today|what is the weather like|weather)\b', text, re.IGNORECASE))

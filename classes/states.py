@@ -33,17 +33,17 @@ class Startup(State):
 
 	def execute(self):
 		print "Starting up"
-		self.brain.speaker.say("Biep... ")
+		self.brain.speaker.say("Ho ho ho ")
 		#time.sleep(1)
-		self.brain.speaker.say("Boep... ")
+		self.brain.speaker.say("Ho ho ho ")
 		#time.sleep(0.5)
-		self.brain.speaker.say("Who dares to wake me")
+		self.brain.speaker.say("Merry Christmas")
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
 		serServo.write("4")
-		self.brain.speaker.say("Bow to your robot ruler. HaHaHa")
+		self.brain.speaker.say("Joy to the world!")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -65,7 +65,7 @@ class Scanning(State):
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")
 			else:
-				self.brain.speaker.say("Say what?")
+				self.brain.speaker.say("What did you say you lovely person?")
 
 	def exit(self):
 		print "Exit Scanning"
@@ -76,14 +76,14 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("What do you want from me")
+		self.brain.speaker.say("You called me?")
 		serServo.write("2")
 
 	def execute(self):
 		print "Moving to sound origin"
 		#self.fSM.to_transition("toTrack")
 		#super(Move, self).get_color_code()
-		
+
 		ccDetected = serServo.readline()
 		print ccDetected
 		if re.search("detected", ccDetected, re.IGNORECASE):
@@ -100,10 +100,10 @@ class Move(State):
 class Track(State):
 	def __init__(self, fSM, brain):
 		super(Track, self).__init__(fSM, brain)
-		
+
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hey subject, what do you want from me?")
+		self.brain.speaker.say("Hey, there you are you sweety")
 		serServo.write("3")
 
 	def execute(self):

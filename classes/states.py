@@ -5,6 +5,7 @@ import re
 import time
 import serial
 import sys
+import random
 
 serServo = serial.Serial('/dev/ttyACM0', 9600)
 serLed = serial.Serial('/dev/ttyACM1', 9600)
@@ -65,7 +66,8 @@ class Scanning(State):
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")
 			else:
-				self.brain.speaker.say("What did you say you lovely person?")
+				defanswer = ('What did you say, you lovely person?', 'Whatever tickles your fancy.')
+				self.brain.speaker.say(random.choice(defanswer))
 
 	def exit(self):
 		print "Exit Scanning"

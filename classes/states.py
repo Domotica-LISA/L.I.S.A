@@ -34,17 +34,17 @@ class Startup(State):
 
 	def execute(self):
 		print "Starting up"
-		self.brain.speaker.say("Ho ho ho ")
+		self.brain.speaker.say("Beep")
 		#time.sleep(1)
-		self.brain.speaker.say("Ho ho ho ")
+		self.brain.speaker.say("Boep ")
 		#time.sleep(0.5)
-		self.brain.speaker.say("Merry Christmas")
+		self.brain.speaker.say("What do you want from me!?")
 		self.fSM.to_transition("toScanning")
 
 	def exit(self):
 		print "Startup complete"
 		serServo.write("4")
-		self.brain.speaker.say("Joy to the world!")
+		self.brain.speaker.say("Bow to your robot overlord")
 
 class Scanning(State):
 	def __init__(self, fSM, brain):
@@ -66,7 +66,7 @@ class Scanning(State):
 			if re.search(self.persona, input, re.IGNORECASE):
 				self.fSM.to_transition("toMove")
 			else:
-				defanswer = ('What did you say, you lovely person?', 'Whatever tickles your fancy.')
+				defanswer = ('What did you say?!', 'Whatever tickles your fancy.', "I wouldn't say such things if I were you.")
 				self.brain.speaker.say(random.choice(defanswer))
 
 	def exit(self):
@@ -78,7 +78,7 @@ class Move(State):
 
 	def enter(self):
 		print "Start Moving"
-		self.brain.speaker.say("You called me?")
+		self.brain.speaker.say("What do you want from me!?")
 		serServo.write("2")
 
 	def execute(self):
@@ -105,7 +105,7 @@ class Track(State):
 
 	def enter(self):
 		print "Start Tracking"
-		self.brain.speaker.say("Hey there you are, you sweety")
+		self.brain.speaker.say("There you are! I found you!")
 		serServo.write("3")
 
 	def execute(self):

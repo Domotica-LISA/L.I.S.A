@@ -7,8 +7,8 @@ import serial
 import sys
 import random
 
-serServo = serial.Serial('/dev/ttyACM0', 9600)
-serLed = serial.Serial('/dev/ttyACM1', 9600)
+serServo = serial.Serial('/dev/ttyACM0', 19200)
+serLed = serial.Serial('/dev/ttyACM1', 19200)
 
 class State(object):
 	def __init__(self, fSM, brain):

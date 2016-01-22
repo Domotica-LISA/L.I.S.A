@@ -151,13 +151,28 @@ class Shutdown(State):
 	def exit(self):
 		print "Exit shutdown"
 
+class DemoStartup(State):
+	def __init__(self, fSM, brain):
+		super(DemoStartup, self).__init__(fSM, brain)
+
+	def enter(self):
+		print "Entering Demo startup"
+
+	def execute(self):
+		print "Demo starting up"
+
+		self.fSM.to_transition("toDemo")
+
+	def exit(self):
+		print "Demo startup complete"
+		serServo.write("4")
+
 class Demo(State):
 	def __init__(self, fSM, brain):
 		super(Demo, self).__init__(fSM, brain)
 
 	def enter(self):
 		print "Entering demo"
-		serServo.write("4")
 		serLed.write("55, 38, 0")
 		serServo.write("3")
 
@@ -171,3 +186,5 @@ class Demo(State):
 
 	def exit(self):
 		print "Exit Demo"
+		serServo.write("5")
+		serLed.write("0,0,0")

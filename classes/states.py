@@ -160,11 +160,13 @@ class DemoStartup(State):
 
 	def execute(self):
 		print "Demo starting up"
-
+		self.brain.speaker.say("Starting Demo function")
 		self.fSM.to_transition("toDemo")
 
 	def exit(self):
 		print "Demo startup complete"
+		serServo.write("4")
+		self.brain.speaker.say("Running Demo function")
 
 class Demo(State):
 	def __init__(self, fSM, brain):
@@ -172,7 +174,6 @@ class Demo(State):
 
 	def enter(self):
 		print "Entering demo"
-		serServo.write("4")
 		serLed.write("55, 38, 0")
 		serServo.write("3")
 

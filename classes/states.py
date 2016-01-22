@@ -150,3 +150,24 @@ class Shutdown(State):
 
 	def exit(self):
 		print "Exit shutdown"
+
+class Demo(State):
+	def __init__(self, fSM, brain):
+		super(Demo, self).__init__(fSM, brain)
+
+	def enter(self):
+		print "Entering demo"
+		serServo.write("4")
+		serLed.write("55, 38, 0")
+		serServo.write("3")
+
+	def execute(self):
+		print "Demo running"
+
+		input = self.brain.mic.active_listen()
+		print input
+		if re.search(r'\bexit demo\b', input, re.IGNORECASE):
+			self.fSM.to_transition("toStartup")
+
+	def exit(self):
+		print "Exit Demo"
